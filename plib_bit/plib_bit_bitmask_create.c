@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   plib_string_index_of.c                             :+:      :+:    :+:   */
+/*   plib_bit_bitmask_create.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plgol.perso <pollivie@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/23 13:04:27 by plgol.perso       #+#    #+#             */
-/*   Updated: 2023/11/23 13:04:31 by plgol.perso      ###   ########.fr       */
+/*   Created: 2023/11/29 22:19:39 by plgol.perso       #+#    #+#             */
+/*   Updated: 2023/11/29 22:19:39 by plgol.perso      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../plib.h"
 
-int	plib_string_index_of(char *str, int ch)
+unsigned int plib_bit_bitmask_create(unsigned int start, unsigned int end)
 {
-	int	index;
+	unsigned int mask;
 
-	index = 0;
-	while (*str)
-	{
-		if (*str == ch)
-			return (index);
-		++index;
-		++str;
-	}
-	return (-1);
+	if (start > end || start > 31 || end > 31)
+		return (0);
+	mask = ((1u << (end - start + 1)) - 1) << start;
+	return (mask);
 }

@@ -1,28 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   plib_string_index_of.c                             :+:      :+:    :+:   */
+/*   plib_io_file_copy.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plgol.perso <pollivie@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/23 13:04:27 by plgol.perso       #+#    #+#             */
-/*   Updated: 2023/11/23 13:04:31 by plgol.perso      ###   ########.fr       */
+/*   Created: 2023/11/28 13:24:21 by plgol.perso       #+#    #+#             */
+/*   Updated: 2023/11/28 13:24:22 by plgol.perso      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../plib.h"
 
-int	plib_string_index_of(char *str, int ch)
-{
-	int	index;
+t_file *plib_io_file_copy(t_file *self);
 
-	index = 0;
-	while (*str)
-	{
-		if (*str == ch)
-			return (index);
-		++index;
-		++str;
-	}
-	return (-1);
-}

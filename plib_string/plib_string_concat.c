@@ -12,17 +12,14 @@
 
 #include "../plib.h"
 
-int	plib_string_concat(char *dst, char *src, unsigned int dstsize)
+int	plib_string_concat(char *dst, char *src)
 {
 	unsigned int	dlen;
 	unsigned int	slen;
 
-	if (dstsize == 0)
-		return (0);
 	slen = 0;
 	dlen = plib_string_length(dst);
-	while (src[slen] && (dlen + slen) < dstsize - 1)
+	while (src[slen])
 		dst[dlen++] = src[slen++];
-	dst[dlen] = '\0';
 	return (slen + dlen);
 }

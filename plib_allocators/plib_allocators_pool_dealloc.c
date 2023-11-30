@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   plib_string_index_of.c                             :+:      :+:    :+:   */
+/*   plib_allocators_pool_dealloc.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plgol.perso <pollivie@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/23 13:04:27 by plgol.perso       #+#    #+#             */
-/*   Updated: 2023/11/23 13:04:31 by plgol.perso      ###   ########.fr       */
+/*   Created: 2023/11/28 16:20:54 by plgol.perso       #+#    #+#             */
+/*   Updated: 2023/11/28 16:20:55 by plgol.perso      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../plib.h"
 
-int	plib_string_index_of(char *str, int ch)
+void plib_allocators_pool_dealloc(t_pool *self, void *ptr)
 {
-	int	index;
+	t_list *pool;
 
-	index = 0;
-	while (*str)
-	{
-		if (*str == ch)
-			return (index);
-		++index;
-		++str;
-	}
-	return (-1);
+	if (!self || !ptr)
+		return;
+	pool = ptr - sizeof(t_list);
+	pool->next = self->memory_list;
+	self->memory_list = pool;
 }

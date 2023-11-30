@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   plib_reader_destroy.c                              :+:      :+:    :+:   */
+/*   plib_bit_count_set_bits.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plgol.perso <pollivie@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/23 13:31:12 by plgol.perso       #+#    #+#             */
-/*   Updated: 2023/11/23 13:31:13 by plgol.perso      ###   ########.fr       */
+/*   Created: 2023/11/29 21:15:35 by plgol.perso       #+#    #+#             */
+/*   Updated: 2023/11/29 21:15:36 by plgol.perso      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../plib.h"
 
-t_reader	*plib_reader_destroy(t_reader *self)
+unsigned int	plib_bit_count_set_bits(unsigned int num)
 {
-	return (plib_memory_dealloc(self));
+	int	count;
+
+	count = 0;
+	while (num)
+	{
+		num &= (num - 1);
+		++count;
+	}
+	return (count);
 }

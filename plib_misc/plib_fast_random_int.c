@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   plib_string_index_of.c                             :+:      :+:    :+:   */
+/*   plib_fast_random_int.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plgol.perso <pollivie@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/23 13:04:27 by plgol.perso       #+#    #+#             */
-/*   Updated: 2023/11/23 13:04:31 by plgol.perso      ###   ########.fr       */
+/*   Created: 2023/11/23 17:53:33 by plgol.perso       #+#    #+#             */
+/*   Updated: 2023/11/23 17:53:33 by plgol.perso      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../plib.h"
 
-int	plib_string_index_of(char *str, int ch)
+unsigned int	plib_fast_random_int(unsigned int index)
 {
-	int	index;
-
-	index = 0;
-	while (*str)
-	{
-		if (*str == ch)
-			return (index);
-		++index;
-		++str;
-	}
-	return (-1);
+	index = (index << 13) ^ index;
+	return ((index * (index * index * 15731 + 789221) + 1376312589) & 0x7fffffff);
 }

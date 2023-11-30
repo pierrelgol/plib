@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   plib_string_index_of.c                             :+:      :+:    :+:   */
+/*   plib_io_file_split_list_chunk.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plgol.perso <pollivie@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/23 13:04:27 by plgol.perso       #+#    #+#             */
-/*   Updated: 2023/11/23 13:04:31 by plgol.perso      ###   ########.fr       */
+/*   Created: 2023/11/28 15:30:18 by plgol.perso       #+#    #+#             */
+/*   Updated: 2023/11/28 15:30:19 by plgol.perso      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../plib.h"
 
-int	plib_string_index_of(char *str, int ch)
+t_list *plib_io_file_split_list_chunk(t_file *self, int chunk_size)
 {
-	int	index;
+	t_list	*head;
+	char	**split;
+	int	i;
 
-	index = 0;
-	while (*str)
-	{
-		if (*str == ch)
-			return (index);
-		++index;
-		++str;
-	}
-	return (-1);
+	i = 0;
+	split = plib_io_file_split_chunk(self, chunk_size);
+	if (!split)
+		return (NULL);
+	head = plib_list_create(split[i++]);
+	while(split[i])
+		plib_list_insert_back(head, split[i++]);
+	plib_memory_dealloc(split);
+	return (head);
 }

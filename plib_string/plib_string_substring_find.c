@@ -5,33 +5,33 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: plgol.perso <pollivie@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/23 09:38:09 by plgol.perso       #+#    #+#             */
-/*   Updated: 2023/11/23 10:40:51 by plgol.perso      ###   ########.fr       */
+/*   Created: 2023/11/29 22:37:40 by plgol.perso       #+#    #+#             */
+/*   Updated: 2023/11/29 23:04:06 by plgol.perso      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../plib.h"
 
-char	*plib_string_substring_find(char *str, char *sub, unsigned int srchsize)
+char *plib_string_substring_find(char *str, char *sub, unsigned int sbound)
 {
-	unsigned int	i;
-	unsigned int	j;
+	unsigned int i;
+	unsigned int j;
 
-	if (!str && srchsize == 0)
+	if (!str || !sub || sbound == 0)
 		return (NULL);
 	if (!*sub)
-		return ((char *)str);
+		return ((char *) str);
 	i = 0;
 	while (str[i])
 	{
 		j = 0;
-		while (str[i] && str[i] == sub[j] && i < srchsize)
+		while (str[i] && str[i] == sub[j] && i < sbound)
 		{
 			j++;
 			i++;
 		}
 		if (!sub[j])
-			return ((char *)&str[(int)i - j]);
+			return ((char *) &str[(int) i - j]);
 		i = (i - j) + 1;
 	}
 	return (NULL);

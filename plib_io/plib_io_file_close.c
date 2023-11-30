@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   plib_string_index_of.c                             :+:      :+:    :+:   */
+/*   plib_io_file_close.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plgol.perso <pollivie@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/23 13:04:27 by plgol.perso       #+#    #+#             */
-/*   Updated: 2023/11/23 13:04:31 by plgol.perso      ###   ########.fr       */
+/*   Created: 2023/11/28 12:31:38 by plgol.perso       #+#    #+#             */
+/*   Updated: 2023/11/28 12:31:40 by plgol.perso      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../plib.h"
 
-int	plib_string_index_of(char *str, int ch)
+int plib_io_file_close(t_file *self)
 {
-	int	index;
-
-	index = 0;
-	while (*str)
+	if (self->status & IS_OPEN)
 	{
-		if (*str == ch)
-			return (index);
-		++index;
-		++str;
+		self->status ^= (IS_OPEN | IS_VALID);
+		self->fd = close(self->fd);
 	}
-	return (-1);
+	return (self->fd);
 }

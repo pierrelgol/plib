@@ -21,7 +21,7 @@ char	*plib_string_join(char *str1, char *str2)
 	result = (char *)calloc(sizeof(char), size);
 	if (!result)
 		return (NULL);
-	plib_string_concat(result, str1, size);
-	plib_string_concat(result, str2, size);
+	plib_string_concat(result, str1);
+	plib_string_concat(result, str2);
 	return (result);
 }

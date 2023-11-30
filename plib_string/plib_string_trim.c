@@ -21,12 +21,12 @@ char	*plib_string_trim(char *str, char *charset)
 
 	start = 0;
 	end = plib_string_length(str);
-	set = plib_char_boolset_create_from((char [255]){0}, charset);
+	set = plib_char_boolset_create_from((char[255]){0}, charset);
 	while (str[start] && set[(int)str[start]] == 1)
 		++start;
 	while (start < end && set[(int)str[end - 1]] == 1)
 		--end;
-	result = calloc(sizeof(char), (end - start + 1));
+	result = plib_memory_alloc(sizeof(char), (end - start + 1));
 	if (!result)
 		return (NULL);
 	plib_string_copy(result, &str[start], (end - start) + 1);

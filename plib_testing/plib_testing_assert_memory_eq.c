@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   plib_writer_create.c                               :+:      :+:    :+:   */
+/*   plib_testing_assert_memory_eq.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plgol.perso <pollivie@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/23 13:06:44 by plgol.perso       #+#    #+#             */
-/*   Updated: 2023/11/23 14:26:23 by plgol.perso      ###   ########.fr       */
+/*   Created: 2023/11/23 17:29:56 by plgol.perso       #+#    #+#             */
+/*   Updated: 2023/11/23 17:29:57 by plgol.perso      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../plib.h"
+#include <stdio.h>
+#include <string.h>
 
-t_writer	*plib_writer_create(char *buffer, int size, int fd)
+int	plib_testing_assert_memory_eq(void *m1, void *m2, int n, char *name)
 {
-	t_writer	*self;
+	int	result;
 
-	self = plib_memory_alloc(1, sizeof(t_writer));
-	if (!self)
-		return (NULL);
-	self->buffer = buffer;
-	self->bsize = size;
-	self->fd = fd;
-	return (self);
+	result = memcmp(m1, m2, n);
+	fprintf(stdout, "%16s : %s\n",name, (result == 0 ? "pass" : "fail"));
+	return (result == 0);
 }

@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   plib_writer_destroy.c                              :+:      :+:    :+:   */
+/*   plib_io_file_read.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plgol.perso <pollivie@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/23 13:08:52 by plgol.perso       #+#    #+#             */
-/*   Updated: 2023/11/23 14:26:29 by plgol.perso      ###   ########.fr       */
+/*   Created: 2023/11/28 13:24:08 by plgol.perso       #+#    #+#             */
+/*   Updated: 2023/11/28 13:24:09 by plgol.perso      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../plib.h"
 
-t_writer	*plib_writer_destroy(t_writer *self)
+int     plib_io_file_read(t_file *self, int rbyte, int fd)
 {
-	return (plib_memory_dealloc(self));
+	int	r;
+
+	if ((self->count + rbyte) >= self->size)
+		rbyte = self->size - self->count;
+	r = read(fd, &self->content[self->count], rbyte);
+	self->count += r;
+	return (r);
 }

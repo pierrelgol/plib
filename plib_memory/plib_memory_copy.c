@@ -18,7 +18,7 @@ void	*plib_memory_copy(void *dst, void *src, unsigned int movsize)
 	char			*ptr_dst;
 	unsigned int	i;
 
-	if (!dst && !src)
+	if (!dst || !src)
 		return (NULL);
 	i = 0;
 	ptr_dst = dst;

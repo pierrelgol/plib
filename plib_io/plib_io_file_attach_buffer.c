@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   plib_string_index_of.c                             :+:      :+:    :+:   */
+/*   plib_io_file_attach_buffer.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plgol.perso <pollivie@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/23 13:04:27 by plgol.perso       #+#    #+#             */
-/*   Updated: 2023/11/23 13:04:31 by plgol.perso      ###   ########.fr       */
+/*   Created: 2023/11/28 13:24:58 by plgol.perso       #+#    #+#             */
+/*   Updated: 2023/11/28 13:27:05 by plgol.perso      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../plib.h"
 
-int	plib_string_index_of(char *str, int ch)
+int	plib_io_file_attach_buffer(t_file *self, char *buffer, int bsize)
 {
-	int	index;
-
-	index = 0;
-	while (*str)
+	if (!self->content)
 	{
-		if (*str == ch)
-			return (index);
-		++index;
-		++str;
+		self->content = buffer;
+		self->size = bsize;
 	}
-	return (-1);
+	else
+	{
+		if (self->status & IS_FREEABLE_BUFFER)
+		{
+			plib_memory_dealloc(self->content);
+			self->status ^= IS_FREEABLE_BUFFER;
+		}
+		self->size = bsize;
+		self->content = buffer;
+	}
+	return (self->size);
 }

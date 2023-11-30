@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   plib_writer_flush.c                                :+:      :+:    :+:   */
+/*   plib_bit_check_parity.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plgol.perso <pollivie@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/23 13:28:32 by plgol.perso       #+#    #+#             */
-/*   Updated: 2023/11/23 14:26:34 by plgol.perso      ###   ########.fr       */
+/*   Created: 2023/11/29 21:37:30 by plgol.perso       #+#    #+#             */
+/*   Updated: 2023/11/29 21:37:47 by plgol.perso      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "../plib.h"
 
-int	plib_writer_flush(t_writer *self)
+unsigned int	plib_bit_check_parity(unsigned int num)
 {
-	return (write(self->fd, &self->buffer[self->bcount], self->bsize));
+	unsigned int	parity;
+
+	parity = 0;
+	while (num)
+	{
+		parity ^= 1;
+		num &= (num - 1);
+	}
+	return (parity);
 }

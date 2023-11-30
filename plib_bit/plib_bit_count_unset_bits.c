@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   plib_string_index_of.c                             :+:      :+:    :+:   */
+/*   plib_bit_count_unset_bits.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plgol.perso <pollivie@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/23 13:04:27 by plgol.perso       #+#    #+#             */
-/*   Updated: 2023/11/23 13:04:31 by plgol.perso      ###   ########.fr       */
+/*   Created: 2023/11/29 21:15:52 by plgol.perso       #+#    #+#             */
+/*   Updated: 2023/11/29 21:15:54 by plgol.perso      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../plib.h"
 
-int	plib_string_index_of(char *str, int ch)
+unsigned int	plib_bit_count_unset_bits(unsigned int num)
 {
-	int	index;
+	int	count;
 
-	index = 0;
-	while (*str)
+	count = 0;
+	while (num)
 	{
-		if (*str == ch)
-			return (index);
-		++index;
-		++str;
+		num &= (num - 1);
+		++count;
 	}
-	return (-1);
+	return ((sizeof(unsigned int) << 3) - count);
 }

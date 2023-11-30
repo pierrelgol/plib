@@ -17,10 +17,10 @@ void	*plib_memory_move(void *dst, void *src, unsigned int mov_size)
 	const char	*ptr_src;
 	char		*ptr_dst;
 
+	if (!dst || !src)
+		return (NULL);
 	ptr_src = (const char *)src;
 	ptr_dst = (char *)dst;
-	if (!dst && !src)
-		return (NULL);
 	if (dst > src)
 	{
 		while (mov_size)

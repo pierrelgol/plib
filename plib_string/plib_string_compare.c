@@ -10,16 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int	plib_string_compare(char *str1, char *str2, unsigned int cmpsize)
+#include "../plib.h"
+
+int	plib_string_compare(char *str1, char *str2)
 {
 	char	*ptr_s1;
 	char	*ptr_s2;
 
 	ptr_s1 = str1;
 	ptr_s2 = str2;
-	if (cmpsize == 0)
-		return (0);
-	while (--cmpsize && *ptr_s1 && *ptr_s1 == *ptr_s2)
+	while (*ptr_s1 && *ptr_s1 == *ptr_s2)
 	{
 		++ptr_s1;
 		++ptr_s2;
