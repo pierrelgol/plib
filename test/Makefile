@@ -13,17 +13,14 @@
 CC          := cc
 RM          := rm -f
 CFLAGS      := -g3 -Wall -Wextra -Werror
-# CFLAGS      := -Wall -Wextra  -Wpedantic -Wundef -Wshadow -Wconversion -Wformat \
-#                -g -O0 -fsanitize=address -fsanitize=undefined \
-#                -std=c99 -march=native -pg -fprofile-instr-generate -fcoverage-mapping
 
 
-NAME        := libplib.a
+NAME        := ./build/libplibtest.a
 SHARED_NAME := libplib.so
 
-SRCS        := $(wildcard ./string/*.c) \
-               $(wildcard ./memory/*.c) \
-               $(wildcard ./char/*.c)
+SRCS        := $(wildcard ./test_string/*.c) \
+               $(wildcard ./test_memory/*.c) \
+               $(wildcard ./test_char/*.c)
 
 OBJS        := $(SRCS:.c=.o)
 
@@ -32,7 +29,7 @@ OBJS        := $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS) && cp libplib.a ./test/build/libplib.a && cd ./test/ && sh build_test.sh
+	ar rcs $(NAME) $(OBJS)
 
 so: $(OBJS)
 	$(CC) $(CFLAGS) -shared -o $(SHARED_NAME) $(OBJS)

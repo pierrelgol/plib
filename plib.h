@@ -13,208 +13,147 @@
 #ifndef PLIB_H
 #define PLIB_H
 
-#include <errno.h>
 #include <fcntl.h>
-#include <stdbool.h>
+#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <unistd.h>
 
-#define ALOWE "abcdefhijklmnopqrstuvwxyz"
-#define AUPER "ABCDEFHIJKLMNOPQRSTUVWXYZ"
-#define ALPHA "abcdefhijklmnopqrstuvwxyzABCDEFHIJKLMNOPQRSTUVWXYZ"
-#define ALNUM "abcdefhijklmnopqrstuvwxyzABCDEFHIJKLMNOPQRSTUVWXYZ0123456789"
-#define DIGIT "0123456789"
+#include <stdio.h>
 
-typedef int (*t_comparator)(void *, void *);
+// Initialize a static char array with ASCII values
+static const char asciiTable[129] = {
+    '\0',   '\x01', '\x02', '\x03', '\x04', '\x05', '\x06', '\x07', '\x08',
+    '\t',   '\n',   '\x0b', '\x0c', '\r',   '\x0e', '\x0f', '\x10', '\x11',
+    '\x12', '\x13', '\x14', '\x15', '\x16', '\x17', '\x18', '\x19', '\x1a',
+    '\x1b', '\x1c', '\x1d', '\x1e', '\x1f', ' ',    '!',    '"',    '#',
+    '$',    '%',    '&',    '\'',   '(',    ')',    '*',    '+',    ',',
+    '-',    '.',    '/',    '0',    '1',    '2',    '3',    '4',    '5',
+    '6',    '7',    '8',    '9',    ':',    ';',    '<',    '=',    '>',
+    '?',    '@',    'A',    'B',    'C',    'D',    'E',    'F',    'G',
+    'H',    'I',    'J',    'K',    'L',    'M',    'N',    'O',    'P',
+    'Q',    'R',    'S',    'T',    'U',    'V',    'W',    'X',    'Y',
+    'Z',    '[',    '\\',   ']',    '^',    '_',    '`',    'a',    'b',
+    'c',    'd',    'e',    'f',    'g',    'h',    'i',    'j',    'k',
+    'l',    'm',    'n',    'o',    'p',    'q',    'r',    's',    't',
+    'u',    'v',    'w',    'x',    'y',    'z',    '{',    '|',    '}',
+    '~',    '\x7f'};
 
-/* ------------------------- plib_list ------------------------- */
+/*############################################################################*/
+/*                                [PlibString] */
+/*############################################################################*/
 
-typedef struct s_list
-{
-	struct s_list *next;
-	void          *data;
-} t_list;
+char         *string_append_back(char *str1, char *str2);
+char         *string_append_front(char *str1, char *str2);
+char         *string_clone(char *str);
+int           string_compare(char *str1, char *str2);
+int           string_concat(char *dst, char *src);
+int           string_contains(char *str, char *substring);
+char         *string_copy(char *dst, char *src);
+int           string_count(char *dst, int ch);
+char         *string_create(unsigned int size);
+char         *string_destroy(char *str);
+int           string_ends_with(char *str, char *sufix);
+char         *string_fill(char *dst, int ch);
+char         *string_filter(char *str, int ch);
+int           string_get_at(char *str, unsigned int index);
+int           string_index_of(char *str, int ch);
+char         *string_join(char *str1, char *str2);
+unsigned int  string_length(char *str);
+int           string_map_assert(char *str, int (*f)(int ch));
+char         *string_map_apply(char *str, int (*f)(int ch));
+char         *string_map_clone(char *str, int (*f)(int ch));
+int           string_map_count(char *str, int (*f)(int ch));
+char         *string_map_filter(char *str, int (*f)(int ch));
+int           string_map_index_of(char *str, int (*f)(int ch));
+char         *string_map_search(char *str, int (*f)(int ch));
+char         *string_map_slice(char *str, int (*f)(int ch));
+char         *string_nclone(char *src, unsigned int n);
+int           string_ncompare(char *str1, char *str2, unsigned int n);
+int           string_nconcat(char *dst, char *src, unsigned int n);
+char         *string_ncopy(char *dst, char *src, unsigned int n);
+char         *string_njoin(char *str1, char *str2, unsigned int n);
+int           string_nlength(char *src, unsigned int n);
+char         *string_nsearch(char *str, char *sub, unsigned int n);
+char        **string_nsplit(char *str, unsigned int n);
+char         *string_pad(char *str, int ch, unsigned int n);
+char         *string_pad_left(char *str, int ch, unsigned int n);
+char         *string_pad_right(char *str, int ch, unsigned int n);
+char         *string_random(unsigned int n);
+char         *string_random_custom(char *set, unsigned int n);
+char         *string_remove_back(char *str1, char *str2);
+char         *string_remove_front(char *str1, char *str2);
+char         *string_reverse(char *str);
+char         *string_rotate_left(char *str, unsigned int n);
+char         *string_rotate_right(char *str, unsigned int n);
+char         *string_search(char *str, char *sub);
+char         *string_search_replace(char *str, char *sub, char *with);
+char         *string_search_replace_all(char *str, char *sub, char *with);
+int           string_set_at(char *str, unsigned int index, int ch);
+char         *string_shuffle(char *str);
+char         *string_slice(char *str1, unsigned int start, unsigned int end);
+char         *string_sort(char *str, int (*f)(int ch1, int ch2));
+char        **string_split(char *str, int ch);
+char        **string_split_charset(char *str, char *charset);
+char        **string_split_create(unsigned int n);
+char        **string_split_destroy(char **str, unsigned int n);
+char        **string_split_map(char *str, int (*f)(int ch));
+int           string_starts_with(char *str, char *prefix);
+char         *string_to_boolset(char *str, char set[255]);
+char         *string_to_freqset(char *str, char set[255]);
+int           string_to_int(char *str);
+long          string_to_long(char *str);
+unsigned int  string_to_uint(char *str);
+unsigned long string_to_ulong(char *str);
+char         *string_trim(char *str, int ch);
+char         *string_trim_left(char *str, int ch);
+char         *string_trim_right(char *str, int ch);
+char         *string_unsplit(char **strs);
 
-t_list *plib_list_create(void *data);
-void    plib_list_destroy(t_list **list);
-void    plib_list_remove(t_list **list, t_list *node);
-t_list *plib_list_insert_after(t_list *node, void *data);
-t_list *plib_list_insert_front(t_list *list, void *data);
-t_list *plib_list_insert_back(t_list *list, void *data);
-t_list *plib_list_find_node(t_list *list, t_list *node);
-t_list *plib_list_find_data(t_list *list, void *data, t_comparator comp);
+/*############################################################################*/
+/*                                [PlibChar]                                  */
+/*############################################################################*/
 
-/* ------------------------- plib_table ------------------------ */
+int char_is_alnum(int ch);
+int char_is_alpha(int ch);
+int char_is_digit(int ch);
+int char_is_newline(int ch);
+int char_is_spaces(int ch);
+int char_is_whitespace(int ch);
+int char_is_lowercase(int ch);
+int char_is_uppercase(int ch);
+int char_is_even(int ch);
+int char_is_odd(int ch);
+int char_is_printable(int ch);
+int char_is_ascii(int ch);
+int char_is_binary(int ch);
+int char_is_hex(int ch);
+int char_is_octal(int ch);
+int char_is_decimal(int ch);
 
-typedef struct s_entry
-{
-	char *key;
-	void *value;
-} t_entry;
+int char_to_uppercase(int ch);
+int char_to_lowercase(int ch);
+int char_to_reversecase(int ch);
+int char_to_nextchar(int ch);
+int char_to_prevchar(int ch);
+int char_to_random(int ch);
+int char_sort_ascending(int ch1, int ch2);
+int char_sort_descending(int ch1, int ch2);
 
-typedef struct s_table
-{
-	unsigned int size;
-	unsigned int capacity;
-	t_entry     *body;
-} t_table;
+/*############################################################################*/
+/*                                [PlibMemory]                                */
+/*############################################################################*/
 
-t_table      *plib_table_create(void);
-void          plib_table_destroy(t_table *self);
-void          plib_table_entry_set(t_table *self, char *key, void *value);
-void         *plib_table_entry_get(t_table *self, char *key);
-unsigned long plib_table_hash(char *str);
+void *memory_alloc(unsigned int count, unsigned int size);
+void *memory_dealloc(void *ptr);
+int   memory_compare(void *m1, void *m2, unsigned int n);
+void *memory_copy(void *m1, void *m2, unsigned int n);
+void *memory_clone(void *m1, unsigned int n);
+void *memory_search(void *m1, int ch, unsigned int n);
+void *memory_move(void *m1, const void *m2, unsigned int n);
+void *memory_set(void *m1, int ch, unsigned int n);
 
-t_entry     *plib_table_body_create(unsigned int capacity);
-void         plib_table_body_remove(t_table *self, char *key);
-void         plib_table_body_resize(t_table *self, unsigned int capacity);
-unsigned int plib_table_body_find_empty(t_table *self, char *key);
-
-/* ------------------------- plib_string ----------------------- */
-
-int    plib_string_compare(char *str1, char *str2);
-int    plib_string_compare_until(char *str1, char *str2, unsigned int cmpsize);
-int    plib_string_concat(char *dst, char *str);
-char  *plib_string_copy(char *dest, char *src, unsigned int cpysize);
-char  *plib_string_duplicate(char *str);
-char  *plib_string_find_first(char *str, int ch);
-char  *plib_string_find_last(char *str, int ch);
-char  *plib_string_join(char *str1, char *str2);
-int    plib_string_length(char *str);
-int    plib_string_index_of(char *str, int ch);
-char **plib_string_split(char *str, char *charset);
-char  *plib_string_substring_create(char *str, int start, int length);
-char  *plib_string_substring_find(char *str, char *sub, unsigned int bound);
-int    plib_string_to_int(char *nbr);
-char  *plib_string_to_lowercase(char *str);
-char  *plib_string_to_upercase(char *str);
-char  *plib_string_trim(char *str, char *charset);
-
-/* ------------------------- plib_memory ----------------------- */
-
-void *plib_memory_alloc(unsigned int count, unsigned int size);
-void *plib_memory_dealloc(void *ptr);
-void *plib_memory_set(void *src, int ch, unsigned int setsize);
-void *plib_memory_find_first(void *src, int ch, unsigned int srchsize);
-void *plib_memory_find_last(void *src, int ch, unsigned int srchsize);
-int   plib_memory_compare(void *src1, void *src2, unsigned int cmpsize);
-void *plib_memory_copy(void *dst, void *src, unsigned int cpysize);
-void *plib_memory_move(void *dst, void *src, unsigned int movsize);
-
-/* ------------------------- plib_char ------------------------- */
-
-int   plib_char_is_alpha(int ch);
-int   plib_char_is_ascii(int ch);
-int   plib_char_is_digit(int ch);
-int   plib_char_is_lowercase(int ch);
-int   plib_char_is_upercase(int ch);
-int   plib_char_is_printable(int ch);
-int   plib_char_is_space(int ch);
-int   plib_char_is_alpha_numerical(int ch);
-int   plib_char_is_in_range(int lbound, int ubound, int ch);
-char *plib_char_boolset_create(char *str);
-char *plib_char_boolset_create_from(char *empty_set, char *str);
-char *plib_char_boolset_destroy(char *set);
-char *plib_char_set_create(char *str);
-char *plib_char_set_create_from(char *empty_set, char *str);
-char *plib_char_set_destroy(char *set);
-
-/* ------------------------- plib_testing ------------------------- */
-
-int   plib_testing_assert_memory_eq(void *m1, void *m2, int n, char *name);
-int   plib_testing_assert_string_eq(char *str1, char *str2, char *name);
-char *plib_testing_string_generator(char *set, int length);
-char *plib_testing_fstring_generator(char *around, char *inside, int size);
-int   plib_testing_assert_condition(int condition, char *name);
-
-/* ------------------------- plib_misc ------------------------- */
-
-void plib_insertion_sort(void *data, size_t nel, size_t width, t_comparator comp);
-float        plib_fast_square_root(float number);
-unsigned int plib_fast_random_int(unsigned int index);
-
-/* ------------------------- plib_IO ------------------------- */
-
-#define TYPE_FILE 0x1
-#define TYPE_FD 0x2
-#define IS_OPEN 0x4
-#define IS_VALID 0x8
-#define IS_EOF 0x16
-#define IS_FREEABLE_BUFFER 0x32
-
-struct s_file
-{
-	long int     size;
-	long int     count;
-	int          fd;
-	unsigned int perm;
-	unsigned int status;
-	char        *path;
-	char        *content;
-};
-
-typedef struct s_file t_file;
-
-int     plib_io_file_close(t_file *self);
-int     plib_io_file_open(t_file *self, char *path, int perm);
-int     plib_io_file_read(t_file *self, int rbyte, int fd);
-int     plib_io_file_write(t_file *self, int rbyte, int fd);
-int     plib_io_file_attach_buffer(t_file *self, char *buffer, int bsize);
-int     plib_io_file_create_buffer(t_file *self, int rsize);
-t_file *plib_io_file_copy(t_file *self);
-t_file *plib_io_file_create(int status);
-t_file *plib_io_file_destroy(t_file *self);
-
-t_file *plib_io_file_erase_content(t_file *self);
-char  **plib_io_file_split_token(t_file *self, char *charset);
-char  **plib_io_file_split_chunk(t_file *self, int chunk_size);
-t_list *plib_io_file_split_list_chunk(t_file *self, int chunk_size);
-
-/* ------------------------- plib_allocators ------------------------- */
-
-struct s_bmp_alloc
-{
-	unsigned long count;
-	unsigned long size;
-	void         *memory;
-};
-
-typedef struct s_bmp_alloc t_bmp_alloc;
-
-t_bmp_alloc *plib_bump_alloc_create(unsigned long count, unsigned long size);
-void *plib_bump_alloc_alloc(t_bmp_alloc *self, unsigned long count, unsigned long size);
-void *plib_bump_alloc_dealloc(t_bmp_alloc *self, void *ptr);
-void *plib_bump_alloc_destroy(t_bmp_alloc *self);
-
-typedef struct s_pool
-{
-	t_list *memory_list;
-
-} t_pool;
-
-t_pool *plib_allocators_pool_create(unsigned long npool, unsigned long pool_size);
-
-void *plib_allocators_pool_alloc(t_pool *self);
-void  plib_allocators_pool_dealloc(t_pool *self, void *ptr);
-
-/* ------------------------- plib_bit ------------------------- */
-
-unsigned int plib_bit_count_set_bits(unsigned int num);
-unsigned int plib_bit_count_unset_bits(unsigned int num);
-unsigned int plib_bit_rotate_left(unsigned int num, unsigned int shift);
-unsigned int plib_bit_rotate_right(unsigned int num, unsigned int shift);
-unsigned int plib_bit_set_bit(unsigned int num, unsigned int pos);
-unsigned int plib_bit_toggle_bit(unsigned int num, unsigned int pos);
-unsigned int plib_bit_unset_bit(unsigned int num, unsigned int pos);
-unsigned int plib_bit_compare_bits(unsigned int num, unsigned int pos1, unsigned int pos2);
-unsigned int plib_bit_swap_bits(unsigned int num, unsigned int pos1, unsigned int pos2, unsigned int nbits);
-unsigned int plib_bit_reverse_bits(unsigned int num);
-unsigned int plib_bit_check_parity(unsigned int num);
-unsigned int plib_bit_is_set(unsigned int num, unsigned int pos);
-unsigned int plib_bit_bitmask_create(unsigned int start, unsigned int end);
-unsigned int plib_bit_bitmask_combine(unsigned int mask1, unsigned int mask2);
-
-/* ------------------------- plib_bitset ------------------------- */
+/*############################################################################*/
+/*                                [PlibBoolSet]                               */
+/*############################################################################*/
 
 #endif
