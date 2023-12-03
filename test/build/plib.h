@@ -42,6 +42,16 @@ static const char asciiTable[129] = {
 /*                                [PlibString] */
 /*############################################################################*/
 
+#define BOOLSET     \
+	(char[255]) \
+	{           \
+		0   \
+	}
+#define FREQSET     \
+	(char[255]) \
+	{           \
+		0   \
+	}
 
 char         *string_append_back(char *str1, char *str2);
 char         *string_append_front(char *str1, char *str2);

@@ -12,30 +12,30 @@
 
 #include "../plib.h"
 
-static unsigned int split_words_count(char *str, char *set)
+static unsigned int	split_words_count(char *str, char *set)
 {
-	unsigned int words;
+	unsigned int	words;
 
 	words = 0;
 	while (*str)
 	{
-		while (*str && set[(unsigned int) *str] == 1)
+		while (*str && set[(unsigned int)*str] == 1)
 			++str;
-		while (*str && set[(unsigned int) *str] == 0)
+		while (*str && set[(unsigned int)*str] == 0)
 			++str;
-		if (set[(unsigned int) *(str - 1)] != 1)
+		if (set[(unsigned int)*(str - 1)] != 1)
 			++words;
 	}
 	return (words);
 }
 
-static char *split_word_create(char *str, char *set)
+static char	*split_word_create(char *str, char *set)
 {
-	unsigned int wlen;
-	char        *word;
+	unsigned int	wlen;
+	char			*word;
 
 	wlen = 0;
-	while (str[wlen] && set[(int) str[wlen]] != 1)
+	while (str[wlen] && set[(int)str[wlen]] != 1)
 		++wlen;
 	word = string_create((wlen + 1));
 	if (!word)
@@ -44,11 +44,11 @@ static char *split_word_create(char *str, char *set)
 	return (word);
 }
 
-char **string_split_charset(char *str, char *set)
+char	**string_split_charset(char *str, char *set)
 {
-	char       **result;
-	unsigned int word_count;
-	unsigned int index;
+	char			**result;
+	unsigned int	word_count;
+	unsigned int	index;
 
 	if (!str || !set)
 		return (0);
@@ -59,13 +59,13 @@ char **string_split_charset(char *str, char *set)
 	index = 0;
 	while (*str)
 	{
-		while (*str && set[(unsigned int) *str] == 1)
+		while (*str && set[(unsigned int)*str] == 1)
 			++str;
-		if (*str && set[(unsigned int) *str] == 0)
+		if (*str && set[(unsigned int)*str] == 0)
 			result[index++] = split_word_create(str, set);
 		if (!result[index - 1])
 			return (string_split_destroy(result, index - 1));
-		while (*str && set[(unsigned int) *str] == 0)
+		while (*str && set[(unsigned int)*str] == 0)
 			++str;
 	}
 	return (result);

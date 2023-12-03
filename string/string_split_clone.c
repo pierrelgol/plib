@@ -1,37 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string_trim_right.c                                :+:      :+:    :+:   */
+/*   string_split_clone.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plgol.perso <pollivie@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/01 12:45:53 by plgol.perso       #+#    #+#             */
-/*   Updated: 2023/12/01 12:45:53 by plgol.perso      ###   ########.fr       */
+/*   Created: 2023/12/03 17:46:19 by plgol.perso       #+#    #+#             */
+/*   Updated: 2023/12/03 17:46:20 by plgol.perso      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../plib.h"
 
 #include "../plib.h"
 
-char	*string_trim_right(char *str, int ch)
+char	**string_split_clone(char **strs)
 {
-	char			*result;
-	unsigned int	length;
-	unsigned int	end;
+	unsigned int size;
+	unsigned int index;
+	char **result;
 
-	if (!str)
+	if (!strs)
 		return (0);
-	length = string_length(str);
-	if (length == 0)
-		return (str);
-	end = 0;
-	while (str[length - end - 1] == ch)
-		++end;
-	result = string_create((length - end) + 1);
+	size = string_split_size(strs);
+	result = string_split_create(size + 1);
 	if (!result)
 		return (0);
-	memory_copy(result, str, (length - end));
+	index = 0;
+	while(index < size)
+	{
+		result[index] = string_clone(strs[index]);
+		++index;
+	}
 	return (result);
 }
-

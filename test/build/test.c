@@ -132,18 +132,21 @@ int main(void)
 	test_string_split();
 	test_string_split_create();
 	test_string_split_destroy();
-	// test_string_split_map();
-	// test_string_start_with();
+	test_string_split_length();
+	test_string_split_size();
+	test_string_split_join();
+	test_string_split_compare();
+	test_string_starts_with();
+	test_string_split_clone();
+	test_string_trim();
+	test_string_trim_left();
+	test_string_trim_right();
 	// test_string_to_boolset();
 	// test_string_to_freqset();
 	// test_string_to_int();
 	// test_string_to_long();
 	// test_string_to_uint();
 	// test_string_to_ulong();
-	// test_string_trim();
-	// test_string_trim_left();
-	// test_string_trim_right();
-	// test_string_trim_unsplit();
 	printf("\n######################################################################\n");
 	// test_string_nsplit(); //needs rework
 }
