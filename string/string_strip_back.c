@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string_nlength.c                                   :+:      :+:    :+:   */
+/*   string_strip_back.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plgol.perso <pollivie@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/01 12:43:34 by plgol.perso       #+#    #+#             */
-/*   Updated: 2023/12/01 12:43:35 by plgol.perso      ###   ########.fr       */
+/*   Created: 2023/12/01 12:45:03 by plgol.perso       #+#    #+#             */
+/*   Updated: 2023/12/01 12:45:05 by plgol.perso      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../plib.h"
 
-int	string_nlength(char *str, unsigned int n)
+char	*string_strip_back(char *source, char *to_remove)
 {
-	char	*pstr;
+	char			*result;
+	unsigned int	slen;
+	unsigned int	rmlen;
 
-	if (!str || !n)
+	if (!source || !to_remove)
 		return (0);
-	pstr = str;
-	while (*pstr && n--)
-		++pstr;
-	return ((int)(pstr - str));
+	if (string_ends_with(source, to_remove))
+	{
+		slen = string_length(source);
+		rmlen = string_length(to_remove);
+		result = string_slice(source, 0, slen - rmlen);
+		if (!result)
+			return (0);
+		return (result);
+	}
+	return (source);
 }

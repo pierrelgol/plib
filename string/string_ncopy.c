@@ -17,7 +17,7 @@ char	*string_ncopy(char *dest, char *src, unsigned int n)
 	unsigned int	i;
 
 	if (!dest || !src || !n)
-		return (dest);
+		return (0);
 	i = 0;
 	while (src[i] && i < n)
 	{

@@ -12,7 +12,7 @@
 
 #include "../plib.h"
 
-char	*string_pad_left(char *str, int ch, unsigned int n)
+char	*string_pad_right(char *str, int ch, unsigned int n)
 {
 	char			*result;
 	unsigned int	rlength;
@@ -28,6 +28,6 @@ char	*string_pad_left(char *str, int ch, unsigned int n)
 	if (!result)
 		return (0);
 	memory_copy(result, str, slength);
-	memory_set(&result[slength - 1], ch, n);
+	memory_set(&result[slength], ch, n);
 	return (result);
 }

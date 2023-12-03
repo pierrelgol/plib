@@ -14,25 +14,32 @@
 
 char	**string_nsplit(char *str, unsigned int n)
 {
-	char			**result;
-	unsigned int	index;
-	unsigned int	length;
-	unsigned int	end;
+	char			**split;
+	unsigned int	nchunk;
+	unsigned int	slen;
+	unsigned int	pad;
+	unsigned int	i;
 
-	index = 0;
-	length = (string_length(str)) / n;
-	result = string_split_create(n + 1);
-	if (!result)
+	if (!str || !n)
 		return (0);
-	while (index < n)
+	slen = string_length(str);
+	pad = 0;
+	if ((slen + pad) % n != 0)
 	{
-		end = string_length(&str[length * index]);
-		if (end > length)
-			end = length;
-		result[index] = string_slice(str, length * index, end);
-		if (!result[index])
-			return (string_split_destroy(result, index));
-		++index;
+		while ((slen + pad) % n != 0)
+			++pad;
+		str = string_pad_right(str, '0', pad + 1);
 	}
-	return (result);
+	nchunk = (slen + pad) / n;
+	split = string_split_create(nchunk);
+	i = 0;
+	while (i < nchunk)
+	{
+		split[i] = string_create(n + 1);
+		if (!split[i])
+			string_split_destroy(split, i);
+		memory_copy(split[i], &str[i * n], n);
+		++i;
+	}
+	return (split);
 }

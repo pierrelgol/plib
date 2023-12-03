@@ -28,7 +28,7 @@ char	*string_pad(char *str, int ch, unsigned int n)
 	if (!result)
 		return (0);
 	memory_set(result, ch, n);
-	memory_copy(&result[n - 1], str, slength);
-	memory_set(&result[n + slength - 1], ch, n);
+	memory_copy(&result[n], str, slength);
+	memory_set(&result[n + slength], ch, n);
 	return (result);
 }

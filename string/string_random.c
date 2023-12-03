@@ -18,11 +18,13 @@ char	*string_random(unsigned int n)
 	unsigned int	ch;
 	unsigned int	i;
 
+	if (!n)
+		return (0);
 	result = string_create(n + 1);
 	if (!result)
 		return (0);
 	i = 0;
-	ch = 42;
+	ch = 42 + n;
 	while (i < n)
 	{
 		ch = ((unsigned int)char_to_random((int)ch) + 32) % 126;

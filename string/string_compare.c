@@ -16,7 +16,6 @@ int	string_compare(char *str1, char *str2)
 {
 	if (!str1 || !str2)
 		return (0);
-
 	while (*str1 && *((unsigned char *)str1) == *((unsigned char *)str2))
 	{
 		++str1;

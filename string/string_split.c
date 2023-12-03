@@ -50,6 +50,8 @@ char	**string_split(char *str, int ch)
 	unsigned int	length;
 	unsigned int	index;
 
+	if (!str)
+		return (0);
 	index = 0;
 	length = split_words_count(str, ch);
 	result = string_split_create(length + 1);

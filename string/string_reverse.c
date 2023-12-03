@@ -16,6 +16,7 @@ char	*string_reverse(char *str)
 {
 	unsigned int	length;
 	unsigned int	i;
+	unsigned int	temp;
 
 	if (!str)
 		return (0);
@@ -23,7 +24,9 @@ char	*string_reverse(char *str)
 	i = 0;
 	while (i < (length - i - 1))
 	{
+		temp = str[i];
 		str[i] = str[length - i - 1];
+		str[length - i - 1] = temp;
 		++i;
 	}
 	return (str);

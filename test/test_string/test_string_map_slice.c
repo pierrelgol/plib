@@ -20,7 +20,7 @@ static int test1(void)
 
 	test1 = "abcdefghijkl0123456789mnopqrstuvwxyz";
 	test2 = string_map_slice(test1, char_is_digit);
-	if (string_compare(test2, "0123456789") != 0)
+	if (string_compare("0123456789", test2) != 0)
 	{
 		string_destroy(test2);
 		return (FAIL);

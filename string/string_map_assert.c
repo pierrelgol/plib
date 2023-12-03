@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int string_map_assert(char *str, int (*f)(int ch))
+int	string_map_assert(char *str, int (*f)(int ch))
 {
 	if (!str || !f)
 		return (-1);
 	while (*str)
 	{
 		if (!f(*str))
-			break;
+			break ;
 		++str;
 	}
 	return (*str == '\0');

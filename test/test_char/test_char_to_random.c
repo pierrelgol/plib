@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../build/plib_test.h"
+#include <stdio.h>
 
 int	test_char_to_random(void)
 {
@@ -19,7 +20,7 @@ int	test_char_to_random(void)
 
 	i = 0;
 	count = 0;
-	while (i < 256)
+	while (i < 255)
 	{
 		if (char_to_random(asciiTable[i]) != i)
 			++count;

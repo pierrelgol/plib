@@ -28,6 +28,6 @@ char	*string_pad_left(char *str, int ch, unsigned int n)
 	if (!result)
 		return (0);
 	memory_set(result, ch, n);
-	memory_copy(&result[n - 1], str, slength);
+	memory_copy(&result[n], str, slength);
 	return (result);
 }

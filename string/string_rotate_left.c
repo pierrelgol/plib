@@ -22,7 +22,7 @@ char	*string_rotate_left(char *str, unsigned int n)
 		return (0);
 	length = string_length(str);
 	n %= length;
-	if (n == 0)
+	if (n == 0 || length <= 1)
 		return (str);
 	temp = string_clone(str);
 	temp[n] = '\0';

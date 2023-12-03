@@ -24,14 +24,12 @@ char	*string_random_custom(char *set, unsigned int n)
 	if (!result)
 		return (0);
 	i = 0;
-	ch = 42;
 	while (i < n)
 	{
-		ch = (unsigned int)char_to_random((int)ch) % 255;
+		ch = (unsigned int)char_to_random((int)ch + 32) % 126;
 		while (set[ch] == 0)
-			ch = (unsigned int)char_to_random((int)ch) % 255;
+			ch += (unsigned int)char_to_random((int)ch + 32) % 126;
 		result[i++] = (char)ch;
 	}
 	return (result);
 }
-

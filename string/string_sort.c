@@ -17,7 +17,7 @@ char	*string_sort(char *str, int (*f)(int ch1, int ch2))
 	unsigned int	temp;
 	unsigned int	i;
 
-	if (!str || !f)
+	if (!str || !f || !*str)
 		return (0);
 	i = 1;
 	while (str[i])

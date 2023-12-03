@@ -12,11 +12,6 @@
 
 #include "../plib.h"
 
-static unsigned int	abs_length(unsigned int n)
-{
-	return (((n < 0) * (-(n))) + ((n >= 0) * n));
-}
-
 char	*string_slice(char *str, unsigned int start, unsigned int end)
 {
 	char			*result;
@@ -28,7 +23,7 @@ char	*string_slice(char *str, unsigned int start, unsigned int end)
 	slength = string_length(str);
 	if (slength < end || slength < start)
 		return (0);
-	result = string_create((abs_length(end - start)) + 1);
+	result = string_create(((slength - start) + (slength - end)) + 1);
 	index = 0;
 	if (start <= end)
 	{
@@ -37,8 +32,8 @@ char	*string_slice(char *str, unsigned int start, unsigned int end)
 	}
 	else
 	{
-		while (start >= end)
-			result[index++] = str[start--];
+		while (start > end)
+			result[index++] = str[--start];
 	}
 	return (result);
 }

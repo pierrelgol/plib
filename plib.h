@@ -42,6 +42,9 @@ static const char asciiTable[129] = {
 /*                                [PlibString] */
 /*############################################################################*/
 
+#define BOOLSET (char [255]){0}
+#define FREQSET (char [255]){0}
+
 char         *string_append_back(char *str1, char *str2);
 char         *string_append_front(char *str1, char *str2);
 char         *string_clone(char *str);
@@ -72,16 +75,14 @@ int           string_ncompare(char *str1, char *str2, unsigned int n);
 int           string_nconcat(char *dst, char *src, unsigned int n);
 char         *string_ncopy(char *dst, char *src, unsigned int n);
 char         *string_njoin(char *str1, char *str2, unsigned int n);
-int           string_nlength(char *src, unsigned int n);
 char         *string_nsearch(char *str, char *sub, unsigned int n);
-char        **string_nsplit(char *str, unsigned int n);
 char         *string_pad(char *str, int ch, unsigned int n);
 char         *string_pad_left(char *str, int ch, unsigned int n);
 char         *string_pad_right(char *str, int ch, unsigned int n);
 char         *string_random(unsigned int n);
 char         *string_random_custom(char *set, unsigned int n);
-char         *string_remove_back(char *str1, char *str2);
-char         *string_remove_front(char *str1, char *str2);
+char         *string_strip_back(char *str1, char *str2);
+char         *string_strip_front(char *str1, char *str2);
 char         *string_reverse(char *str);
 char         *string_rotate_left(char *str, unsigned int n);
 char         *string_rotate_right(char *str, unsigned int n);
@@ -92,11 +93,6 @@ int           string_set_at(char *str, unsigned int index, int ch);
 char         *string_shuffle(char *str);
 char         *string_slice(char *str1, unsigned int start, unsigned int end);
 char         *string_sort(char *str, int (*f)(int ch1, int ch2));
-char        **string_split(char *str, int ch);
-char        **string_split_charset(char *str, char *charset);
-char        **string_split_create(unsigned int n);
-char        **string_split_destroy(char **str, unsigned int n);
-char        **string_split_map(char *str, int (*f)(int ch));
 int           string_starts_with(char *str, char *prefix);
 char         *string_to_boolset(char *str, char set[255]);
 char         *string_to_freqset(char *str, char set[255]);
@@ -107,7 +103,19 @@ unsigned long string_to_ulong(char *str);
 char         *string_trim(char *str, int ch);
 char         *string_trim_left(char *str, int ch);
 char         *string_trim_right(char *str, int ch);
+
+char        **string_split(char *str, int ch);
+char        **string_split_create(unsigned int n);
+char        **string_split_destroy(char **str, unsigned int n);
 char         *string_unsplit(char **strs);
+unsigned int  string_split_length(char **strs);
+unsigned int  string_split_size(char **strs);
+char        **string_split_copy(char **dst, char **srcs);
+char        **string_split_clone(char **strs);
+char        **string_split_map_filter(char *str, int (*f)(int ch));
+char        **string_split_map_apply(char *str, int (*f)(int ch));
+char        **string_split_map_assert(char *str, int (*f)(int ch));
+char        **string_split_map_assert(char *str, int (*f)(int ch));
 
 /*############################################################################*/
 /*                                [PlibChar]                                  */
@@ -155,5 +163,6 @@ void *memory_set(void *m1, int ch, unsigned int n);
 /*############################################################################*/
 /*                                [PlibBoolSet]                               */
 /*############################################################################*/
+
 
 #endif

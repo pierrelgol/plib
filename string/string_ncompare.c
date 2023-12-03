@@ -14,5 +14,7 @@
 
 int	string_ncompare(char *str1, char *str2, unsigned int n)
 {
+	if (!str1 || !str2 || !n)
+		return (0);
 	return (memory_compare(str1, str2, n));
 }

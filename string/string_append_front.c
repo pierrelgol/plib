@@ -12,11 +12,11 @@
 
 #include "../plib.h"
 
-char *string_append_front(char *str1, char *str2)
+char	*string_append_front(char *str1, char *str2)
 {
-	char        *result;
-	unsigned int rlength;
-	unsigned int i;
+	char			*result;
+	unsigned int	rlength;
+	unsigned int	i;
 
 	if (!str1 || !str2)
 		return (0);

@@ -15,20 +15,17 @@
 char	*string_shuffle(char *str)
 {
 	unsigned int	length;
-	unsigned int	index;
+	char			seed[2];
 
 	if (!str)
 		return (0);
 	length = string_length(str);
-	index = 0;
+	if (length <= 1)
+		return (str);
+	seed[0] = str[0];
+	seed[1] = str[length - 1];
+	str = string_rotate_left(str, seed[0]);
 	str = string_reverse(str);
-	while (length--)
-	{
-		if (length & 1)
-			str[index] = (char)char_to_random(str[length]);
-		else
-			str[index] = (char)char_to_reversecase(str[length]);
-		++index;
-	}
-	return (0);
+	str = string_rotate_right(str, seed[1]);
+	return (str);
 }
