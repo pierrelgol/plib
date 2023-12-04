@@ -139,4 +139,15 @@ int test_memory_search(void);
 int test_memory_move(void);
 int test_memory_set(void);
 
+int test_list_node_create(void);
+int test_list_node_destroy(void);
+int test_list_node_at(void);
+int test_list_size(void);
+int test_list_create(void);
+int test_list_destroy(void);
+int test_list_insert_at(void);
+int test_list_remove_at(void);
+int test_list_peek_at(void);
+
+
 #endif

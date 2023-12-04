@@ -42,17 +42,6 @@ static const char asciiTable[129] = {
 /*                                [PlibString] */
 /*############################################################################*/
 
-#define BOOLSET     \
-	(char[255]) \
-	{           \
-		0   \
-	}
-#define FREQSET     \
-	(char[255]) \
-	{           \
-		0   \
-	}
-
 char         *string_append_back(char *str1, char *str2);
 char         *string_append_front(char *str1, char *str2);
 char         *string_clone(char *str);
@@ -175,7 +164,48 @@ void *memory_move(void *m1, const void *m2, unsigned int n);
 void *memory_set(void *m1, int ch, unsigned int n);
 
 /*############################################################################*/
-/*                                [PlibBoolSet]                               */
+/*                                [PlibList]                                  */
 /*############################################################################*/
+
+typedef struct s_node
+{
+	struct s_node *prev;
+	struct s_node *next;
+	void          *data;
+} t_node;
+
+typedef struct s_list
+{
+	t_node *head;
+	t_node *tail;
+
+} t_list;
+
+t_node *list_node_create(void *data);
+t_node *list_node_destroy(t_node *node);
+t_node *list_node_at(t_node *head, unsigned int index);
+
+unsigned int list_size(t_list *list);
+t_list      *list_create(void *data);
+t_list      *list_destroy(t_list *list);
+t_list      *list_insert_at(t_list *list, void *data, unsigned int index);
+t_list      *list_remove_at(t_list *list, unsigned int index);
+void        *list_peek_at(t_list *list, unsigned int index);
+
+/*############################################################################*/
+/*                                [PlibList]                                  */
+/*############################################################################*/
+
+/*############################################################################*/
+/*                                [PROTOTYPES]                               */
+/*############################################################################*/
+
+// needs a lot of improvent on the split functions turns out they are more important then you might think
+// we need more higher level function to transform a split progressively, mroe filter more mapping matching etc.
+
+char *string_search_first(char *str, char *sub);
+char *string_search_last(char *str, char *sub);
+char *string_map_match_first(char *str, char *(*f)(char *src));
+char *string_map_match_last(char *str, char *(*f)(char *src));
 
 #endif

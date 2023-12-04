@@ -148,5 +148,15 @@ int main(void)
 	// test_string_to_uint();
 	// test_string_to_ulong();
 	printf("\n######################################################################\n");
+	test_list_peek_at();
+	test_list_create();
+	test_list_destroy();
+	test_list_node_at();
+	test_list_node_create();
+	test_list_node_destroy();
+	test_list_size();
+	test_list_insert_at();
+	test_list_remove_at();
+
 	// test_string_nsplit(); //needs rework
 }
