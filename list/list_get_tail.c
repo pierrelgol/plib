@@ -14,7 +14,7 @@
 
 t_list	*list_get_tail(t_list **self)
 {
-	t_list *temp;
+	t_list	*temp;
 
 	if (!self || !*self)
 		return (0);

@@ -30,4 +30,3 @@ void	*list_peek_at(t_list **list, unsigned int index)
 		return (curr->data);
 	}
 }
-

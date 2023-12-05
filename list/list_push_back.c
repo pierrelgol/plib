@@ -29,4 +29,3 @@ t_list	*list_push_back(t_list **list, t_list *node)
 	}
 	return (node);
 }
-

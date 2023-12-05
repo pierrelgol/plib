@@ -37,4 +37,3 @@ t_list	*list_pop_at(t_list **list, unsigned int index)
 		return (curr);
 	}
 }
-

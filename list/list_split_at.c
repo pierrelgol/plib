@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../plib.h"
 
 t_list	*list_split_at(t_list **self, unsigned int index)

@@ -203,6 +203,7 @@ t_list *list_rotate_left(t_list **self, unsigned int shift);
 t_list *list_get_head(t_list **self);
 t_list *list_get_tail(t_list **self);
 t_list *list_split_at(t_list **self, unsigned int index);
+void	list_sort(t_list **list, int (*f)(void *d1, void *d2));
 
 unsigned int list_length(t_list *list);
 

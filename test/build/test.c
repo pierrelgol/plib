@@ -176,4 +176,5 @@ int	main(void)
 	test_list_get_head();
 	test_list_get_tail();
 	test_list_split_at();
+	test_list_sort();
 }

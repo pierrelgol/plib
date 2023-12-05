@@ -32,4 +32,3 @@ t_list	*list_push_at(t_list **list, t_list *node, unsigned int index)
 	}
 	return (node);
 }
-

@@ -12,7 +12,7 @@
 
 #include "../plib.h"
 
-t_list *list_push_front(t_list **self, t_list *node)
+t_list	*list_push_front(t_list **self, t_list *node)
 {
 	if (!self || !node)
 		return (0);

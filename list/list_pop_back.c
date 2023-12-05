@@ -12,7 +12,7 @@
 
 #include "../plib.h"
 
-t_list *list_pop_back(t_list **self)
+t_list	*list_pop_back(t_list **self)
 {
 	t_list	*prev;
 	t_list	*curr;
@@ -30,4 +30,3 @@ t_list *list_pop_back(t_list **self)
 	curr->next = 0;
 	return (curr);
 }
-

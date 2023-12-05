@@ -12,9 +12,9 @@
 
 #include "../plib.h"
 
-t_list *list_pop_front(t_list **self)
+t_list	*list_pop_front(t_list **self)
 {
-	t_list *node;
+	t_list	*node;
 
 	if (!self || !*self)
 		return (0);

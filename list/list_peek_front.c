@@ -14,9 +14,7 @@
 
 void	*list_peek_front(t_list **self)
 {
-
 	if (!self || !*self)
 		return (0);
 	return ((*self)->data);
 }
-

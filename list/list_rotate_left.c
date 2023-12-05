@@ -12,10 +12,10 @@
 
 #include "../plib.h"
 
-t_list *list_rotate_left(t_list **self, unsigned int shift)
+t_list	*list_rotate_left(t_list **self, unsigned int shift)
 {
-	unsigned int length;
-	t_list      *temp;
+	unsigned int	length;
+	t_list			*temp;
 
 	if (!self || !*self)
 		return (0);

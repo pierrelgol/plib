@@ -165,5 +165,6 @@ int test_list_rotate_left(void);
 int test_list_get_head(void);
 int test_list_get_tail(void);
 int test_list_split_at(void);
+int test_list_sort(void);
 
 #endif
