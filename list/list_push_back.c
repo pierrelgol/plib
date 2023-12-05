@@ -16,7 +16,7 @@ t_list	*list_push_back(t_list **list, t_list *node)
 {
 	t_list	*temp;
 
-	if (!list)
+	if (!list || !node)
 		return (0);
 	if (!*list)
 		(*list) = node;

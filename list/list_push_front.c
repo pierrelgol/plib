@@ -14,7 +14,7 @@
 
 t_list *list_push_front(t_list **self, t_list *node)
 {
-	if (!self)
+	if (!self || !node)
 		return (0);
 	if (!*self)
 		(*self) = node;

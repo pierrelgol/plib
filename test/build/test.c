@@ -162,4 +162,18 @@ int	main(void)
 	test_list_peek_front();
 	test_list_peek_back();
 	test_list_length();
+
+	test_list_clone();
+	test_list_concat();
+	test_list_pop_front();
+	test_list_pop_back();
+	test_list_pop_at();
+	test_list_push_front();
+	test_list_push_back();
+	test_list_push_at();
+	test_list_rotate_right();
+	test_list_rotate_left();
+	test_list_get_head();
+	test_list_get_tail();
+	test_list_split_at();
 }

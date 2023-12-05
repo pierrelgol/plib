@@ -16,7 +16,7 @@ t_list	*list_push_at(t_list **list, t_list *node, unsigned int index)
 {
 	t_list	*temp;
 
-	if (!list)
+	if (!list || !node)
 		return (0);
 	if (index == 0)
 		return (list_push_front(list, node));

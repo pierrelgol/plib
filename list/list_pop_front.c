@@ -19,7 +19,10 @@ t_list *list_pop_front(t_list **self)
 	if (!self || !*self)
 		return (0);
 	node = (*self);
-	(*self) = (*self)->next;
+	if ((*self)->next)
+		(*self) = (*self)->next;
+	else
+		(*self) = 0;
 	node->next = 0;
 	return (node);
 }
