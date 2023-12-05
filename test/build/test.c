@@ -158,5 +158,8 @@ int	main(void)
 	test_list_remove_at();
 	test_list_remove_front();
 	test_list_remove_back();
+	test_list_peek_at();
+	test_list_peek_front();
+	test_list_peek_back();
 	test_list_length();
 }

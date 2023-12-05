@@ -147,6 +147,9 @@ int		test_list_insert_back(void);
 int		test_list_remove_front(void);
 int		test_list_remove_at(void);
 int		test_list_remove_back(void);
+int		test_list_peek_front(void);
+int		test_list_peek_at(void);
+int		test_list_peek_back(void);
 int		test_list_length(void);
 
 #endif

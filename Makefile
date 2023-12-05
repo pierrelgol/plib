@@ -21,11 +21,13 @@ CFLAGS      := -g3 -Wall -Wextra -Werror
 NAME        := libplib.a
 SHARED_NAME := libplib.so
 
-SRCS        := $(wildcard ./string/*.c) \
-               $(wildcard ./memory/*.c) \
-               $(wildcard ./char/*.c)   \
-               $(wildcard ./list/*.c)   \
-               # $(wildcard ./stack/*.c)  \
+SRCS        := $(wildcard ./string/*.c) 	\
+               $(wildcard ./memory/*.c) 	\
+               $(wildcard ./char/*.c)   	\
+               $(wildcard ./list/*.c)   	\
+               $(wildcard ./bit/*.c)   		\
+               $(wildcard ./stack/*.c)  	\
+               $(wildcard ./table/*.c)  	\
 
 OBJS        := $(SRCS:.c=.o)
 
