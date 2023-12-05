@@ -1,20 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_node_destroy.c                                :+:      :+:    :+:   */
+/*   list_insert_back.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plgol.perso <pollivie@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/04 11:10:05 by plgol.perso       #+#    #+#             */
-/*   Updated: 2023/12/04 11:10:06 by plgol.perso      ###   ########.fr       */
+/*   Created: 2023/12/04 20:33:28 by plgol.perso       #+#    #+#             */
+/*   Updated: 2023/12/04 20:33:31 by plgol.perso      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../plib.h"
 
-t_node	*list_node_destroy(t_node *node)
+t_list *list_insert_back(t_list **list, void *data)
 {
-	if (!node)
+	t_list *new_node;
+	t_list *temp;
+
+	if (!list)
 		return (0);
-	return (memory_dealloc(node));
+	new_node = list_create(data);
+	if (!new_node)
+		return (0);
+	if (!*list)
+		(*list) = new_node;
+	else
+	{
+		temp = (*list);
+		while (temp->next)
+			temp = temp->next;
+		temp->next = new_node;
+	}
+	return (new_node);
 }

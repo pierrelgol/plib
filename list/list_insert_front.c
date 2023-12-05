@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_node_at.c                                     :+:      :+:    :+:   */
+/*   list_insert_front.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plgol.perso <pollivie@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/04 12:32:41 by plgol.perso       #+#    #+#             */
-/*   Updated: 2023/12/04 12:32:42 by plgol.perso      ###   ########.fr       */
+/*   Created: 2023/12/04 20:08:41 by plgol.perso       #+#    #+#             */
+/*   Updated: 2023/12/04 20:08:42 by plgol.perso      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../plib.h"
 
-t_node	*list_node_at(t_node *head, unsigned int index)
+t_list	*list_insert_front(t_list **self, void *data)
 {
-	unsigned int	count;
-	t_node			*temp;
+	t_list *new_head;
 
-	if (!head)
+	if (!self)
 		return (0);
-	temp = head;
-	count = 0;
-	while (temp && count < index)
+	new_head = list_create(data);
+	if (!new_head)
+		return (0);
+	if (!*self)
+		(*self) = new_head;
+	else
 	{
-		temp = temp->next;
-		++count;
+		new_head->next = (*self);
+		(*self) = new_head;
 	}
-	return (temp);
+	return (new_head);
 }

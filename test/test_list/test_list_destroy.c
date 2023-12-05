@@ -5,21 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: plgol.perso <pollivie@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/04 13:10:33 by plgol.perso       #+#    #+#             */
-/*   Updated: 2023/12/04 13:10:34 by plgol.perso      ###   ########.fr       */
+/*   Created: 2023/12/05 08:50:20 by plgol.perso       #+#    #+#             */
+/*   Updated: 2023/12/05 08:50:21 by plgol.perso      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../build/plib_test.h"
 
-
 static int test1(void)
 {
 	t_list *list;
+	char   *str;
 
-	list = list_create("This");
+	str = "This is a test";
+	list = list_create(str);
+	if (!list)
+		return (FAIL);
 	if (list_destroy(list) == 0)
 		return (PASS);
+	list_destroy(list);
 	return (FAIL);
 }
 
@@ -30,7 +34,8 @@ static int test2(void)
 	list = 0;
 	if (list_destroy(list) == 0)
 		return (PASS);
-	return (FAIL);
+	list_destroy(list);
+	return (PASS);
 }
 
 int test_list_destroy(void)
@@ -42,5 +47,4 @@ int test_list_destroy(void)
 
 	return (1);
 }
-
 

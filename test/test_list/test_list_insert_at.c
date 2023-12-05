@@ -5,88 +5,137 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: plgol.perso <pollivie@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/04 13:10:48 by plgol.perso       #+#    #+#             */
-/*   Updated: 2023/12/04 13:10:48 by plgol.perso      ###   ########.fr       */
+/*   Created: 2023/12/05 09:37:20 by plgol.perso       #+#    #+#             */
+/*   Updated: 2023/12/05 09:37:24 by plgol.perso      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../build/plib_test.h"
-
 
 static int test1(void)
 {
 	t_list *list;
+	char   *str1;
+	char   *str2;
 
-	list = list_create(0);
-	list = list_insert_at(list, 0, 0);
-	if (list_size(list) == 2)
+	str1 = "This";
+	str2 = "is a test";
+	list = list_create(str1);
+	list_insert_at(&list, str2, 1);
+	if (list_length(list) != 2)
 	{
 		list_destroy(list);
-		return (PASS);
+		return (FAIL);
+	}
+	if (string_compare(list_remove_front(&list), "This") != 0)
+	{
+		list_destroy(list);
+		return (FAIL);
+	}
+	if (string_compare(list_remove_front(&list), "is a test") != 0)
+	{
+		list_destroy(list);
+		return (FAIL);
 	}
 	list_destroy(list);
-	return (FAIL);
+	return (PASS);
 }
 
 static int test2(void)
 {
 	t_list *list;
+	char   *str1;
+	char   *str2;
 
-	list = list_create(0);
-	list = list_insert_at(list, 0, 1);
-	if (list_size(list) == 2)
+	str1 = "This";
+	str2 = "is a test";
+	list = list_create(str1);
+	list_insert_at(&list, str2, 0);
+	if (list_length(list) != 2)
 	{
 		list_destroy(list);
-		return (PASS);
+		return (FAIL);
+	}
+	if (string_compare(list_remove_front(&list), "is a test") != 0)
+	{
+		list_destroy(list);
+		return (FAIL);
+	}
+	if (string_compare(list_remove_front(&list), "This") != 0)
+	{
+		list_destroy(list);
+		return (FAIL);
 	}
 	list_destroy(list);
-	return (FAIL);
+	return (PASS);
 }
 
 static int test3(void)
 {
 	t_list *list;
+	char   *str1;
+	char   *str2;
+	char   *str3;
 
-	list = list_create(0);
-	list = list_insert_at(list, 0, 1);
-	list = list_insert_at(list, 0, 1);
-	if (list_size(list) == 3)
+	str1 = "This ";
+	str2 = "is ";
+	str3 = "a test";
+	list = list_create(str1);
+	list_insert_at(&list, str3, 1);
+	list_insert_at(&list, str2, 1);
+	if (list_length(list) != 3)
 	{
 		list_destroy(list);
-		return (PASS);
+		return (FAIL);
+	}
+	if (string_compare(list_remove_front(&list), "This ") != 0)
+	{
+		list_destroy(list);
+		return (FAIL);
+	}
+	if (string_compare(list_remove_front(&list), "is ") != 0)
+	{
+		list_destroy(list);
+		return (FAIL);
+	}
+	if (string_compare(list_remove_front(&list), "a test") != 0)
+	{
+		list_destroy(list);
+		return (FAIL);
 	}
 	list_destroy(list);
-	return (FAIL);
+	return (PASS);
 }
 
 static int test4(void)
 {
 	t_list *list;
 
-	list = list_create(0);
-	list = list_insert_at(list, 0, 1);
-	list = list_insert_at(list, 0, 42);
-	if (list_size(list) == 3)
+	list = 0;
+	list_insert_at(&list, 0, 1);
+	if (list_length(list) != 1)
 	{
 		list_destroy(list);
-		return (PASS);
+		return (FAIL);
 	}
 	list_destroy(list);
-	return (FAIL);
+	return (PASS);
 }
-
 
 static int test5(void)
 {
 	t_list *list;
 
 	list = 0;
-	if (list_insert_at(list, 0, 10) == 0)
-		return (PASS);
-	return (FAIL);
+	list_insert_at(&list, 0, 0);
+	if (list_length(list) != 1)
+	{
+		list_destroy(list);
+		return (FAIL);
+	}
+	list_destroy(list);
+	return (PASS);
 }
-
 
 int test_list_insert_at(void)
 {

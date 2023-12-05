@@ -31,7 +31,6 @@ void test_print_verbose_start(char *name);
 void test_print_verbose_test(char *name, int is_success);
 void test_print_verbose_end(void);
 
-
 int test_string_append_back(void);
 int test_string_append_front(void);
 int test_string_clone(void);
@@ -139,15 +138,15 @@ int test_memory_search(void);
 int test_memory_move(void);
 int test_memory_set(void);
 
-int test_list_node_create(void);
-int test_list_node_destroy(void);
-int test_list_node_at(void);
-int test_list_size(void);
 int test_list_create(void);
 int test_list_destroy(void);
 int test_list_insert_at(void);
 int test_list_remove_at(void);
-int test_list_peek_at(void);
-
+int test_list_insert_front(void);
+int test_list_insert_back(void);
+int test_list_remove_front(void);
+int test_list_remove_at(void);
+int test_list_remove_back(void);
+int test_list_length(void);
 
 #endif

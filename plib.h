@@ -164,40 +164,30 @@ void *memory_move(void *m1, const void *m2, unsigned int n);
 void *memory_set(void *m1, int ch, unsigned int n);
 
 /*############################################################################*/
-/*                                [PlibList]                                  */
+/*                                [PlibdList] */
 /*############################################################################*/
 
-typedef struct s_node
+struct s_list
 {
-	struct s_node *prev;
-	struct s_node *next;
+	struct s_list *next;
 	void          *data;
-} t_node;
+};
 
-typedef struct s_list
-{
-	t_node *head;
-	t_node *tail;
+typedef struct s_list t_list;
 
-} t_list;
-
-t_node *list_node_create(void *data);
-t_node *list_node_destroy(t_node *node);
-t_node *list_node_at(t_node *head, unsigned int index);
-
-unsigned int list_size(t_list *list);
 t_list      *list_create(void *data);
-t_list      *list_destroy(t_list *list);
-t_list      *list_insert_at(t_list *list, void *data, unsigned int index);
-t_list      *list_remove_at(t_list *list, unsigned int index);
-void        *list_peek_at(t_list *list, unsigned int index);
+t_list      *list_destroy(t_list *self);
+t_list	    *list_insert_at(t_list **self, void *data, unsigned int index);
+void	    *list_remove_at(t_list **self, unsigned int index);
+t_list      *list_insert_front(t_list **self, void *data);
+t_list      *list_insert_back(t_list **self, void *data);
+void        *list_remove_front(t_list **self);
+void	    *list_remove_at(t_list **self, unsigned int index);
+void        *list_remove_back(t_list **self);
+unsigned int list_length(t_list *list);
 
 /*############################################################################*/
-/*                                [PlibList]                                  */
-/*############################################################################*/
-
-/*############################################################################*/
-/*                                [PROTOTYPES]                               */
+/*                                [PROTOTYPES] */
 /*############################################################################*/
 
 // needs a lot of improvent on the split functions turns out they are more important then you might think

@@ -21,7 +21,7 @@ SHARED_NAME := libplib.so
 SRCS        := $(wildcard ./test_string/*.c) \
                $(wildcard ./test_memory/*.c) \
                $(wildcard ./test_char/*.c)	 \
-               $(wildcard ./test_list/*.c) 
+               $(wildcard ./test_list/*.c)	 \
 
 OBJS        := $(SRCS:.c=.o)
 

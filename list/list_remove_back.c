@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_size.c                                        :+:      :+:    :+:   */
+/*   list_remove_back.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plgol.perso <pollivie@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/04 11:17:42 by plgol.perso       #+#    #+#             */
-/*   Updated: 2023/12/04 11:17:43 by plgol.perso      ###   ########.fr       */
+/*   Created: 2023/12/04 20:39:28 by plgol.perso       #+#    #+#             */
+/*   Updated: 2023/12/04 20:39:29 by plgol.perso      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../plib.h"
 
-unsigned int	list_size(t_list *list)
+void	*list_remove_back(t_list **self)
 {
-	unsigned int	size;
-	t_node			*temp;
+	t_list	*prev;
+	t_list	*curr;
+	void	*data;
 
-	if (!list)
+	if (!self || !*self)
 		return (0);
-	size = 0;
-	temp = list->head;
-	while (temp)
+	curr = (*self);
+	prev = curr;
+	while (curr->next)
 	{
-		temp = temp->next;
-		++size;
+		prev = curr;
+		curr = curr->next;
 	}
-	return (size);
+	data = curr->data;
+	prev->next = 0;
+	memory_dealloc(curr);
+	return (data);
 }

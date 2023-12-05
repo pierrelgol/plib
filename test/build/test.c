@@ -13,7 +13,6 @@
 #include "plib_test.h"
 #include <stdio.h>
 
-
 void test_print_verbose_start(char *name)
 {
 	printf("%s%-32s%s : ", BLUE, name, RESET);
@@ -21,13 +20,13 @@ void test_print_verbose_start(char *name)
 
 void test_print_verbose_test(char *name, int is_success)
 {
-	(void)name;
+	(void) name;
 	if (is_success)
 	{
-		printf("%s%4s%s",GREEN, "[OK]", RESET);
+		printf("%s%4s%s", GREEN, "[OK]", RESET);
 	}
 	else
-		printf("%s%5s%s",RED, "[KO]", RESET);
+		printf("%s%5s%s", RED, "[KO]", RESET);
 }
 // void test_print_verbose_test(char *name, int is_success)
 // {
@@ -46,7 +45,8 @@ void test_print_verbose_end(void)
 
 int main(void)
 {
-	printf("\n##############################[PlibChar]##############################\n");
+	printf("\n##############################[PlibChar]#####################"
+	       "#########\n");
 	test_char_is_alnum();
 	test_char_is_alpha();
 	test_char_is_digit();
@@ -71,7 +71,8 @@ int main(void)
 	test_char_to_random();
 	test_char_sort_ascending();
 	test_char_sort_descending();
-	printf("\n##############################[PlibMemory]############################\n");
+	printf("\n##############################[PlibMemory]###################"
+	       "#########\n");
 	test_memory_alloc();
 	test_memory_clone();
 	test_memory_compare();
@@ -80,7 +81,8 @@ int main(void)
 	test_memory_set();
 	test_memory_search();
 	test_memory_move();
-	printf("\n##############################[PlibString]############################\n");
+	printf("\n##############################[PlibString]###################"
+	       "#########\n");
 	test_string_append_back();
 	test_string_append_front();
 	test_string_clone();
@@ -141,22 +143,22 @@ int main(void)
 	test_string_trim();
 	test_string_trim_left();
 	test_string_trim_right();
+
 	// test_string_to_boolset();
 	// test_string_to_freqset();
 	// test_string_to_int();
 	// test_string_to_long();
 	// test_string_to_uint();
 	// test_string_to_ulong();
+
 	printf("\n######################################################################\n");
-	test_list_peek_at();
 	test_list_create();
 	test_list_destroy();
-	test_list_node_at();
-	test_list_node_create();
-	test_list_node_destroy();
-	test_list_size();
+	test_list_insert_front();
+	test_list_insert_back();
 	test_list_insert_at();
 	test_list_remove_at();
-
-	// test_string_nsplit(); //needs rework
+	test_list_remove_front();
+	test_list_remove_back();
+	test_list_length();
 }

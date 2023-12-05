@@ -187,14 +187,54 @@ t_node *list_node_at(t_node *head, unsigned int index);
 
 unsigned int list_size(t_list *list);
 t_list      *list_create(void *data);
+void        *list_clear_at(t_list *list, unsigned int index);
 t_list      *list_destroy(t_list *list);
 t_list      *list_insert_at(t_list *list, void *data, unsigned int index);
 t_list      *list_remove_at(t_list *list, unsigned int index);
 void        *list_peek_at(t_list *list, unsigned int index);
 
 /*############################################################################*/
-/*                                [PlibList]                                  */
+/*                                [PlibStack]                                 */
 /*############################################################################*/
+
+typedef struct s_stack
+{
+	unsigned int size;
+	unsigned int count;
+	t_list      *list;
+} t_stack;
+
+t_stack     *stack_destroy(t_stack *self);
+t_stack     *stack_create(void *data);
+void        *stack_swap(t_stack *self);
+void         stack_rotate(t_stack *self, int shift);
+void        *stack_pop(t_stack *self);
+void        *stack_peek(t_stack *self);
+void        *stack_push(t_stack *self, void *data);
+unsigned int stack_is_empty(t_stack *self);
+unsigned int stack_size(t_stack *self);
+unsigned int stack_count(t_stack *self);
+
+/*############################################################################*/
+/*                                [PlibQueue]                                 */
+/*############################################################################*/
+
+typedef struct s_queue
+{
+	unsigned int size;
+	unsigned int count;
+	t_list      *list;
+} t_queue;
+
+t_queue     *queue_delete(t_queue *self);
+t_queue     *queue_create(void *data);
+void        *queue_swap(t_queue *self);
+void         queue_rotate(t_queue *self, int shift);
+void        *queue_dequeu(t_queue *self);
+void        *queue_peek(t_queue *self);
+void        *queue_enqueue(t_queue *self, void *data);
+unsigned int queue_size(t_queue *self);
+unsigned int queue_count(t_queue *self);
 
 /*############################################################################*/
 /*                                [PROTOTYPES]                               */
