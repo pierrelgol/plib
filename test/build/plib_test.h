@@ -151,7 +151,6 @@ int test_list_peek_front(void);
 int test_list_peek_at(void);
 int test_list_peek_back(void);
 int test_list_length(void);
-
 int test_list_clone(void);
 int test_list_concat(void);
 int test_list_pop_front(void);
@@ -166,5 +165,20 @@ int test_list_get_head(void);
 int test_list_get_tail(void);
 int test_list_split_at(void);
 int test_list_sort(void);
+
+int test_bit_count_set_bits(void);
+int test_bit_count_unset_bits(void);
+int test_bit_rotate_left(void);
+int test_bit_rotate_right(void);
+int test_bit_set_bit(void);
+int test_bit_toggle_bit(void);
+int test_bit_unset_bit(void);
+int test_bit_compare_bits(void);
+int test_bit_swap_bits(void);
+int test_bit_reverse_bits(void);
+int test_bit_check_parity(void);
+int test_bit_is_set(void);
+int test_bit_bitmask_create(void);
+int test_bit_bitmask_combine(void);
 
 #endif

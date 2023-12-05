@@ -29,7 +29,7 @@ char	*string_split_join(char **strs, int ch)
 	{
 		i += string_concat(&result[i], *strs);
 		if (*(strs + 1) != 0)
-			i += string_concat(&result[i], (char[2]){[0] = ch});
+			i += string_concat(&result[i], (char [2]){[0] = ch});
 		++strs;
 	}
 	return (result);
