@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../plib.h"
 
 t_list	*list_create(void *data)
@@ -20,8 +19,7 @@ t_list	*list_create(void *data)
 	self = memory_alloc(1, sizeof(*self));
 	if (!self)
 		return (0);
-	self->next= 0;
+	self->next = 0;
 	self->data = data;
 	return (self);
 }
-

@@ -10,11 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../plib.h"
 
 t_list	*list_insert_at(t_list **list, void *data, unsigned int index)
-{	
+{
 	t_list	*new_node;
 	t_list	*temp;
 

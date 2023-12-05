@@ -12,11 +12,11 @@
 
 #include "../build/plib_test.h"
 
-static int test1(void)
+static int	test1(void)
 {
-	char *test1;
+	char	*test1;
 
-	test1 = string_map_clone("abcdefghijklmnopqrstuvwxyz",char_to_uppercase);
+	test1 = string_map_clone("abcdefghijklmnopqrstuvwxyz", char_to_uppercase);
 	if (string_compare(test1, "ABCDEFGHIJKLMNOPQRSTUVWXYZ") != 0)
 	{
 		string_destroy(test1);
@@ -26,23 +26,23 @@ static int test1(void)
 	return (PASS);
 }
 
-static int test2(void)
+static int	test2(void)
 {
-	char *test1;
+	char	*test1;
 
 	test1 = 0;
-	test1 = string_map_clone(0,char_to_uppercase);
+	test1 = string_map_clone(0, char_to_uppercase);
 	if (!test1)
 		return (PASS);
 	string_destroy(test1);
 	return (FAIL);
 }
 
-static int test3(void)
+static int	test3(void)
 {
-	char *test1;
+	char	*test1;
 
-	test1 = string_map_clone("abcdefghijklmnopqrstuvwxyz",0);
+	test1 = string_map_clone("abcdefghijklmnopqrstuvwxyz", 0);
 	if (!test1)
 	{
 		string_destroy(test1);
@@ -52,11 +52,11 @@ static int test3(void)
 	return (FAIL);
 }
 
-static int test4(void)
+static int	test4(void)
 {
-	char *test1;
+	char	*test1;
 
-	test1 = string_map_clone("",char_to_uppercase);
+	test1 = string_map_clone("", char_to_uppercase);
 	if (string_compare(test1, "") == 0)
 	{
 		string_destroy(test1);
@@ -66,9 +66,9 @@ static int test4(void)
 	return (FAIL);
 }
 
-int test_string_map_clone(void)
+int	test_string_map_clone(void)
 {
-	test_print_verbose_start((char *) __FUNCTION__);
+	test_print_verbose_start((char *)__FUNCTION__);
 	test_print_verbose_test("test1", test1() == PASS);
 	test_print_verbose_test("test2", test2() == PASS);
 	test_print_verbose_test("test3", test3() == PASS);

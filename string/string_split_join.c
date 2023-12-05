@@ -12,11 +12,11 @@
 
 #include "../plib.h"
 
-char *string_split_join(char **strs, int ch)
+char	*string_split_join(char **strs, int ch)
 {
-	char        *result;
-	unsigned int length;
-	unsigned int i;
+	char			*result;
+	unsigned int	length;
+	unsigned int	i;
 
 	if (!strs)
 		return (0);

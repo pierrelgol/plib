@@ -12,11 +12,11 @@
 
 #include "../build/plib_test.h"
 
-static int test1(void)
+static int	test1(void)
 {
-	char *test1;
-	char *test2;
-	char *result;
+	char	*test1;
+	char	*test2;
+	char	*result;
 
 	test1 = 0;
 	test2 = "This";
@@ -26,11 +26,11 @@ static int test1(void)
 	return (FAIL);
 }
 
-static int test2(void)
+static int	test2(void)
 {
-	char *test1;
-	char *test2;
-	char *result;
+	char	*test1;
+	char	*test2;
+	char	*result;
 
 	test1 = "This";
 	test2 = 0;
@@ -40,11 +40,11 @@ static int test2(void)
 	return (FAIL);
 }
 
-static int test3(void)
+static int	test3(void)
 {
-	char *test1;
-	char *test2;
-	char *result;
+	char	*test1;
+	char	*test2;
+	char	*result;
 
 	test1 = "This is a test to see if it can find a very long string";
 	test2 = "This is a test to see if it can find a very long string";
@@ -58,11 +58,11 @@ static int test3(void)
 	return (PASS);
 }
 
-static int test4(void)
+static int	test4(void)
 {
-	char *test1;
-	char *test2;
-	char *result;
+	char	*test1;
+	char	*test2;
+	char	*result;
 
 	test1 = "This is still a test!";
 	test2 = "test!";
@@ -74,11 +74,11 @@ static int test4(void)
 	return (PASS);
 }
 
-static int test5(void)
+static int	test5(void)
 {
-	char *test1;
-	char *test2;
-	char *result;
+	char	*test1;
+	char	*test2;
+	char	*result;
 
 	test1 = "This is still a test!";
 	test2 = "I'm not here";
@@ -88,23 +88,23 @@ static int test5(void)
 	return (FAIL);
 }
 
-static int test6(void)
+static int	test6(void)
 {
-	char *test1;
-	char *test2;
-	char *result;
+	char	*test1;
+	char	*test2;
+	char	*result;
 
 	test1 = "This is still a test!, I'm here";
 	test2 = "I'm here";
-	result = string_nsearch(test1, test2, string_length(test1) -1);
+	result = string_nsearch(test1, test2, string_length(test1) - 1);
 	if (!result)
 		return (PASS);
 	return (FAIL);
 }
 
-int test_string_nsearch(void)
+int	test_string_nsearch(void)
 {
-	test_print_verbose_start((char *) __FUNCTION__);
+	test_print_verbose_start((char *)__FUNCTION__);
 	test_print_verbose_test("test1", test1() == PASS);
 	test_print_verbose_test("test2", test2() == PASS);
 	test_print_verbose_test("test3", test3() == PASS);
@@ -112,6 +112,5 @@ int test_string_nsearch(void)
 	test_print_verbose_test("test5", test5() == PASS);
 	test_print_verbose_test("test6", test6() == PASS);
 	test_print_verbose_end();
-
 	return (1);
 }

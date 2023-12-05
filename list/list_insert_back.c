@@ -12,10 +12,10 @@
 
 #include "../plib.h"
 
-t_list *list_insert_back(t_list **list, void *data)
+t_list	*list_insert_back(t_list **list, void *data)
 {
-	t_list *new_node;
-	t_list *temp;
+	t_list	*new_node;
+	t_list	*temp;
 
 	if (!list)
 		return (0);

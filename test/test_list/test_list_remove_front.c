@@ -10,14 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../build/plib_test.h"
 
-static int test1(void)
+static int	test1(void)
 {
-	t_list *list;
-	char   *str1;
-	char   *str2;
+	t_list	*list;
+	char	*str1;
+	char	*str2;
 
 	str1 = "This";
 	str2 = "is a test";
@@ -42,11 +41,11 @@ static int test1(void)
 	return (PASS);
 }
 
-static int test2(void)
+static int	test2(void)
 {
-	t_list *list;
-	char   *str1;
-	char   *str2;
+	t_list	*list;
+	char	*str1;
+	char	*str2;
 
 	str1 = "This";
 	str2 = "is a test";
@@ -71,12 +70,12 @@ static int test2(void)
 	return (PASS);
 }
 
-static int test3(void)
+static int	test3(void)
 {
-	t_list *list;
-	char   *str1;
-	char   *str2;
-	char   *str3;
+	t_list	*list;
+	char	*str1;
+	char	*str2;
+	char	*str3;
 
 	str1 = "This ";
 	str2 = "is ";
@@ -108,9 +107,9 @@ static int test3(void)
 	return (PASS);
 }
 
-static int test4(void)
+static int	test4(void)
 {
-	t_list *list;
+	t_list	*list;
 
 	list = 0;
 	list_insert_at(&list, 0, 0);
@@ -119,9 +118,9 @@ static int test4(void)
 	return (FAIL);
 }
 
-static int test5(void)
+static int	test5(void)
 {
-	t_list *list;
+	t_list	*list;
 
 	list = 0;
 	list_insert_at(&list, 0, 0);
@@ -130,15 +129,14 @@ static int test5(void)
 	return (FAIL);
 }
 
-int test_list_remove_front(void)
+int	test_list_remove_front(void)
 {
-	test_print_verbose_start((char *) __FUNCTION__);
+	test_print_verbose_start((char *)__FUNCTION__);
 	test_print_verbose_test("test1", test1() == PASS);
 	test_print_verbose_test("test2", test2() == PASS);
 	test_print_verbose_test("test3", test3() == PASS);
 	test_print_verbose_test("test4", test4() == PASS);
 	test_print_verbose_test("test5", test5() == PASS);
 	test_print_verbose_end();
-
 	return (1);
 }

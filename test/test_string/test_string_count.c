@@ -10,10 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../build/plib_test.h"
 
-static int test1(void)
+static int	test1(void)
 {
 	char	*test1;
 
@@ -23,7 +22,7 @@ static int test1(void)
 	return (PASS);
 }
 
-static int test2(void)
+static int	test2(void)
 {
 	char	*test1;
 
@@ -33,8 +32,7 @@ static int test2(void)
 	return (PASS);
 }
 
-
-static int test3(void)
+static int	test3(void)
 {
 	char	*test1;
 
@@ -44,7 +42,7 @@ static int test3(void)
 	return (PASS);
 }
 
-static int test4(void)
+static int	test4(void)
 {
 	char	*test1;
 
@@ -54,7 +52,7 @@ static int test4(void)
 	return (PASS);
 }
 
-static int test5(void)
+static int	test5(void)
 {
 	char	*test1;
 
@@ -64,15 +62,14 @@ static int test5(void)
 	return (PASS);
 }
 
-int test_string_count(void)
+int	test_string_count(void)
 {
-	test_print_verbose_start((char *) __FUNCTION__);
+	test_print_verbose_start((char *)__FUNCTION__);
 	test_print_verbose_test("test1", test1() == PASS);
 	test_print_verbose_test("test2", test2() == PASS);
 	test_print_verbose_test("test3", test3() == PASS);
 	test_print_verbose_test("test4", test4() == PASS);
 	test_print_verbose_test("test5", test5() == PASS);
 	test_print_verbose_end();
-
 	return (1);
 }

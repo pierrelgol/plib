@@ -13,9 +13,9 @@
 #include "../build/plib_test.h"
 #include <stdio.h>
 
-static int test1(void)
+static int	test1(void)
 {
-	char **result;
+	char	**result;
 
 	result = string_split_create(0);
 	result = string_split_destroy(result, 100);
@@ -25,10 +25,9 @@ static int test1(void)
 	return (FAIL);
 }
 
-
-static int test2(void)
+static int	test2(void)
 {
-	char **result;
+	char	**result;
 
 	result = string_split_create(42);
 	result = string_split_destroy(result, 42);
@@ -38,9 +37,9 @@ static int test2(void)
 	return (FAIL);
 }
 
-int test_string_split_destroy(void)
+int	test_string_split_destroy(void)
 {
-	test_print_verbose_start((char *) __FUNCTION__);
+	test_print_verbose_start((char *)__FUNCTION__);
 	test_print_verbose_test("test1", test1() == PASS);
 	test_print_verbose_test("test2", test2() == PASS);
 	// test_print_verbose_test("test3", test3() == PASS);
@@ -48,5 +47,3 @@ int test_string_split_destroy(void)
 	test_print_verbose_end();
 	return (1);
 }
-
-

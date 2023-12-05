@@ -24,7 +24,6 @@ static int	test1(void)
 	return (FAIL);
 }
 
-
 static int	test2(void)
 {
 	char	*test1;
@@ -97,7 +96,6 @@ static int	test7(void)
 	return (PASS);
 }
 
-
 int	test_string_starts_with(void)
 {
 	test_print_verbose_start((char *)__FUNCTION__);
@@ -111,5 +109,3 @@ int	test_string_starts_with(void)
 	test_print_verbose_end();
 	return (1);
 }
-
-

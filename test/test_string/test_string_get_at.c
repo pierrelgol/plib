@@ -18,12 +18,11 @@ static int	test1(void)
 	char	test2;
 
 	test1 = "This is a test";
-	test2 = string_get_at(test1,  -5);
+	test2 = string_get_at(test1, -5);
 	if (test2 == -1)
 		return (PASS);
 	return (FAIL);
 }
-
 
 static int	test2(void)
 {
@@ -31,7 +30,7 @@ static int	test2(void)
 	char	test2;
 
 	test1 = "This is a test";
-	test2 = string_get_at(test1,  1337);
+	test2 = string_get_at(test1, 1337);
 	if (test2 == -1)
 		return (PASS);
 	return (FAIL);
@@ -43,7 +42,7 @@ static int	test3(void)
 	char	test2;
 
 	test1 = "This is a test";
-	test2 = string_get_at(test1,  0);
+	test2 = string_get_at(test1, 0);
 	if (test2 == 'T')
 		return (PASS);
 	return (FAIL);
@@ -55,7 +54,7 @@ static int	test4(void)
 	char	test2;
 
 	test1 = "This is a test";
-	test2 = string_get_at(test1,  string_length(test1) - 1);
+	test2 = string_get_at(test1, string_length(test1) - 1);
 	if (test2 == 't')
 		return (PASS);
 	return (FAIL);
@@ -67,7 +66,7 @@ static int	test5(void)
 	char	test2;
 
 	test1 = 0;
-	test2 = string_get_at(test1,  0);
+	test2 = string_get_at(test1, 0);
 	if (test2 == -1)
 		return (PASS);
 	return (FAIL);
@@ -84,4 +83,3 @@ int	test_string_get_at(void)
 	test_print_verbose_end();
 	return (1);
 }
-

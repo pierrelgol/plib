@@ -10,13 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../build/plib_test.h"
 
-static int test1(void)
+static int	test1(void)
 {
-	char *test1;
-	char *test2;
+	char	*test1;
+	char	*test2;
 
 	test1 = "abcdefghijkl0123456789mnopqrstuvwxyz";
 	test2 = string_map_slice(test1, char_is_digit);
@@ -29,10 +28,10 @@ static int test1(void)
 	return (PASS);
 }
 
-static int test2(void)
+static int	test2(void)
 {
-	char *test1;
-	char *test2;
+	char	*test1;
+	char	*test2;
 
 	test1 = "abcdefghijkl0mnopqrstuvwxyz";
 	test2 = string_map_slice(test1, char_is_digit);
@@ -45,10 +44,10 @@ static int test2(void)
 	return (PASS);
 }
 
-static int test3(void)
+static int	test3(void)
 {
-	char *test1;
-	char *test2;
+	char	*test1;
+	char	*test2;
 
 	test1 = "abcdefghijkl0mnopqrstuvwxyz";
 	test2 = string_map_slice(test1, char_is_spaces);
@@ -61,11 +60,10 @@ static int test3(void)
 	return (PASS);
 }
 
-
-static int test4(void)
+static int	test4(void)
 {
-	char *test1;
-	char *test2;
+	char	*test1;
+	char	*test2;
 
 	test1 = "";
 	test2 = string_map_slice(test1, char_is_spaces);
@@ -78,10 +76,10 @@ static int test4(void)
 	return (PASS);
 }
 
-static int test5(void)
+static int	test5(void)
 {
-	char *test1;
-	char *test2;
+	char	*test1;
+	char	*test2;
 
 	test1 = 0;
 	test2 = string_map_slice(test1, char_is_spaces);
@@ -94,10 +92,10 @@ static int test5(void)
 	return (FAIL);
 }
 
-static int test6(void)
+static int	test6(void)
 {
-	char *test1;
-	char *test2;
+	char	*test1;
+	char	*test2;
 
 	test1 = 0;
 	test2 = string_map_slice(test1, 0);
@@ -110,10 +108,9 @@ static int test6(void)
 	return (FAIL);
 }
 
-
-int test_string_map_slice(void)
+int	test_string_map_slice(void)
 {
-	test_print_verbose_start((char *) __FUNCTION__);
+	test_print_verbose_start((char *)__FUNCTION__);
 	test_print_verbose_test("test1", test1() == PASS);
 	test_print_verbose_test("test2", test2() == PASS);
 	test_print_verbose_test("test3", test3() == PASS);

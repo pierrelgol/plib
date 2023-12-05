@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../build/plib_test.h"
 
 static int	test1(void)
@@ -57,7 +56,6 @@ static int	test3(void)
 	string_destroy(test2);
 	return (FAIL);
 }
-
 
 static int	test4(void)
 {

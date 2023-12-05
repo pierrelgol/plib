@@ -12,11 +12,11 @@
 
 #include "../build/plib_test.h"
 
-static int test1(void)
+static int	test1(void)
 {
-	char *test1;
+	char	*test1;
 
-	test1 = string_map_filter("abcdefghijklmnopqrstuvwxyz",char_is_lowercase);
+	test1 = string_map_filter("abcdefghijklmnopqrstuvwxyz", char_is_lowercase);
 	if (string_compare(test1, "") != 0)
 	{
 		string_destroy(test1);
@@ -26,11 +26,12 @@ static int test1(void)
 	return (PASS);
 }
 
-static int test2(void)
+static int	test2(void)
 {
-	char *test1;
+	char	*test1;
 
-	test1 = string_map_filter("00abcdefghijklmn00opqrstuvwxyz00",char_is_digit);
+	test1 = string_map_filter("00abcdefghijklmn00opqrstuvwxyz00",
+			char_is_digit);
 	if (string_compare(test1, "abcdefghijklmnopqrstuvwxyz") != 0)
 	{
 		string_destroy(test1);
@@ -40,31 +41,31 @@ static int test2(void)
 	return (PASS);
 }
 
-static int test3(void)
+static int	test3(void)
 {
-	char *test1;
+	char	*test1;
 
-	test1 = string_map_filter(0,char_is_digit);
+	test1 = string_map_filter(0, char_is_digit);
 	if (!test1)
 		return (PASS);
 	string_destroy(test1);
 	return (FAIL);
 }
 
-static int test4(void)
+static int	test4(void)
 {
-	char *test1;
+	char	*test1;
 
-	test1 = string_map_filter("char_is_digit",0);
+	test1 = string_map_filter("char_is_digit", 0);
 	if (!test1)
 		return (PASS);
 	string_destroy(test1);
 	return (FAIL);
 }
 
-int test_string_map_filter(void)
+int	test_string_map_filter(void)
 {
-	test_print_verbose_start((char *) __FUNCTION__);
+	test_print_verbose_start((char *)__FUNCTION__);
 	test_print_verbose_test("test1", test1() == PASS);
 	test_print_verbose_test("test2", test2() == PASS);
 	test_print_verbose_test("test3", test3() == PASS);
@@ -72,4 +73,3 @@ int test_string_map_filter(void)
 	test_print_verbose_end();
 	return (1);
 }
-

@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../build/plib_test.h"
 
 static int	test1(void)
@@ -44,7 +43,6 @@ static int	test2(void)
 		return (PASS);
 	return (FAIL);
 }
-
 
 static int	test3(void)
 {

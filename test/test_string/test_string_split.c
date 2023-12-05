@@ -13,14 +13,16 @@
 #include "../build/plib_test.h"
 #include <stdio.h>
 
-static int test1(void)
+static int	test1(void)
 {
-	char  *test1;
-	char **result;
+	char	*test1;
+	char	**result;
 
 	test1 = "This is a test";
 	result = string_split(test1, ' ');
-	if (string_compare(result[0], "This") == 0 && string_compare(result[1], "is") == 0 && string_compare(result[2], "a") == 0 && string_compare(result[3], "test") == 0)
+	if (string_compare(result[0], "This") == 0 && string_compare(result[1],
+			"is") == 0 && string_compare(result[2], "a") == 0
+		&& string_compare(result[3], "test") == 0)
 	{
 		string_split_destroy(result, string_split_size(result));
 		return (PASS);
@@ -29,10 +31,10 @@ static int test1(void)
 	return (FAIL);
 }
 
-static int test2(void)
+static int	test2(void)
 {
-	char  *test1;
-	char **result;
+	char	*test1;
+	char	**result;
 
 	test1 = "";
 	result = string_split(test1, ' ');
@@ -45,10 +47,10 @@ static int test2(void)
 	return (FAIL);
 }
 
-static int test3(void)
+static int	test3(void)
 {
-	char  *test1;
-	char **result;
+	char	*test1;
+	char	**result;
 
 	test1 = "This is a very long string";
 	result = string_split(test1, 'z');
@@ -61,10 +63,10 @@ static int test3(void)
 	return (FAIL);
 }
 
-static int test4(void)
+static int	test4(void)
 {
-	char  *test1;
-	char **result;
+	char	*test1;
+	char	**result;
 
 	test1 = 0;
 	result = string_split(test1, 'z');
@@ -74,11 +76,9 @@ static int test4(void)
 	return (FAIL);
 }
 
-
-
-int test_string_split(void)
+int	test_string_split(void)
 {
-	test_print_verbose_start((char *) __FUNCTION__);
+	test_print_verbose_start((char *)__FUNCTION__);
 	test_print_verbose_test("test1", test1() == PASS);
 	test_print_verbose_test("test2", test2() == PASS);
 	test_print_verbose_test("test3", test3() == PASS);

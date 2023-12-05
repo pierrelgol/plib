@@ -12,10 +12,10 @@
 
 #include "../plib.h"
 
-void *list_remove_front(t_list **self)
+void	*list_remove_front(t_list **self)
 {
-	t_list *temp;
-	void   *data;
+	t_list	*temp;
+	void	*data;
 
 	if (!self || !*self)
 		return (0);

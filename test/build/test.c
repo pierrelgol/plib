@@ -13,14 +13,14 @@
 #include "plib_test.h"
 #include <stdio.h>
 
-void test_print_verbose_start(char *name)
+void	test_print_verbose_start(char *name)
 {
 	printf("%s%-32s%s : ", BLUE, name, RESET);
 }
 
-void test_print_verbose_test(char *name, int is_success)
+void	test_print_verbose_test(char *name, int is_success)
 {
-	(void) name;
+	(void)name;
 	if (is_success)
 	{
 		printf("%s%4s%s", GREEN, "[OK]", RESET);
@@ -38,15 +38,15 @@ void test_print_verbose_test(char *name, int is_success)
 // 	else
 // 		printf("[%s%s%s][%s%s%s]",BLUE ,name, RESET, RED, "Fail", RESET);
 // }
-void test_print_verbose_end(void)
+void	test_print_verbose_end(void)
 {
 	printf("\n");
 }
 
-int main(void)
+int	main(void)
 {
 	printf("\n##############################[PlibChar]#####################"
-	       "#########\n");
+			"#########\n");
 	test_char_is_alnum();
 	test_char_is_alpha();
 	test_char_is_digit();
@@ -72,7 +72,7 @@ int main(void)
 	test_char_sort_ascending();
 	test_char_sort_descending();
 	printf("\n##############################[PlibMemory]###################"
-	       "#########\n");
+			"#########\n");
 	test_memory_alloc();
 	test_memory_clone();
 	test_memory_compare();
@@ -82,7 +82,7 @@ int main(void)
 	test_memory_search();
 	test_memory_move();
 	printf("\n##############################[PlibString]###################"
-	       "#########\n");
+			"#########\n");
 	test_string_append_back();
 	test_string_append_front();
 	test_string_clone();
@@ -143,14 +143,12 @@ int main(void)
 	test_string_trim();
 	test_string_trim_left();
 	test_string_trim_right();
-
 	// test_string_to_boolset();
 	// test_string_to_freqset();
 	// test_string_to_int();
 	// test_string_to_long();
 	// test_string_to_uint();
 	// test_string_to_ulong();
-
 	printf("\n######################################################################\n");
 	test_list_create();
 	test_list_destroy();

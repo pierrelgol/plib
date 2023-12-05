@@ -12,13 +12,13 @@
 
 #include "../build/plib_test.h"
 
-static int test1(void)
+static int	test1(void)
 {
-	char *test1;
-	char *test2;
+	char	*test1;
+	char	*test2;
 
 	test1 = "00000000000000000000000000000000000000000000000000000000000000"
-	        "00";
+			"00";
 	test2 = string_create(string_length(test1));
 	test2 = string_fill(test2, '0');
 	if (string_compare(test1, test2) != 0)
@@ -30,9 +30,9 @@ static int test1(void)
 	return (PASS);
 }
 
-static int test2(void)
+static int	test2(void)
 {
-	char *test1;
+	char	*test1;
 
 	test1 = 0;
 	test1 = string_fill(test1, '0');
@@ -41,20 +41,20 @@ static int test2(void)
 	return (FAIL);
 }
 
-static int test3(void)
+static int	test3(void)
 {
-	char *test1;
+	char	*test1;
 
-	test1 = (char [2]){0};
+	test1 = (char[2]){0};
 	test1 = string_fill(test1, '0');
 	if (string_compare(test1, "") == 0)
 		return (PASS);
 	return (FAIL);
 }
 
-int test_string_fill(void)
+int	test_string_fill(void)
 {
-	test_print_verbose_start((char *) __FUNCTION__);
+	test_print_verbose_start((char *)__FUNCTION__);
 	test_print_verbose_test("test1", test1() == PASS);
 	test_print_verbose_test("test2", test2() == PASS);
 	test_print_verbose_test("test3", test3() == PASS);

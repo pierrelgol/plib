@@ -26,7 +26,7 @@ int	test_char_to_random(void)
 			++count;
 		++i;
 	}
-	test_print_verbose_start((char *) __FUNCTION__);
+	test_print_verbose_start((char *)__FUNCTION__);
 	test_print_verbose_test("test1", count == 255);
 	test_print_verbose_end();
 	return (count == 255);

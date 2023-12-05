@@ -15,23 +15,22 @@
 static int	test1(void)
 {
 	char	*test1;
-	int	test2;
+	int		test2;
 
 	test1 = "This is a test";
-	test2 = string_index_of(test1,  'z');
+	test2 = string_index_of(test1, 'z');
 	if (test2 == -1)
 		return (PASS);
 	return (FAIL);
 }
 
-
 static int	test2(void)
 {
 	char	*test1;
-	int	test2;
+	int		test2;
 
 	test1 = 0;
-	test2 = string_index_of(test1,  'z');
+	test2 = string_index_of(test1, 'z');
 	if (test2 == -1)
 		return (PASS);
 	return (FAIL);
@@ -40,10 +39,10 @@ static int	test2(void)
 static int	test3(void)
 {
 	char	*test1;
-	int	test2;
+	int		test2;
 
 	test1 = "This is a test";
-	test2 = string_index_of(test1,  'T');
+	test2 = string_index_of(test1, 'T');
 	if (test1[test2] == 'T')
 		return (PASS);
 	return (FAIL);
@@ -52,15 +51,14 @@ static int	test3(void)
 static int	test4(void)
 {
 	char	*test1;
-	int	test2;
+	int		test2;
 
 	test1 = "This is a test";
-	test2 = string_index_of(test1,  't');
+	test2 = string_index_of(test1, 't');
 	if (test1[test2] == 't')
 		return (PASS);
 	return (FAIL);
 }
-
 
 int	test_string_index_of(void)
 {
@@ -72,4 +70,3 @@ int	test_string_index_of(void)
 	test_print_verbose_end();
 	return (1);
 }
-

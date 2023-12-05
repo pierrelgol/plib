@@ -10,14 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../plib.h"
 
 char	**string_split_clone(char **strs)
 {
-	unsigned int size;
-	unsigned int index;
-	char **result;
+	unsigned int	size;
+	unsigned int	index;
+	char			**result;
 
 	if (!strs)
 		return (0);
@@ -26,7 +25,7 @@ char	**string_split_clone(char **strs)
 	if (!result)
 		return (0);
 	index = 0;
-	while(index < size)
+	while (index < size)
 	{
 		result[index] = string_clone(strs[index]);
 		++index;

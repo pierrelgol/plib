@@ -44,7 +44,6 @@ static int	test2(void)
 	return (FAIL);
 }
 
-
 static int	test3(void)
 {
 	char	*test1;
@@ -87,4 +86,3 @@ int	test_string_njoin(void)
 	test_print_verbose_end();
 	return (1);
 }
-

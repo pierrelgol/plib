@@ -12,10 +12,10 @@
 
 #include "../build/plib_test.h"
 
-int test_char_is_alpha(void)
+int	test_char_is_alpha(void)
 {
-	int count;
-	int i;
+	int	count;
+	int	i;
 
 	i = 0;
 	count = 0;
@@ -25,7 +25,7 @@ int test_char_is_alpha(void)
 			++count;
 		++i;
 	}
-	test_print_verbose_start((char *) __FUNCTION__);
+	test_print_verbose_start((char *)__FUNCTION__);
 	test_print_verbose_test("test1", count == 52);
 	test_print_verbose_end();
 	return (count == 52);

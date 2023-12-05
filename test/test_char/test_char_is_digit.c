@@ -25,7 +25,7 @@ int	test_char_is_digit(void)
 			++count;
 		++i;
 	}
-	test_print_verbose_start((char *) __FUNCTION__);
+	test_print_verbose_start((char *)__FUNCTION__);
 	test_print_verbose_test("test1", count == 10);
 	test_print_verbose_end();
 	return (count == 10);

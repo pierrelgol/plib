@@ -12,11 +12,11 @@
 
 #include "../plib.h"
 
-void *list_remove_at(t_list **list, unsigned int index)
+void	*list_remove_at(t_list **list, unsigned int index)
 {
-	t_list *prev;
-	t_list *curr;
-	void   *data;
+	t_list	*prev;
+	t_list	*curr;
+	void	*data;
 
 	if (!list || !*list)
 		return (0);

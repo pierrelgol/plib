@@ -13,10 +13,10 @@
 #include "../build/plib_test.h"
 #include <stdio.h>
 
-static int test1(void)
+static int	test1(void)
 {
-	char **test;
-	char  *result;
+	char	**test;
+	char	*result;
 
 	test = string_split("This is a test", ' ');
 	result = string_split_join(test, ' ');
@@ -31,10 +31,10 @@ static int test1(void)
 	return (FAIL);
 }
 
-static int test2(void)
+static int	test2(void)
 {
-	char **test;
-	char  *result;
+	char	**test;
+	char	*result;
 
 	test = 0;
 	result = string_split_join(test, ' ');
@@ -44,10 +44,10 @@ static int test2(void)
 	return (FAIL);
 }
 
-static int test3(void)
+static int	test3(void)
 {
-	char **test;
-	char  *result;
+	char	**test;
+	char	*result;
 
 	test = string_split("This", ' ');
 	result = string_split_join(test, ' ');
@@ -62,10 +62,9 @@ static int test3(void)
 	return (FAIL);
 }
 
-
-int test_string_split_join(void)
+int	test_string_split_join(void)
 {
-	test_print_verbose_start((char *) __FUNCTION__);
+	test_print_verbose_start((char *)__FUNCTION__);
 	test_print_verbose_test("test1", test1() == PASS);
 	test_print_verbose_test("test2", test2() == PASS);
 	test_print_verbose_test("test3", test3() == PASS);

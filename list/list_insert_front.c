@@ -14,7 +14,7 @@
 
 t_list	*list_insert_front(t_list **self, void *data)
 {
-	t_list *new_head;
+	t_list	*new_head;
 
 	if (!self)
 		return (0);

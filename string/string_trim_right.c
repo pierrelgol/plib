@@ -12,8 +12,6 @@
 
 #include "../plib.h"
 
-#include "../plib.h"
-
 char	*string_trim_right(char *str, int ch)
 {
 	char			*result;
@@ -34,4 +32,3 @@ char	*string_trim_right(char *str, int ch)
 	memory_copy(result, str, (length - end));
 	return (result);
 }
-

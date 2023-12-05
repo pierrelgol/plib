@@ -16,7 +16,6 @@ int	string_split_compare(char **strs1, char **strs2)
 {
 	if (!strs1 || !strs2)
 		return (0);
-
 	while (*strs1 && string_compare(*strs1, *strs2) == 0)
 	{
 		++strs1;

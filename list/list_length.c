@@ -10,10 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../plib.h"
 
-unsigned int list_length(t_list *list)
+unsigned int	list_length(t_list *list)
 {
 	if (!list)
 		return (0);
