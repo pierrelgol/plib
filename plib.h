@@ -173,19 +173,36 @@ struct s_list
 
 typedef struct s_list t_list;
 
-t_list      *list_create(void *data);
-t_list      *list_destroy(t_list *self);
-t_list      *list_insert_at(t_list **self, void *data, unsigned int index);
-void        *list_remove_at(t_list **self, unsigned int index);
-t_list      *list_insert_front(t_list **self, void *data);
-t_list      *list_insert_back(t_list **self, void *data);
-void        *list_remove_front(t_list **self);
-void        *list_remove_at(t_list **self, unsigned int index);
-void        *list_remove_back(t_list **self);
+t_list *list_create(void *data);
+t_list *list_destroy(t_list *self);
+t_list *list_insert_at(t_list **self, void *data, unsigned int index);
+void   *list_remove_at(t_list **self, unsigned int index);
+t_list *list_insert_front(t_list **self, void *data);
+t_list *list_insert_back(t_list **self, void *data);
+void   *list_remove_front(t_list **self);
+void   *list_remove_at(t_list **self, unsigned int index);
+void   *list_remove_back(t_list **self);
 
-void        *list_peek_front(t_list **self);
-void        *list_peek_at(t_list **self, unsigned int index);
-void        *list_peek_back(t_list **self);
+void   *list_peek_front(t_list **self);
+void   *list_peek_at(t_list **self, unsigned int index);
+void   *list_peek_back(t_list **self);
+
+t_list *list_clone(t_list **self);
+t_list *list_concat(t_list **dstl, t_list **srcl);
+
+t_list *list_pop_front(t_list **self);
+t_list *list_pop_back(t_list **self);
+t_list *list_pop_at(t_list **self, unsigned int index);
+
+t_list *list_push_front(t_list **self, t_list *node);
+t_list *list_push_back(t_list **self, t_list *node);
+t_list *list_push_at(t_list **self, t_list *node, unsigned int index);
+
+t_list *list_rotate_right(t_list **self, unsigned int shift);
+t_list *list_rotate_left(t_list **self, unsigned int shift);
+t_list *list_get_head(t_list **self);
+t_list *list_get_tail(t_list **self);
+t_list *list_split_at(t_list **self, unsigned int index);
 
 unsigned int list_length(t_list *list);
 
@@ -270,7 +287,6 @@ unsigned int table_body_find_empty(t_table *self, char *key);
 
 // needs a lot of improvent on the split functions turns out they are more important then you might think
 // we need more higher level function to transform a split progressively mroe filter more mapping matching etc.
-
 
 char *string_search_first(char *str, char *sub);
 char *string_search_last(char *str, char *sub);
