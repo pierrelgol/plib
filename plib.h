@@ -183,9 +183,9 @@ void   *list_remove_front(t_list **self);
 void   *list_remove_at(t_list **self, unsigned int index);
 void   *list_remove_back(t_list **self);
 
-void   *list_peek_front(t_list **self);
-void   *list_peek_at(t_list **self, unsigned int index);
-void   *list_peek_back(t_list **self);
+void *list_peek_front(t_list **self);
+void *list_peek_at(t_list **self, unsigned int index);
+void *list_peek_back(t_list **self);
 
 t_list *list_clone(t_list **self);
 t_list *list_concat(t_list **dstl, t_list **srcl);
@@ -203,7 +203,7 @@ t_list *list_rotate_left(t_list **self, unsigned int shift);
 t_list *list_get_head(t_list **self);
 t_list *list_get_tail(t_list **self);
 t_list *list_split_at(t_list **self, unsigned int index);
-void	list_sort(t_list **list, int (*f)(void *d1, void *d2));
+void    list_sort(t_list **list, int (*f)(void *d1, void *d2));
 
 unsigned int list_length(t_list *list);
 
@@ -293,5 +293,11 @@ char *string_search_first(char *str, char *sub);
 char *string_search_last(char *str, char *sub);
 char *string_map_match_first(char *str, char *(*f)(char *src));
 char *string_map_match_last(char *str, char *(*f)(char *src));
+
+int   testing_assert_condition(int condition, char *name);
+int   testing_assert_memory_eq(void *m1, void *m2, int n, char *name);
+int   testing_assert_string_eq(char *str1, char *str2, char *name);
+char *testing_fstring_generator(char *around, char *inside, int length);
+char *testing_string_generator(char *set, int length);
 
 #endif
