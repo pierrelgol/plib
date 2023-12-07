@@ -98,6 +98,7 @@ char *string_append_back(char *str1, char *str2);
 - Descriptive argument names are encouraged.
 
 ```c
+/*
 create       : Instantiate and perform memory allocation.
 destroy      : Deinstantiate and release memory allocation.
 copy         : Place the content of 'src' into 'dst' without memory allocation.
@@ -135,6 +136,7 @@ append       : Add something to another something.
 push         : Insert an existing element into something.
 pop          : Remove an element without destroying it from something.
 rotate       : Move something into a shifted version of itself.
+*/
 ```
 
 ## General Principles:
