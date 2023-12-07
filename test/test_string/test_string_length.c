@@ -42,12 +42,23 @@ static int	test3(void)
 	return (PASS);
 }
 
+static int	test4(void)
+{
+	char	*test1;
+
+	test1 = "This";
+	if (string_length(test1) == 4)
+		return (PASS);
+	return (FAIL);
+}
+
 int	test_string_length(void)
 {
 	test_print_verbose_start((char *)__FUNCTION__);
 	test_print_verbose_test("test1", test1() == PASS);
 	test_print_verbose_test("test2", test2() == PASS);
 	test_print_verbose_test("test3", test3() == PASS);
+	test_print_verbose_test("test4", test4() == PASS);
 	test_print_verbose_end();
 	return (1);
 }

@@ -10,24 +10,16 @@
 #                                                                              #
 # **************************************************************************** #
 
-CC          := cc
-RM          := rm -f
-CFLAGS      := -g3 -Wall -Wextra -Werror
+CC := cc
+RM := rm -f
+CFLAGS := -g3 -Wall -Wextra -Werror
 
-
-NAME        := ./build/libplibtest.a
+NAME := ./build/libplibtest.a
 SHARED_NAME := libplib.so
 
-SRCS        := $(wildcard ./test_string/*.c) 		\
-               $(wildcard ./test_memory/*.c) 		\
-               $(wildcard ./test_char/*.c)	 		\
-               $(wildcard ./test_list/*.c)	 		\
-               $(wildcard ./test_bit/*.c)   		\
-               $(wildcard ./test_stack/*.c)  		\
-
-
-
-OBJS        := $(SRCS:.c=.o)
+TEST_DIRS := test_string test_memory test_char test_list test_bit test_stack
+SRCS := $(foreach dir,$(TEST_DIRS),$(wildcard ./$(dir)/*.c))
+OBJS := $(SRCS:.c=.o)
 
 .PHONY: all clean fclean re
 
@@ -46,4 +38,3 @@ fclean: clean
 	$(RM) $(NAME) $(SHARED_NAME)
 
 re: fclean all
-

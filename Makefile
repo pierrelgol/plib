@@ -10,33 +10,29 @@
 #                                                                              #
 # **************************************************************************** #
 
-CC          := cc
-RM          := rm -f
-CFLAGS      := -g3 -Wall -Wextra -Werror
-# CFLAGS      := -Wall -Wextra  -Wpedantic -Wundef -Wshadow -Wconversion -Wformat \
-#                -g -O0 -fsanitize=address -fsanitize=undefined \
-#                -std=c99 -march=native -pg -fprofile-instr-generate -fcoverage-mapping
 
+CC := cc
+RM := rm -f
 
-NAME        := libplib.a
+DEBUG_FLAGS := -Wall -Wextra -Wpedantic -Wundef -Wshadow -Wconversion -Wformat -g3 -O0 -std=c99 -march=native
+
+RELEASE_FLAGS := -O2 -mcpu=native -flto
+
+CFLAGS := $(DEBUG_FLAGS)
+
+NAME := libplib.a
 SHARED_NAME := libplib.so
 
-SRCS        := $(wildcard ./string/*.c) 	\
-               $(wildcard ./memory/*.c) 	\
-               $(wildcard ./char/*.c)   	\
-               $(wildcard ./list/*.c)   	\
-               $(wildcard ./bit/*.c)   		\
-               $(wildcard ./stack/*.c)  	\
-               $(wildcard ./table/*.c)  	\
+SRC_DIRS := string memory char list bit stack table
+SRCS := $(foreach dir,$(SRC_DIRS),$(wildcard ./$(dir)/*.c))
+OBJS := $(SRCS:.c=.o)
 
-OBJS        := $(SRCS:.c=.o)
-
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re test
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS) && cp libplib.a ./test/build/libplib.a && cd ./test/ && sh build_test.sh
+	ar rcs $(NAME) $(OBJS)
 
 so: $(OBJS)
 	$(CC) $(CFLAGS) -shared -o $(SHARED_NAME) $(OBJS)
@@ -45,7 +41,18 @@ clean:
 	$(RM) $(OBJS)
 
 fclean: clean
-	$(RM) $(NAME) $(SHARED_NAME)
+	$(RM) $(NAME) $(SHARED_NAME) ./test/build/$(NAME)
 
 re: fclean all
 
+test: $(NAME)
+	@echo "Running test..."
+	@cd ./test/ && sh build_test.sh
+
+debug: CFLAGS := $(DEBUG_FLAGS)
+debug: all
+	@echo "Switched to Debug mode: $(CFLAGS)"
+
+release: CFLAGS := $(RELEASE_FLAGS)
+release: all
+	@echo "Switched to Release mode: $(CFLAGS)"
