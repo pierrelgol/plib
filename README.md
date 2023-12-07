@@ -1,7 +1,3 @@
-Absolutely, let's refine and enhance the readability of the `README.md`.
-
----
-
 # PLIB
 
 ## Overview:
