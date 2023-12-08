@@ -1,28 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_create.c                                     :+:      :+:    :+:   */
+/*   test_stack_destroy.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plgol.perso <pollivie@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/05 10:51:33 by plgol.perso       #+#    #+#             */
-/*   Updated: 2023/12/05 10:51:33 by plgol.perso      ###   ########.fr       */
+/*   Created: 2023/12/08 10:32:59 by plgol.perso       #+#    #+#             */
+/*   Updated: 2023/12/08 10:33:00 by plgol.perso      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../plib.h"
 
-t_stack *stack_create(void *data)
-{
-	t_stack     *self;
-
-	self = memory_alloc(1, sizeof(t_stack));
-	if (!self)
-		return (0);
-	self->top = list_create(data);
-	if (!self->top)
-		return (stack_destroy(self));
-	self->size = 1;
-	self->count = 1;
-	return (self);
-}
