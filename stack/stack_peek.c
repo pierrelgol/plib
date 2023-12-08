@@ -10,4 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../plib.h"
 
+void	*stack_peek(t_stack *stack)
+{
+	if (!stack || stack_is_empty(stack))
+		return (0);
+	return (stack->top->data);
+}
