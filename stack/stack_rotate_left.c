@@ -10,4 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../plib.h"
+
+t_stack     *stack_rotate_left(t_stack *stack, unsigned int n)
+{
+	if (!stack || stack_is_empty(stack))
+		return (0);
+	stack->top = list_rotate_left(&stack->top, n);
+	return (stack);
+}
 
