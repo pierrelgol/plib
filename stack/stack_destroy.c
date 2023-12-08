@@ -16,7 +16,9 @@ t_stack	*stack_destroy(t_stack *self)
 {
 	if (!self)
 		return (0);
-	if (self->stack)
-		list_destroy(self->stack);
+	if (self->top)
+		list_destroy(self->top);
+	if (self->free_node)
+		list_destroy(self->top);
 	return (memory_dealloc(self));
 }
