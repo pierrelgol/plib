@@ -201,14 +201,14 @@ int main(void)
 	       "#########\n");
 
 	test_stack_create();
-	// test_stack_destroy();
-	// test_stack_rotate_left();
-	// test_stack_rotate_right();
-	// test_stack_push();
-	// test_stack_pop();
-	// test_stack_peek();
-	// test_stack_clear();
-	// test_stack_is_full();
-	// test_stack_is_empty();
-	// test_stack_length();
+	test_stack_destroy();
+	test_stack_push();
+	test_stack_pop();
+	test_stack_peek();
+	test_stack_rotate_left();
+	test_stack_rotate_right();
+	test_stack_clear();
+	test_stack_is_full();
+	test_stack_is_empty();
+	test_stack_length();
 }

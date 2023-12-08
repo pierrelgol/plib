@@ -14,10 +14,10 @@
 
 void	stack_clear(t_stack *stack)
 {
-	t_list *temp;
+	t_list	*temp;
 
 	if (!stack)
-		return;
+		return ;
 	while (stack->count != 0)
 	{
 		temp = list_pop_front(&stack->top);

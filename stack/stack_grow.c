@@ -12,9 +12,9 @@
 
 #include "../plib.h"
 
-t_stack *stack_grow(t_stack *stack)
+t_stack	*stack_grow(t_stack *stack)
 {
-	unsigned int i;
+	unsigned int	i;
 
 	if (!stack)
 		return (0);

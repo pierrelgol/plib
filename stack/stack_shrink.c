@@ -14,13 +14,13 @@
 
 t_stack	*stack_shrink(t_stack *stack)
 {
-	unsigned int current_size;
-	unsigned int target_size;
+	unsigned int	current_size;
+	unsigned int	target_size;
 
 	if (!stack)
 		return (0);
 	current_size = stack->size;
-	target_size = current_size << 1;
+	target_size = current_size >> 1;
 	if (current_size >= 2)
 	{
 		while (current_size > target_size)
@@ -28,6 +28,7 @@ t_stack	*stack_shrink(t_stack *stack)
 			list_remove_front(&stack->free_node);
 			--current_size;
 		}
+		stack->size = target_size;
 	}
 	return (stack);
 }

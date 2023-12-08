@@ -12,9 +12,9 @@
 
 #include "../plib.h"
 
-t_stack *stack_create(void *data)
+t_stack	*stack_create(void *data)
 {
-	t_stack     *self;
+	t_stack	*self;
 
 	self = memory_alloc(1, sizeof(t_stack));
 	if (!self)
@@ -22,7 +22,8 @@ t_stack *stack_create(void *data)
 	self->top = list_create(data);
 	if (!self->top)
 		return (stack_destroy(self));
-	self->size = 1;
+	self->free_node = list_create(0);
+	self->size = 2;
 	self->count = 1;
 	return (self);
 }

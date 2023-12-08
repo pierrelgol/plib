@@ -14,5 +14,7 @@
 
 unsigned int	stack_is_full(t_stack *stack)
 {
+	if (!stack)
+		return (1);
 	return (stack->count == stack->size);
 }

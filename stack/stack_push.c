@@ -12,9 +12,9 @@
 
 #include "../plib.h"
 
-void *stack_push(t_stack *stack, void *data)
+void	*stack_push(t_stack *stack, void *data)
 {
-	t_list *new;
+	t_list	*new;
 
 	if (!stack)
 		return (0);

@@ -12,7 +12,9 @@
 
 #include "../plib.h"
 
-unsigned int stack_length(t_stack *stack)
+unsigned int	stack_length(t_stack *stack)
 {
+	if (!stack)
+		return (0);
 	return (stack->count);
 }
