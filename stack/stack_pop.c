@@ -10,4 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../plib.h"
 
+void	*stack_pop(t_stack *stack)
+{
+	void	*data;
+	t_list	*node;
+
+	if (!stack || stack_is_empty(stack))
+		return (0);
+	node = list_pop_front(&stack->top);
+	data = node->data;
+	node->data = 0;
+	list_push_front(&stack->free_node, node);
+	stack->count -= 1;
+	if ((stack->size / stack->count) >= 4)
+		stack_shrink(stack);
+	return (data);
+}

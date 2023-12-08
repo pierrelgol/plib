@@ -12,18 +12,18 @@
 
 #include "../plib.h"
 
-// t_stack *stack_create(unsigned int type)
-// {
-// 	t_stack     *self;
-// 	unsigned int i;
+t_stack	*stack_create(void *data)
+{
+	t_stack	*self;
 
-// 	self = memory_alloc(1, sizeof(t_stack));
-// 	if (!self)
-// 		return (0);
-// 	self->stack = list_create(0);
-// 	i = 0;
-// 	while (i < DEFAULT_SIZE)
-// 	{
-		
-// 	}
-// }
+	self = memory_alloc(1, sizeof(t_stack));
+	if (!self)
+		return (0);
+	self->top = list_create(data);
+	if (!self->top)
+		return (stack_destroy(self));
+	self->free_node = list_create(0);
+	self->size = 2;
+	self->count = 1;
+	return (self);
+}

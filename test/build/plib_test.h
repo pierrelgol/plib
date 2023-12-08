@@ -181,4 +181,16 @@ int test_bit_is_set(void);
 int test_bit_bitmask_create(void);
 int test_bit_bitmask_combine(void);
 
+int test_stack_create(void);
+int test_stack_destroy(void);
+int test_stack_rotate_left(void);
+int test_stack_rotate_right(void);
+int test_stack_push(void);
+int test_stack_pop(void);
+int test_stack_peek(void);
+int test_stack_clear(void);
+int test_stack_is_full(void);
+int test_stack_is_empty(void);
+int test_stack_length(void);
+
 #endif

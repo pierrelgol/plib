@@ -47,6 +47,8 @@ re: fclean all
 
 test: $(NAME)
 	@echo "Running test..."
+	@cp libplib.a ./test/build/
+	@cp plib.h ./test/build/
 	@cd ./test/ && sh build_test.sh
 
 debug: CFLAGS := $(DEBUG_FLAGS)

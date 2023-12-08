@@ -211,25 +211,24 @@ unsigned int list_length(t_list *list);
 /*                                [PlibStack] */
 /*############################################################################*/
 
-#define FIXED_SIZE 0
-#define DYNAMIC_SIZE 1
-#define DEFAULT_SIZE 32
-
 typedef struct s_stack
 {
-	unsigned int   type;
 	unsigned int   size;
 	unsigned int   count;
-	struct s_list *stack;
+	struct s_list *top;
+	struct s_list *free_node;
 
 } t_stack;
 
-t_stack     *stack_create(unsigned int type);
+t_stack     *stack_create(void *data);
 t_stack     *stack_destroy(t_stack *self);
-void         stack_push(t_stack *self, void *data);
-void        *stack_pop(t_stack *self, void *pop);
-void        *stack_peek(t_stack *self, void *pop);
-void         stack_rotate(t_stack *self, void *pop);
+t_stack     *stack_rotate_left(t_stack *self, unsigned int i);
+t_stack     *stack_rotate_right(t_stack *self, unsigned int i);
+void        *stack_push(t_stack *self, void *data);
+void        *stack_pop(t_stack *self);
+void        *stack_peek(t_stack *self);
+t_stack     *stack_grow(t_stack *self);
+t_stack     *stack_shrink(t_stack *self);
 void         stack_clear(t_stack *self);
 unsigned int stack_is_full(t_stack *self);
 unsigned int stack_is_empty(t_stack *self);

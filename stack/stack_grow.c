@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_clear.c                                      :+:      :+:    :+:   */
+/*   stack_grow.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plgol.perso <pollivie@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/05 21:06:02 by plgol.perso       #+#    #+#             */
-/*   Updated: 2023/12/05 21:06:04 by plgol.perso      ###   ########.fr       */
+/*   Created: 2023/12/08 11:23:36 by plgol.perso       #+#    #+#             */
+/*   Updated: 2023/12/08 11:23:37 by plgol.perso      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../plib.h"
 
-void	stack_clear(t_stack *stack)
+t_stack	*stack_grow(t_stack *stack)
 {
-	t_list	*temp;
+	unsigned int	i;
 
 	if (!stack)
-		return ;
-	while (stack->count != 0)
+		return (0);
+	i = 0;
+	while (i < (stack->size << 1))
 	{
-		temp = list_pop_front(&stack->top);
-		temp->data = 0;
-		list_push_front(&stack->free_node, temp);
-		stack->count -= 1;
+		list_insert_front(&stack->free_node, 0);
+		++i;
 	}
+	stack->size <<= 1;
+	return (stack);
 }

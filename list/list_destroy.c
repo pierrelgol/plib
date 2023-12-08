@@ -14,7 +14,16 @@
 
 t_list	*list_destroy(t_list *self)
 {
+	t_list	*temp;
+
 	if (!self)
 		return (0);
-	return (memory_dealloc(self));
+	temp = self;
+	while (temp)
+	{
+		temp = self;
+		self = self->next;
+		temp = memory_dealloc(temp);
+	}
+	return (0);
 }

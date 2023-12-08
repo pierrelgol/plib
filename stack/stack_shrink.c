@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_clear.c                                      :+:      :+:    :+:   */
+/*   stack_shrink.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plgol.perso <pollivie@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/05 21:06:02 by plgol.perso       #+#    #+#             */
-/*   Updated: 2023/12/05 21:06:04 by plgol.perso      ###   ########.fr       */
+/*   Created: 2023/12/08 11:29:20 by plgol.perso       #+#    #+#             */
+/*   Updated: 2023/12/08 11:29:22 by plgol.perso      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../plib.h"
 
-void	stack_clear(t_stack *stack)
+t_stack	*stack_shrink(t_stack *stack)
 {
-	t_list	*temp;
+	unsigned int	current_size;
+	unsigned int	target_size;
 
 	if (!stack)
-		return ;
-	while (stack->count != 0)
+		return (0);
+	current_size = stack->size;
+	target_size = current_size >> 1;
+	if (current_size >= 2)
 	{
-		temp = list_pop_front(&stack->top);
-		temp->data = 0;
-		list_push_front(&stack->free_node, temp);
-		stack->count -= 1;
+		while (current_size > target_size)
+		{
+			list_remove_front(&stack->free_node);
+			--current_size;
+		}
+		stack->size = target_size;
 	}
+	return (stack);
 }

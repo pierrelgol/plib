@@ -196,4 +196,19 @@ int main(void)
 	// test_bit_is_set();
 	// test_bit_bitmask_create();
 	// test_bit_bitmask_combine();
+
+	printf("\n#############################################################"
+	       "#########\n");
+
+	test_stack_create();
+	test_stack_destroy();
+	test_stack_push();
+	test_stack_pop();
+	test_stack_peek();
+	test_stack_rotate_left();
+	test_stack_rotate_right();
+	test_stack_clear();
+	test_stack_is_full();
+	test_stack_is_empty();
+	test_stack_length();
 }
