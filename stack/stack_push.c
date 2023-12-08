@@ -23,7 +23,10 @@ void *stack_push(t_stack *stack, void *data)
 	{
 		i = 0;
 		while (i < (stack->size << 1))
-			list_insert_front(&stack->free_node, data);
+		{
+			list_insert_front(&stack->free_node, 0);
+			++i;
+		}
 		stack->size <<= 1;
 		stack_push(stack, data);
 	}
