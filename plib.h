@@ -222,10 +222,11 @@ typedef struct s_stack
 
 t_stack     *stack_create(void *data);
 t_stack     *stack_destroy(t_stack *self);
+t_stack     *stack_rotate_left(t_stack *self, unsigned int i);
+t_stack     *stack_rotate_right(t_stack *self, unsigned int i);
 void        *stack_push(t_stack *self, void *data);
-void        *stack_pop(t_stack *self, void *pop);
-void        *stack_peek(t_stack *self, void *pop);
-void         stack_rotate(t_stack *self, void *pop);
+void        *stack_pop(t_stack *self);
+void        *stack_peek(t_stack *self);
 void         stack_clear(t_stack *self);
 unsigned int stack_is_full(t_stack *self);
 unsigned int stack_is_empty(t_stack *self);
