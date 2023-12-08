@@ -10,4 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../plib.h"
 
+unsigned int	stack_is_full(t_stack *stack)
+{
+	return (stack->count == stack->size);
+}
