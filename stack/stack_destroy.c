@@ -10,4 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../plib.h"
 
+t_stack	*stack_destroy(t_stack *self)
+{
+	if (!self)
+		return (0);
+	if (self->stack)
+		list_destroy(self->stack);
+	return (memory_dealloc(self));
+}
