@@ -10,4 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../plib.h"
 
+unsigned int stack_length(t_stack *stack)
+{
+	return (stack->count);
+}
