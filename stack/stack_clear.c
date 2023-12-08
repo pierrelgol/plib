@@ -10,4 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../plib.h"
 
+void	stack_clear(t_stack *stack)
+{
+	t_list *temp;
+
+	if (!stack)
+		return;
+	while (stack->count != 0)
+	{
+		temp = list_pop_front(&stack->top);
+		temp->data = 0;
+		list_push_front(&stack->free_node, temp);
+		stack->count -= 1;
+	}
+}
