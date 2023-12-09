@@ -1,0 +1,30 @@
+name: C Test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up GCC
+        uses: actions/setup-cxx@v2
+        with:
+          compiler: gcc
+          
+      - name: Build
+        run: make release
+      - name: Build
+        run: make fclean
+      - name: Build
+        run: make debug
+      - name: Build
+        run: make fclean
+      - name: Run Tests
+        run: make test
