@@ -13,18 +13,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up GCC
-        uses: actions/setup-cxx@v2
+      - name: Set up C/C++ environment
+        uses: actions/setup-node@v2
         with:
-          compiler: gcc
+          node-version: '16'
+          target-platform: 'Linux'
+          architecture: 'x64'
           
-      - name: Build
-        run: make release
-      - name: Build
-        run: make fclean
-      - name: Build
+      - name: Build Debug
         run: make debug
-      - name: Build
-        run: make fclean
+
+      - name: Build Release
+        run: make release
+
       - name: Run Tests
         run: make test
