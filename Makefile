@@ -23,7 +23,7 @@ CFLAGS := $(DEBUG_FLAGS)
 NAME := libplib.a
 SHARED_NAME := libplib.so
 
-SRC_DIRS := string memory char list bit stack table
+SRC_DIRS := string memory char list bit stack table file
 SRCS := $(foreach dir,$(SRC_DIRS),$(wildcard ./$(dir)/*.c))
 OBJS := $(SRCS:.c=.o)
 
