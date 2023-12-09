@@ -282,6 +282,40 @@ void         table_body_resize(t_table *self, unsigned int capacity);
 unsigned int table_body_find_empty(t_table *self, char *key);
 
 /*############################################################################*/
+/*                                [PlibFileSystem] */
+/*############################################################################*/
+
+#define IS_OPEN 0
+#define IS_VALID 1
+#define READ_SIZE 4096
+
+typedef struct s_file
+{
+	unsigned int perm;
+	unsigned int flag;
+	int          in;
+	int          out;
+	long         size;
+	char        *path;
+	char        *name;
+	char        *content;
+
+} t_file;
+
+t_file *file_create(void);
+t_file *file_path_clone(t_file *file, char *path);
+t_file *file_name_clone(t_file *file, char *name);
+t_file *file_content_clone(t_file *file, char *content);
+char   *file_content_search(t_file *file, char *sub);
+char  **file_content_split(t_file *file, int ch);
+int     file_open(char *path, int permissions);
+int     file_read(int fd, char *buffer, unsigned int size);
+int     file_write(int fd, char *buffer, unsigned int size);
+int     file_size(char *path);
+int     file_close(int fd);
+t_file *file_destroy(t_file *self);
+
+/*############################################################################*/
 /*                                [PROTOTYPES] */
 /*############################################################################*/
 
