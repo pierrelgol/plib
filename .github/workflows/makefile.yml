@@ -17,9 +17,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '16'
-          target-platform: 'Linux'
-          architecture: 'x64'
-          
+
       - name: Build Debug
         run: make debug
 
@@ -28,3 +26,4 @@ jobs:
 
       - name: Run Tests
         run: make test
+
