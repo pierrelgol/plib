@@ -12,13 +12,13 @@
 
 #include "../plib.h"
 
-void	*table_entry_get(t_table *self, char *key)
+void	*table_entry_get(t_table *table, char *key)
 {
 	int	index;
 
-	index = table_body_find_empty(self, key);
-	if (self->body[index].key != NULL)
-		return (self->body[index].value);
+	index = table_body_find_empty(table, key);
+	if (table->body[index].key != NULL)
+		return (table->body[index].value);
 	else
 		return (NULL);
 }

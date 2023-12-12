@@ -12,14 +12,14 @@
 
 #include "../plib.h"
 
-static t_list	*list_pop_back(t_list **self)
+static t_list	*list_pop_back(t_list **list)
 {
 	t_list	*prev;
 	t_list	*curr;
 
-	if (!self || !*self)
+	if (!list || !*list)
 		return (0);
-	curr = (*self);
+	curr = (*list);
 	prev = curr;
 	while (curr->next)
 	{
@@ -31,17 +31,17 @@ static t_list	*list_pop_back(t_list **self)
 	return (curr);
 }
 
-static t_list	*list_pop_front(t_list **self)
+static t_list	*list_pop_front(t_list **list)
 {
 	t_list	*node;
 
-	if (!self || !*self)
+	if (!list || !*list)
 		return (0);
-	node = (*self);
-	if ((*self)->next)
-		(*self) = (*self)->next;
+	node = (*list);
+	if ((*list)->next)
+		(*list) = (*list)->next;
 	else
-		(*self) = 0;
+		(*list) = 0;
 	node->next = 0;
 	return (node);
 }

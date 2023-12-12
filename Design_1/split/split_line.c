@@ -17,48 +17,48 @@ static unsigned int	is_line(int ch)
 	return (ch == '\n');
 }
 
-static unsigned int	split_find_size(char *string)
+static unsigned int	split_find_size(char *str)
 {
 	unsigned int	size;
 
-	if (!string)
+	if (!str)
 		return (0);
 	size = 0;
-	while (*string)
+	while (*str)
 	{
-		while (*string && is_line(*string))
-			++string;
-		if (*string && !is_line(*string))
+		while (*str && is_line(*str))
+			++str;
+		if (*str && !is_line(*str))
 			++size;
-		while (*string && !is_line(*string))
-			++string;
+		while (*str && !is_line(*str))
+			++str;
 	}
 	return (size);
 }
 
-char	**split_line(char *string)
+char	**split_line(char *str)
 {
 	char			**result;
 	unsigned int	index;
 	unsigned int	start;
 	unsigned int	end;
 
-	if (!string)
+	if (!str)
 		return (0);
-	result = split_create(split_find_size(string) + 1);
+	result = split_create(split_find_size(str) + 1);
 	if (!result)
 		return (0);
 	index = 0;
 	start = 0;
-	while (string[start])
+	while (str[start])
 	{
-		while (string[start] && is_line(string[start]))
+		while (str[start] && is_line(str[start]))
 			++start;
 		end = start;
-		while (string[end] && !is_line(string[end]))
+		while (str[end] && !is_line(str[end]))
 			++end;
-		if (string[start] && !is_line(string[start]))
-			result[index++] = string_slice(string, start, end);
+		if (str[start] && !is_line(str[start]))
+			result[index++] = string_slice(str, start, end);
 		start = end;
 	}
 	return (result);

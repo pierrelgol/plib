@@ -14,12 +14,12 @@
 
 t_list	*list_create(void)
 {
-	t_list	*self;
+	t_list	*list;
 
-	self = memory_create(1, sizeof(*self));
-	if (!self)
+	list = memory_create(1, sizeof(*list));
+	if (!list)
 		return (0);
-	self->next = 0;
-	self->data = 0;
-	return (self);
+	list->next = 0;
+	list->data = 0;
+	return (list);
 }

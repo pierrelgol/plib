@@ -12,22 +12,22 @@
 
 #include "../plib.h"
 
-static t_list	*list_insert_front(t_list **self, void *data)
+static t_list	*list_insert_front(t_list **list, void *data)
 {
 	t_list	*new_head;
 
-	if (!self)
+	if (!list)
 		return (0);
 	new_head = list_create();
 	if (!new_head)
 		return (0);
 	new_head->data = data;
-	if (!*self)
-		(*self) = new_head;
+	if (!*list)
+		(*list) = new_head;
 	else
 	{
-		new_head->next = (*self);
-		(*self) = new_head;
+		new_head->next = (*list);
+		(*list) = new_head;
 	}
 	return (new_head);
 }

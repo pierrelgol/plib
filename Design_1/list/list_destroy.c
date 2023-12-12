@@ -12,17 +12,17 @@
 
 #include "../plib.h"
 
-t_list	*list_destroy(t_list *self)
+t_list	*list_destroy(t_list *list)
 {
 	t_list	*temp;
 
-	if (!self)
+	if (!list)
 		return (0);
-	temp = self;
+	temp = list;
 	while (temp)
 	{
-		temp = self;
-		self = self->next;
+		temp = list;
+		list = list->next;
 		temp = memory_destroy(temp);
 	}
 	return (0);

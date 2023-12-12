@@ -12,8 +12,11 @@
 
 #include "../plib.h"
 
-void	table_destroy(t_table *self)
+void	table_destroy(t_table *table)
 {
-	memory_destroy(self->body);
-	memory_destroy(self);
+	if (!table)
+		return ;
+	if (table->body != 0)
+		memory_destroy(table->body);
+	memory_destroy(table);
 }

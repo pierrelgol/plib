@@ -12,55 +12,55 @@
 
 #include "../plib.h"
 
-t_list	*list_push_front(t_list **self, t_list *node)
+t_list	*list_push_front(t_list **list, t_list *new_head)
 {
-	if (!self || !node)
+	if (!list || !new_head)
 		return (0);
-	if (!*self)
-		(*self) = node;
+	if (!*list)
+		(*list) = new_head;
 	else
 	{
-		node->next = (*self);
-		(*self) = node;
+		new_head->next = (*list);
+		(*list) = new_head;
 	}
-	return (node);
+	return (new_head);
 }
 
-t_list	*list_push_back(t_list **list, t_list *node)
+t_list	*list_push_back(t_list **list, t_list *new_tail)
 {
 	t_list	*temp;
 
-	if (!list || !node)
+	if (!list || !new_tail)
 		return (0);
 	if (!*list)
-		(*list) = node;
+		(*list) = new_tail;
 	else
 	{
 		temp = (*list);
 		while (temp->next)
 			temp = temp->next;
-		temp->next = node;
+		temp->next = new_tail;
 	}
-	return (node);
+	return (new_tail);
 }
 
-t_list	*list_push_at(t_list **list, t_list *node, unsigned int index)
+t_list	*list_push_at(t_list **list, t_list *new_node, unsigned int index)
 {
 	t_list	*temp;
 
-	if (!list || !node)
+	if (!list || !new_node)
 		return (0);
 	if (index == 0)
-		return (list_push_front(list, node));
+		return (list_push_front(list, new_node));
 	else if (index >= list_length(*list))
-		return (list_push_back(list, node));
+		return (list_push_back(list, new_node));
 	else
 	{
 		temp = (*list);
 		while (temp->next && --index)
 			temp = temp->next;
-		node->next = temp->next;
-		temp->next = node;
+		new_node->next = temp->next;
+		temp->next = new_node;
 	}
-	return (node);
+	return (new_node);
 }

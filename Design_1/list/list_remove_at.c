@@ -12,29 +12,29 @@
 
 #include "../plib.h"
 
-static void	*list_remove_front(t_list **self)
+static void	*list_remove_front(t_list **list)
 {
 	t_list	*temp;
 	void	*data;
 
-	if (!self || !*self)
+	if (!list || !*list)
 		return (0);
-	temp = (*self);
+	temp = (*list);
 	data = temp->data;
-	(*self) = (*self)->next;
+	(*list) = (*list)->next;
 	memory_destroy(temp);
 	return (data);
 }
 
-static void	*list_remove_back(t_list **self)
+static void	*list_remove_back(t_list **list)
 {
 	t_list	*prev;
 	t_list	*curr;
 	void	*data;
 
-	if (!self || !*self)
+	if (!list || !*list)
 		return (0);
-	curr = (*self);
+	curr = (*list);
 	prev = curr;
 	while (curr->next)
 	{

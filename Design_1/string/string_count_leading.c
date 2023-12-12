@@ -12,16 +12,16 @@
 
 #include "../plib.h"
 
-unsigned int	string_count_leading(char *src, int ch)
+unsigned int	string_count_leading(char *str, int ch)
 {
 	unsigned int	count;
 
-	if (!src)
+	if (!str)
 		return (0);
 	count = 0;
-	while (*src == ch)
+	while (*str == ch)
 	{
-		++src;
+		++str;
 		++count;
 	}
 	return (count);

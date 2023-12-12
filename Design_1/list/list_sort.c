@@ -35,13 +35,13 @@ static t_list	*list_sorted_merge(t_list *left, t_list *right,
 	return (result);
 }
 
-static void	list_find_middle(t_list *src, t_list **start, t_list **end)
+static void	list_find_middle(t_list *list, t_list **start, t_list **end)
 {
 	t_list	*fast;
 	t_list	*slow;
 
-	slow = src;
-	fast = src->next;
+	slow = list;
+	fast = list->next;
 	while (fast)
 	{
 		fast = fast->next;
@@ -51,7 +51,7 @@ static void	list_find_middle(t_list *src, t_list **start, t_list **end)
 			fast = fast->next;
 		}
 	}
-	*start = src;
+	*start = list;
 	*end = slow->next;
 	slow->next = 0;
 }

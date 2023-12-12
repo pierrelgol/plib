@@ -12,18 +12,18 @@
 
 #include "../plib.h"
 
-unsigned int	string_count(char *src, int ch)
+unsigned int	string_count(char *str, int ch)
 {
 	unsigned int	count;
 
-	if (!src)
+	if (!str)
 		return (0);
 	count = 0;
-	while (*src)
+	while (*str)
 	{
-		if (*src == ch)
+		if (*str == ch)
 			++count;
-		++src;
+		++str;
 	}
 	return (count);
 }

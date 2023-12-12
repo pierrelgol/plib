@@ -14,15 +14,15 @@
 
 void	*stack_push(t_stack *stack, void *data)
 {
-	t_list	*new;
+	t_list	*new_node;
 
 	if (!stack)
 		return (0);
 	if (stack_is_full(stack))
 		stack = stack_grow(stack);
-	new = list_pop_at(&stack->free_node, 0);
-	new->data = data;
-	list_push_at(&stack->top, new, 0);
+	new_node = list_pop_at(&stack->free_node, 0);
+	new_node->data = data;
+	list_push_at(&stack->top, new_node, 0);
 	stack->count += 1;
 	return (data);
 }

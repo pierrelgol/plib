@@ -12,16 +12,16 @@
 
 #include "../plib.h"
 
-char	*string_copy(char *dest, char *src, unsigned int n)
+char	*string_copy(char *dst, char *src, unsigned int n)
 {
 	unsigned int	index;
 
-	if (!dest || !src)
+	if (!dst || !src)
 		return (0);
 	index = 0;
 	while (*src && index < n)
-		dest[index++] = *src++;
+		dst[index++] = *src++;
 	while (index < n)
-		dest[index++] = '\0';
-	return (dest);
+		dst[index++] = '\0';
+	return (dst);
 }

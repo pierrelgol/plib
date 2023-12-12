@@ -12,34 +12,34 @@
 
 #include "../plib.h"
 
-static t_list	*list_get_head(t_list **self)
+static t_list	*list_get_head(t_list **list)
 {
-	if (!self || !*self)
+	if (!list || !*list)
 		return (0);
-	return ((*self));
+	return ((*list));
 }
 
-static t_list	*list_get_tail(t_list **self)
+static t_list	*list_get_tail(t_list **list)
 {
 	t_list	*temp;
 
-	if (!self || !*self)
+	if (!list || !*list)
 		return (0);
-	temp = (*self);
+	temp = (*list);
 	while (temp->next)
 		temp = temp->next;
 	return (temp);
 }
 
-t_list	*list_concat(t_list **dstl, t_list **srcl)
+t_list	*list_concat(t_list **dlist, t_list **slist)
 {
 	t_list	*dtail;
 	t_list	*shead;
 
-	if (!dstl || !srcl || !*dstl || !*srcl)
+	if (!dlist || !slist || !*dlist || !*slist)
 		return (0);
-	dtail = list_get_tail(dstl);
-	shead = list_get_head(srcl);
+	dtail = list_get_tail(dlist);
+	shead = list_get_head(slist);
 	dtail->next = shead;
-	return ((*dstl));
+	return ((*dlist));
 }

@@ -15,25 +15,25 @@
 char	*string_slice(char *str, unsigned int start, unsigned int end)
 {
 	char			*result;
-	unsigned int	slength;
-	unsigned int	index;
+	unsigned int	slen;
+	unsigned int	i;
 
 	if (!str)
 		return (0);
-	slength = string_length(str);
-	if (slength < end || slength < start)
+	slen = string_length(str);
+	if (slen < end || slen < start)
 		return (0);
-	result = string_create(((slength - start) + (slength - end)) + 1);
-	index = 0;
+	result = string_create(((slen - start) + (slen - end)) + 1);
+	i = 0;
 	if (start <= end)
 	{
 		while (start < end)
-			result[index++] = str[start++];
+			result[i++] = str[start++];
 	}
 	else
 	{
 		while (start > end)
-			result[index++] = str[--start];
+			result[i++] = str[--start];
 	}
 	return (result);
 }

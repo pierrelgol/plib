@@ -14,15 +14,15 @@
 
 t_stack	*stack_create(void)
 {
-	t_stack	*self;
+	t_stack	*stack;
 
-	self = memory_create(1, sizeof(t_stack));
-	if (!self)
+	stack = memory_create(1, sizeof(t_stack));
+	if (!stack)
 		return (0);
-	self->top = list_create();
-	self->top->data = 0;
-	self->free_node = 0;
-	self->size = 1;
-	self->count = 0;
-	return (self);
+	stack->top = list_create();
+	stack->top->data = 0;
+	stack->free_node = 0;
+	stack->size = 1;
+	stack->count = 0;
+	return (stack);
 }

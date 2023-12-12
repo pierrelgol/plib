@@ -13,13 +13,13 @@
 #include "../plib.h"
 #include <string.h>
 
-unsigned int	table_body_find_empty(t_table *self, char *key)
+unsigned int	table_body_find_empty(t_table *table, char *key)
 {
 	int	index;
 
-	index = table_hash(key) % self->capacity;
-	while (self->body[index].key != NULL
-		&& string_compare(self->body[index].key, key) != 0)
-		index = (index + 1) % self->capacity;
+	index = table_hash(key) % table->capacity;
+	while (table->body[index].key != NULL
+		&& string_compare(table->body[index].key, key) != 0)
+		index = (index + 1) % table->capacity;
 	return (index);
 }

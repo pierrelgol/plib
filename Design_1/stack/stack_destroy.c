@@ -12,13 +12,13 @@
 
 #include "../plib.h"
 
-t_stack	*stack_destroy(t_stack *self)
+t_stack	*stack_destroy(t_stack *stack)
 {
-	if (!self)
+	if (!stack)
 		return (0);
-	if (self->top)
-		list_destroy(self->top);
-	if (self->free_node)
-		list_destroy(self->free_node);
-	return (memory_destroy(self));
+	if (stack->top)
+		list_destroy(stack->top);
+	if (stack->free_node)
+		list_destroy(stack->free_node);
+	return (memory_destroy(stack));
 }

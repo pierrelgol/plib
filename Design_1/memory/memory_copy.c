@@ -12,16 +12,16 @@
 
 #include "../plib.h"
 
-void	*memory_copy(void *dest, void *src, unsigned int n)
+void	*memory_copy(void *dst, void *src, unsigned int n)
 {
-	char	*pdest;
+	char	*pdst;
 	char	*psrc;
 
-	if (!dest || !src || !n)
+	if (!dst || !src || !n)
 		return (0);
-	pdest = dest;
+	pdst = dst;
 	psrc = src;
 	while (n--)
-		*pdest++ = *psrc++;
-	return (dest);
+		*pdst++ = *psrc++;
+	return (dst);
 }

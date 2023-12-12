@@ -16,18 +16,18 @@ char	*string_search(char *str, char *sub)
 {
 	unsigned int	i;
 	unsigned int	j;
-	unsigned int	s;
+	unsigned int	slen;
 
 	if (!str || !sub)
 		return (0);
-	s = string_length(str);
+	slen = string_length(str);
 	if (!*sub)
 		return ((char *)str);
 	i = 0;
 	while (str[i])
 	{
 		j = 0;
-		while (str[i] && str[i] == sub[j] && i < s)
+		while (str[i] && str[i] == sub[j] && i < slen)
 		{
 			j++;
 			i++;

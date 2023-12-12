@@ -12,18 +12,18 @@
 
 #include "../plib.h"
 
-unsigned int	string_count_trailing(char *src, int ch)
+unsigned int	string_count_trailing(char *str, int ch)
 {
 	unsigned int	count;
 	unsigned int	slen;
 
-	if (!src)
+	if (!str)
 		return (0);
 	count = 0;
-	slen = string_length(src);
+	slen = string_length(str);
 	if (slen == 0)
 		return (0);
-	while (slen >= 1 && src[slen - 1] == ch)
+	while (slen >= 1 && str[slen - 1] == ch)
 	{
 		--slen;
 		++count;

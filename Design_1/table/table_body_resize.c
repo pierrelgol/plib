@@ -12,21 +12,21 @@
 
 #include "../plib.h"
 
-void	table_body_resize(t_table *self, unsigned int capacity)
+void	table_body_resize(t_table *table, unsigned int new_capacity)
 {
-	unsigned int	old_capacity;
-	t_entry			*old;
+	unsigned int	capacity_old;
+	t_entry			*entry_old;
 	unsigned int	i;
 
-	old = self->body;
-	old_capacity = self->capacity;
-	self->body = table_body_create(capacity);
-	self->capacity = capacity;
+	entry_old = table->body;
+	capacity_old = table->capacity;
+	table->body = table_body_create(new_capacity);
+	table->capacity = new_capacity;
 	i = 0;
-	while (i < old_capacity)
+	while (i < capacity_old)
 	{
-		if (old[i].key != NULL)
-			table_entry_set(self, old[i].key, old[i].value);
+		if (entry_old[i].key != NULL)
+			table_entry_set(table, entry_old[i].key, entry_old[i].value);
 		++i;
 	}
 }

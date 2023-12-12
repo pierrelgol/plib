@@ -12,7 +12,7 @@
 
 #include "../plib.h"
 
-char	*split_binary_search(char **split, int split_size, char *str)
+char	*split_binary_search(char **split, int size, char *str)
 {
 	int	low;
 	int	high;
@@ -20,7 +20,7 @@ char	*split_binary_search(char **split, int split_size, char *str)
 	int	res;
 
 	low = 0;
-	high = split_size - 1;
+	high = size - 1;
 	while (low <= high)
 	{
 		mid = low + (high - low) / 2;
@@ -49,16 +49,16 @@ static char	*split_linear_search(char **split, char *str)
 	return (0);
 }
 
-char	*split_search(char **split, char *string, int sorted)
+char	*split_search(char **split, char *str, int sorted)
 {
 	char	*result;
 
-	if (!split || !string)
+	if (!split || !str)
 		return (0);
 	result = 0;
 	if (!sorted)
-		result = split_linear_search(split, string);
+		result = split_linear_search(split, str);
 	else
-		result = split_binary_search(split, split_size(split), string);
+		result = split_binary_search(split, split_size(split), str);
 	return (result);
 }

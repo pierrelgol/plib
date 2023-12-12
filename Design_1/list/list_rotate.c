@@ -12,42 +12,42 @@
 
 #include "../plib.h"
 
-static t_list	*list_rotate_left(t_list **self, unsigned int shift)
+static t_list	*list_rotate_left(t_list **list, unsigned int shift)
 {
 	unsigned int	length;
 	t_list			*temp;
 
-	if (!self || !*self)
+	if (!list || !*list)
 		return (0);
-	length = list_length(*self);
+	length = list_length(*list);
 	shift %= length;
 	if (shift == 0)
-		return (*self);
+		return (*list);
 	while (shift--)
 	{
-		temp = list_pop_at(self, 0);
-		list_push_at(self, temp, length);
+		temp = list_pop_at(list, 0);
+		list_push_at(list, temp, length);
 	}
-	return (*self);
+	return (*list);
 }
 
-static t_list	*list_rotate_right(t_list **self, unsigned int shift)
+static t_list	*list_rotate_right(t_list **list, unsigned int shift)
 {
 	unsigned int	length;
 	t_list			*temp;
 
-	if (!self || !*self)
+	if (!list || !*list)
 		return (0);
-	length = list_length(*self);
+	length = list_length(*list);
 	shift %= length;
 	if (shift == 0)
-		return (*self);
+		return (*list);
 	while (shift--)
 	{
-		temp = list_pop_at(self, length);
-		list_push_at(self, temp, 0);
+		temp = list_pop_at(list, length);
+		list_push_at(list, temp, 0);
 	}
-	return (*self);
+	return (*list);
 }
 
 t_list	*list_rotate(t_list **list, int shift)

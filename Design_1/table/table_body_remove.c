@@ -12,15 +12,15 @@
 
 #include "../plib.h"
 
-void	table_body_remove(t_table *t, char *key)
+void	table_body_remove(t_table *table, char *key)
 {
 	int	index;
 
-	index = table_body_find_empty(t, key);
-	if (t->body[index].key != NULL)
+	index = table_body_find_empty(table, key);
+	if (table->body[index].key != NULL)
 	{
-		t->body[index].key = NULL;
-		t->body[index].value = NULL;
-		t->size--;
+		table->body[index].key = NULL;
+		table->body[index].value = NULL;
+		table->size--;
 	}
 }

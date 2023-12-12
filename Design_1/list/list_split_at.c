@@ -12,20 +12,20 @@
 
 #include "../plib.h"
 
-t_list	*list_split_at(t_list **self, unsigned int index)
+t_list	*list_split_at(t_list **list, unsigned int index)
 {
 	t_list	*prev;
 	t_list	*split;
 
-	if (!self || !*self)
+	if (!list || !*list)
 		return (0);
 	else if (index == 0)
-		return (*self);
-	else if (index >= list_length(*self))
-		return (list_pop_at(self, list_length((*self))));
+		return (*list);
+	else if (index >= list_length(*list))
+		return (list_pop_at(list, list_length((*list))));
 	else
 	{
-		split = (*self);
+		split = (*list);
 		while (index--)
 		{
 			prev = split;

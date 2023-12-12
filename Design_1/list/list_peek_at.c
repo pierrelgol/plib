@@ -12,20 +12,20 @@
 
 #include "../plib.h"
 
-static void	*list_peek_front(t_list **self)
+static void	*list_peek_front(t_list **list)
 {
-	if (!self || !*self)
+	if (!list || !*list)
 		return (0);
-	return ((*self)->data);
+	return ((*list)->data);
 }
 
-static void	*list_peek_back(t_list **self)
+static void	*list_peek_back(t_list **list)
 {
 	t_list	*curr;
 
-	if (!self || !*self)
+	if (!list || !*list)
 		return (0);
-	curr = (*self);
+	curr = (*list);
 	while (curr->next)
 		curr = curr->next;
 	return (curr->data);

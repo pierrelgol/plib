@@ -12,7 +12,7 @@
 
 #include "../plib.h"
 
-void	*memory_move(void *dst, void *src, unsigned int len)
+void	*memory_move(void *dst, void *src, unsigned int n)
 {
 	const char	*ptr_src;
 	char		*ptr_dst;
@@ -23,14 +23,14 @@ void	*memory_move(void *dst, void *src, unsigned int len)
 	ptr_dst = (char *)dst;
 	if (dst > src)
 	{
-		while (len)
+		while (n)
 		{
-			*(ptr_dst + len - 1) = *(ptr_src + len - 1);
-			len--;
+			*(ptr_dst + n - 1) = *(ptr_src + n - 1);
+			n--;
 		}
 		return (dst);
 	}
-	while (len--)
+	while (n--)
 		*ptr_dst++ = *ptr_src++;
 	return (dst);
 }

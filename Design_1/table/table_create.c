@@ -14,13 +14,13 @@
 
 t_table	*table_create(void)
 {
-	t_table	*self;
+	t_table	*table;
 
-	self = memory_create(sizeof(t_table), 1);
-	if (!self)
+	table = memory_create(sizeof(t_table), 1);
+	if (!table)
 		return (NULL);
-	self->size = 0;
-	self->capacity = DEFAULT_TABLE_SIZE;
-	self->body = table_body_create(self->capacity);
-	return (self);
+	table->size = 0;
+	table->capacity = DEFAULT_TABLE_SIZE;
+	table->body = table_body_create(table->capacity);
+	return (table);
 }

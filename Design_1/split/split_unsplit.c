@@ -22,7 +22,7 @@ char	*split_unsplit(char **split, int sep)
 	if (!split)
 		return (0);
 	size = split_size(split);
-	rlen = split_length(split) + size * sep;
+	rlen = split_length(split) + size;
 	result = string_create(rlen + 1);
 	if (!rlen)
 		return (0);

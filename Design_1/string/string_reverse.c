@@ -14,19 +14,19 @@
 
 char	*string_reverse(char *str)
 {
-	unsigned int	length;
+	unsigned int	slen;
 	unsigned int	i;
 	unsigned int	temp;
 
 	if (!str)
 		return (0);
-	length = string_length(str);
+	slen = string_length(str);
 	i = 0;
-	while (i < (length - i - 1))
+	while (i < (slen - i - 1))
 	{
 		temp = str[i];
-		str[i] = str[length - i - 1];
-		str[length - i - 1] = temp;
+		str[i] = str[slen - i - 1];
+		str[slen - i - 1] = temp;
 		++i;
 	}
 	return (str);

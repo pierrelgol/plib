@@ -14,19 +14,19 @@
 
 static char	*string_rotate_left(char *str, unsigned int n)
 {
-	unsigned int	len;
+	unsigned int	slen;
 	char			*temp;
 
 	if (!str)
 		return (0);
-	len = string_length(str);
-	n %= len;
-	if (n == 0 || len <= 1)
+	slen = string_length(str);
+	n %= slen;
+	if (n == 0 || slen <= 1)
 		return (str);
 	temp = string_clone(str);
 	temp[n] = '\0';
-	string_move(str, str + n, len - n);
-	str[len - n] = '\0';
+	string_move(str, str + n, slen - n);
+	str[slen - n] = '\0';
 	string_concat(str, temp, n);
 	string_destroy(temp);
 	return (str);
@@ -34,19 +34,19 @@ static char	*string_rotate_left(char *str, unsigned int n)
 
 static char	*string_rotate_right(char *str, unsigned int n)
 {
-	unsigned int	len;
+	unsigned int	slen;
 	char			*temp;
 
 	if (!str)
 		return (0);
-	len = string_length(str);
-	n %= len;
-	if (n == 0 || len <= 1)
+	slen = string_length(str);
+	n %= slen;
+	if (n == 0 || slen <= 1)
 		return (str);
 	temp = string_clone(str);
-	string_move(str + n, str, len - n);
-	string_copy(str, temp + len - n, n);
-	str[len] = '\0';
+	string_move(str + n, str, slen - n);
+	string_copy(str, temp + slen - n, n);
+	str[slen] = '\0';
 	string_destroy(temp);
 	return (str);
 }

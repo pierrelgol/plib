@@ -12,22 +12,22 @@
 
 #include "../plib.h"
 
-void	table_entry_set(t_table *self, char *key, void *value)
+void	table_entry_set(t_table *table, char *key, void *value)
 {
 	int	index;
 
-	index = table_body_find_empty(self, key);
-	if (self->body[index].key != NULL)
-		self->body[index].value = value;
+	index = table_body_find_empty(table, key);
+	if (table->body[index].key != NULL)
+		table->body[index].value = value;
 	else
 	{
-		self->size++;
-		if ((float)self->size / self->capacity > 0.8)
+		table->size++;
+		if ((float)table->size / table->capacity > 0.8)
 		{
-			table_body_resize(self, self->capacity * 2);
-			index = table_body_find_empty(self, key);
+			table_body_resize(table, table->capacity * 2);
+			index = table_body_find_empty(table, key);
 		}
-		self->body[index].key = key;
-		self->body[index].value = value;
+		table->body[index].key = key;
+		table->body[index].value = value;
 	}
 }
