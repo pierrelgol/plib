@@ -20,12 +20,8 @@ char	*string_trim(char *str, int ch)
 
 	if (!str)
 		return (0);
-	start = 0;
-	while (str[start] == ch)
-		++start;
-	end = string_length(str);
-	while (end >= 0 && str[end - 1] == ch)
-		--end;
+	start = string_count_leading(str, ch);
+	end = string_length(str) + string_count_trailing(str, ch);
 	result = string_create((end - start) + 1);
 	if (!result)
 		return (0);
