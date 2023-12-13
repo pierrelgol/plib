@@ -51,10 +51,11 @@ char					*string_search(char *str1, char *sub);
 unsigned int			string_count(char *str, int ch);
 unsigned int			string_count_leading(char *str, int ch);
 unsigned int			string_count_trailing(char *str, int ch);
+long					string_to_long(char *str);
 
 /******************************************************************************/
 /*                                                                            */
-/*                                  Split                                     */
+/*                                  Split */
 /*                                                                            */
 /******************************************************************************/
 

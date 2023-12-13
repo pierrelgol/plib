@@ -12,9 +12,9 @@
 
 #include "../plib.h"
 
-static unsigned int split_find_size(char *string, int ch)
+static unsigned int	split_find_size(char *string, int ch)
 {
-	unsigned int size;
+	unsigned int	size;
 
 	if (!string)
 		return (0);
@@ -31,12 +31,12 @@ static unsigned int split_find_size(char *string, int ch)
 	return (size);
 }
 
-char **split(char *string, int ch)
+char	**split(char *string, int ch)
 {
-	char       **result;
-	unsigned int index;
-	unsigned int start;
-	unsigned int end;
+	char			**result;
+	unsigned int	index;
+	unsigned int	start;
+	unsigned int	end;
 
 	if (!string)
 		return (0);
