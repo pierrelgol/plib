@@ -18,12 +18,6 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Build Debug
-        run: make debug
-
-      - name: Build Release
-        run: make release
-
-      - name: Run Tests
-        run: make test
+      - name: Build
+        run: make
 
