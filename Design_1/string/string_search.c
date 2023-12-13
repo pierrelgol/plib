@@ -1,27 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   testing_assert_string_eq.c                         :+:      :+:    :+:   */
+/*   string_search.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plgol.perso <pollivie@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/23 17:24:50 by plgol.perso       #+#    #+#             */
-/*   Updated: 2023/12/06 21:05:24 by plgol.perso      ###   ########.fr       */
+/*   Created: 2023/12/10 21:31:23 by plgol.perso       #+#    #+#             */
+/*   Updated: 2023/12/10 21:31:25 by plgol.perso      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../plib.h"
-#include <stdio.h>
-#include <string.h>
 
-int testing_assert_string_eq(char *str1, char *str2, char *name)
+char	*string_search(char *str, char *sub)
 {
-	int result;
+	unsigned int	i;
+	unsigned int	j;
+	unsigned int	slen;
 
-	result = string_compare(str1, str2);
-	if (result)
-		fprintf(stdout, "%16s : %s\n", name, "pass");
-	else
-		fprintf(stdout, "%16s : %s\n", name, "fail");
-	return (result == 0);
+	if (!str || !sub)
+		return (0);
+	slen = string_length(str);
+	if (!*sub)
+		return ((char *)str);
+	i = 0;
+	while (str[i])
+	{
+		j = 0;
+		while (str[i] && str[i] == sub[j] && i < slen)
+		{
+			j++;
+			i++;
+		}
+		if (!sub[j])
+			return ((char *)&str[(unsigned int)i - j]);
+		i = (i - j) + 1;
+	}
+	return (0);
 }

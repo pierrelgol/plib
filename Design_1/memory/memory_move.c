@@ -1,23 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   testing_assert_condition.c                         :+:      :+:    :+:   */
+/*   memory_move.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plgol.perso <pollivie@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/06 21:05:03 by plgol.perso       #+#    #+#             */
-/*   Updated: 2023/12/06 21:05:04 by plgol.perso      ###   ########.fr       */
+/*   Created: 2023/12/01 13:56:51 by plgol.perso       #+#    #+#             */
+/*   Updated: 2023/12/01 13:56:52 by plgol.perso      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../plib.h"
-#include <stdio.h>
 
-int testing_assert_condition(int condition, char *name)
+void	*memory_move(void *dst, void *src, unsigned int n)
 {
-	if (condition)
-		fprintf(stdout, "%16s : %s\n", name, "pass");
-	else
-		fprintf(stdout, "%16s : %s\n", name,"fail");
-	return (condition);
+	const char	*ptr_src;
+	char		*ptr_dst;
+
+	if (!dst || !src)
+		return (0);
+	ptr_src = (char *)src;
+	ptr_dst = (char *)dst;
+	if (dst > src)
+	{
+		while (n)
+		{
+			*(ptr_dst + n - 1) = *(ptr_src + n - 1);
+			n--;
+		}
+		return (dst);
+	}
+	while (n--)
+		*ptr_dst++ = *ptr_src++;
+	return (dst);
 }
