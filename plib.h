@@ -58,6 +58,7 @@ unsigned int			string_count_trailing(char *str, int ch);
 /*                                                                            */
 /******************************************************************************/
 
+char					**split(char *string, int ch);
 char					**split_create(unsigned int size);
 char					**split_destroy(char **split);
 unsigned int			split_length(char **split);
