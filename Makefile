@@ -14,7 +14,7 @@
 CC := cc
 RM := rm -f
 CFLAGS := -Wall -Werror -Wextra
-NAME := plib.a
+NAME := libplib.a
 SRC_DIRS := string memory char split file bit list stack table
 SRCS := $(foreach dir,$(SRC_DIRS),$(wildcard ./$(dir)/*.c))
 OBJS := $(SRCS:.c=.o)
