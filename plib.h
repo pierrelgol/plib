@@ -179,6 +179,33 @@ unsigned int			stack_length(t_stack *self);
 
 /******************************************************************************/
 /*                                                                            */
+/*                                  iStack                                    */
+/*                                                                            */
+/******************************************************************************/
+
+typedef struct s_istack
+{
+	int					count;
+	int					capacity;
+	int					*data;
+
+}						t_istack;
+
+t_istack				*istack_create(unsigned int size);
+t_istack				*istack_destroy(t_istack *stack);
+int						istack_is_empty(t_istack *stack);
+int						istack_is_full(t_istack *stack);
+int						istack_pop(t_istack *stack);
+void					istack_push(t_istack *stack, int value);
+void					istack_swap(t_istack *stack);
+int						istack_peek_at(t_istack *stack, int index);
+void					istack_rotate(t_istack *stack, int shift);
+void					istack_rotate_left(t_istack *s, int shift);
+void					istack_rotate_right(t_istack *s, int shift);
+void					istack_print(t_istack *stack);
+
+/******************************************************************************/
+/*                                                                            */
 /*                                  Bit                                       */
 /*                                                                            */
 /******************************************************************************/
@@ -235,6 +262,37 @@ t_entry					*table_body_create(unsigned int capacity);
 void					table_body_remove(t_table *self, char *key);
 void					table_body_resize(t_table *self, unsigned int capacity);
 unsigned int			table_body_find_empty(t_table *self, char *key);
+
+/******************************************************************************/
+/*                                                                            */
+/*                                  iTable                                    */
+/*                                                                            */
+/******************************************************************************/
+
+typedef struct s_ientry
+{
+	char				*key;
+	long				value;
+}						t_ientry;
+
+typedef struct s_itable
+{
+	unsigned int		size;
+	unsigned int		capacity;
+	t_ientry			*body;
+}						t_itable;
+
+t_itable				*itable_create(void);
+void					itable_destroy(t_itable *self);
+void					itable_entry_set(t_itable *self, char *key, long value);
+long					itable_entry_get(t_itable *self, char *key);
+unsigned long			itable_hash(char *str);
+
+t_ientry				*itable_body_create(unsigned int capacity);
+void					itable_body_remove(t_itable *self, char *key);
+void					itable_body_resize(t_itable *self,
+							unsigned int capacity);
+unsigned int			itable_body_find_empty(t_itable *self, char *key);
 
 /******************************************************************************/
 /*                                                                            */
