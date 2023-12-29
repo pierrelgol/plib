@@ -52,7 +52,6 @@ unsigned int string_count_leading(char *str, int ch);
 unsigned int string_count_trailing(char *str, int ch);
 long         string_to_long(char *str);
 
-
 /******************************************************************************/
 /*                                                                            */
 /*                                  Split */
@@ -109,6 +108,7 @@ int char_to_reversecase(int ch);
 /******************************************************************************/
 
 void *memory_create(unsigned int count, unsigned int size);
+void *memory_realloc(void *ptr, unsigned int size);
 void *memory_destroy(void *ptr);
 int   memory_compare(void *m1, void *m2, unsigned int n);
 void *memory_copy(void *m1, void *m2, unsigned int n);
@@ -172,7 +172,6 @@ unsigned int stack_is_full(t_stack *self);
 unsigned int stack_is_empty(t_stack *self);
 unsigned int stack_length(t_stack *self);
 
-
 /******************************************************************************/
 /*                                                                            */
 /*                                  Bit                                       */
@@ -228,7 +227,6 @@ void         table_body_remove(t_table *self, char *key);
 void         table_body_resize(t_table *self, unsigned int capacity);
 unsigned int table_body_find_empty(t_table *self, char *key);
 
-
 /******************************************************************************/
 /*                                                                            */
 /*                                  File                                      */
@@ -264,5 +262,89 @@ int     file_write(int fd, char *buffer, unsigned int size);
 int     file_size(char *path);
 int     file_close(int fd);
 t_file *file_destroy(t_file *self);
+
+/******************************************************************************/
+/*                                                                            */
+/*                                  Buffer                                    */
+/*                                                                            */
+/******************************************************************************/
+
+#define BUFFER_GROWTH_RATE 2
+#define BUFFER_DEFAULT_CAPACITY 4095
+
+typedef struct s_buffer
+{
+	char *data;
+	int   rindex;
+	int   count;
+	int   capacity;
+
+} t_buffer;
+
+t_buffer *buffer_create();
+t_buffer *buffer_destroy(t_buffer *buffer);
+void      buffer_growth(t_buffer *buffer);
+char      buffer_peek(t_buffer *buffer);
+char     *buffer_ptr(t_buffer *buffer);
+char      buffer_read(t_buffer *buffer);
+void      buffer_should_grow(t_buffer *buffer, int size);
+char      buffer_unread(t_buffer *buffer, char ch);
+void      buffer_write(t_buffer *buffer, char ch);
+
+/******************************************************************************/
+/*                                                                            */
+/*                                  Vector				      */
+/*                                                                            */
+/******************************************************************************/
+
+#define VECTOR_GROWTH_RATE 2
+#define VECTOR_DEFAULT_CAPACITY 31
+
+typedef struct s_vector
+{
+	int   peek_index;
+	int   read_index;
+	int   write_index;
+	int   item_count;
+	int   item_width;
+	int   items_size;
+	void *items;
+
+} t_vector;
+
+t_vector *vector_create(int esize);
+t_vector *vector_destroy(t_vector *vector);
+t_vector *vector_clone(t_vector *vector);
+
+void *vector_pop_at(t_vector *vector, int index);
+void *vector_push_at(t_vector *vector, void *element, int index);
+void *vector_peek_at(t_vector *vector, int index);
+
+void *vector_ptr_pop_at(t_vector *vector, int index);
+void *vector_ptr_push_at(t_vector *vector, void *elem, int index);
+void *vector_ptr_peek_at(t_vector *vector, int index);
+
+void vector_growth(t_vector *vector);
+void vector_shrink(t_vector *vector);
+
+int vector_get_peek_index(t_vector *vector);
+int vector_set_peek_index(t_vector *vector, int index);
+
+int vector_get_read_index(t_vector *vector);
+int vector_set_read_index(t_vector *vector, int index);
+
+int vector_get_write_index(t_vector *vector);
+int vector_set_write_index(t_vector *vector, int index);
+
+int vector_get_item_count(t_vector *vector);
+int vector_get_item_width(t_vector *vector);
+
+int vector_get_items_size(t_vector *vector);
+int vector_set_items_size(t_vector *vector, int size);
+
+void *vector_read(t_vector *vector);
+int   vector_write(t_vector *vector, void *elem);
+
+void *vector_items(t_vector *vector);
 
 #endif
