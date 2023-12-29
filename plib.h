@@ -320,10 +320,6 @@ void *vector_pop_at(t_vector *vector, int index);
 void *vector_push_at(t_vector *vector, void *element, int index);
 void *vector_peek_at(t_vector *vector, int index);
 
-void *vector_ptr_pop_at(t_vector *vector, int index);
-void *vector_ptr_push_at(t_vector *vector, void *elem, int index);
-void *vector_ptr_peek_at(t_vector *vector, int index);
-
 void vector_growth(t_vector *vector);
 void vector_shrink(t_vector *vector);
 
