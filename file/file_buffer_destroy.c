@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   buffer_growth.c                                    :+:      :+:    :+:   */
+/*   file_buffer_destroy.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plgol.perso <pollivie@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/29 14:47:58 by plgol.perso       #+#    #+#             */
-/*   Updated: 2023/12/29 14:48:01 by plgol.perso      ###   ########.fr       */
+/*   Created: 2023/12/30 16:48:59 by plgol.perso       #+#    #+#             */
+/*   Updated: 2023/12/30 16:49:00 by plgol.perso      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../plib.h"
 
-void	buffer_growth(t_buffer *buffer)
+int	file_buffer_destroy(t_file *file)
 {
-	buffer->capacity = buffer->capacity * BUFFER_GROWTH_RATE;
-	buffer->data = memory_realloc(buffer->data, buffer->capacity + 1);
+	if (file->buffer != 0)
+	{
+		buffer_destroy(file->buffer);
+		return (1);
+	}
+	return (0);
 }

@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   buffer_growth.c                                    :+:      :+:    :+:   */
+/*   file_buffer_read.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plgol.perso <pollivie@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/29 14:47:58 by plgol.perso       #+#    #+#             */
-/*   Updated: 2023/12/29 14:48:01 by plgol.perso      ###   ########.fr       */
+/*   Created: 2023/12/30 17:20:23 by plgol.perso       #+#    #+#             */
+/*   Updated: 2023/12/30 17:20:24 by plgol.perso      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../plib.h"
 
-void	buffer_growth(t_buffer *buffer)
+int	file_buffer_read(t_file *file)
 {
-	buffer->capacity = buffer->capacity * BUFFER_GROWTH_RATE;
-	buffer->data = memory_realloc(buffer->data, buffer->capacity + 1);
+	t_buffer	*buffer;
+
+	buffer = file->buffer;
+	if (buffer->rindex <= buffer->count)
+		return (buffer->data[buffer->rindex++]);
+	else
+		return (0);
 }
