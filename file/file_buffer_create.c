@@ -15,7 +15,10 @@
 
 int	file_buffer_create(t_file *file)
 {
-	file->buffer = buffer_create();
+	struct s_allocator *allocator;
+
+	allocator = file->allocator;
+	file->buffer = buffer_create(allocator);
 	if (!file->buffer)
 		return (0);
 	return (1);

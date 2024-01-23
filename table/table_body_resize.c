@@ -20,7 +20,7 @@ void	table_body_resize(t_table *table, unsigned int new_capacity)
 
 	entry_old = table->body;
 	capacity_old = table->capacity;
-	table->body = table_body_create(new_capacity);
+	table->body = table_body_create(table->allocator, new_capacity);
 	table->capacity = new_capacity;
 	i = 0;
 	while (i < capacity_old)

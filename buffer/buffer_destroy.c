@@ -14,9 +14,12 @@
 
 t_buffer	*buffer_destroy(t_buffer *buffer)
 {
+	struct s_allocator *allocator;
+
 	if (!buffer)
 		return (0);
+	allocator = buffer->allocator;
 	if (buffer->data != 0)
-		memory_destroy(buffer->data);
-	return (memory_destroy(buffer));
+		allocator->destroy(allocator, buffer->data);
+	return (allocator->destroy(allocator, buffer));
 }

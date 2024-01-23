@@ -12,7 +12,7 @@
 
 #include "../plib.h"
 
-char	*string_join(char *str1, char *str2)
+char	*string_join(struct s_allocator *allocator, char *str1, char *str2)
 {
 	char			*result;
 	unsigned int	s1len;
@@ -22,7 +22,7 @@ char	*string_join(char *str1, char *str2)
 		return (0);
 	s1len = string_length(str1);
 	s2len = string_length(str2);
-	result = string_create(s1len + s2len + 1);
+	result = string_create(allocator, s1len + s2len + 1);
 	if (!result)
 		return (0);
 	string_concat(result, str1, s1len);

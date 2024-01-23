@@ -36,7 +36,7 @@ static unsigned int	split_find_size(char *str)
 	return (size);
 }
 
-char	**split_line(char *str)
+char	**split_line(struct s_allocator *allocator, char *str)
 {
 	char			**result;
 	unsigned int	index;
@@ -45,7 +45,7 @@ char	**split_line(char *str)
 
 	if (!str)
 		return (0);
-	result = split_create(split_find_size(str) + 1);
+	result = split_create(allocator, split_find_size(str) + 1);
 	if (!result)
 		return (0);
 	index = 0;
@@ -58,7 +58,7 @@ char	**split_line(char *str)
 		while (str[end] && !is_line(str[end]))
 			++end;
 		if (str[start] && !is_line(str[start]))
-			result[index++] = string_slice(str, start, end);
+			result[index++] = string_slice(allocator, str, start, end);
 		start = end;
 	}
 	return (result);

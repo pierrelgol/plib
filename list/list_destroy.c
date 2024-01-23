@@ -12,7 +12,7 @@
 
 #include "../plib.h"
 
-t_list	*list_destroy(t_list *list)
+t_list	*list_destroy(struct s_allocator *allocator, t_list *list)
 {
 	t_list	*temp;
 
@@ -23,7 +23,7 @@ t_list	*list_destroy(t_list *list)
 	{
 		temp = list;
 		list = list->next;
-		temp = memory_destroy(temp);
+		temp = allocator->destroy(allocator, temp);
 	}
 	return (0);
 }

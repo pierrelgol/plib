@@ -12,28 +12,21 @@
 
 #include "../plib.h"
 
-char	*string_slice(char *str, unsigned int start, unsigned int end)
+char *string_slice(struct s_allocator *allocator, char *str, size_t start, size_t end)
 {
-	char			*result;
-	unsigned int	slen;
-	unsigned int	i;
+	char        *result;
+	size_t slen;
 
 	if (!str)
 		return (0);
 	slen = string_length(str);
 	if (slen < end || slen < start)
 		return (0);
-	result = string_create(((slen - start) + (slen - end)) + 1);
-	i = 0;
+	result = string_create(allocator, ((slen - start) + (slen - end)) + 1);
 	if (start <= end)
-	{
-		while (start < end)
-			result[i++] = str[start++];
-	}
+		memory_copy(result, str + start, end - start);
 	else
-	{
-		while (start > end)
-			result[i++] = str[--start];
-	}
-	return (result);
+		memory_copy(result, str + end, start - end);
+
+	return result;
 }

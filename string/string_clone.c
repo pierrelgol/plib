@@ -12,13 +12,13 @@
 
 #include "../plib.h"
 
-char	*string_clone(char *str)
+char	*string_clone(struct s_allocator *allocator, char *str)
 {
 	char			*result;
 	unsigned int	rlen;
 
 	rlen = string_length(str);
-	result = string_create(rlen + 1);
+	result = string_create(allocator, rlen + 1);
 	string_copy(result, str, rlen);
 	return (result);
 }

@@ -12,10 +12,10 @@
 
 #include "../plib.h"
 
-char	*string_destroy(char *str)
+char	*string_destroy(struct s_allocator *allocator, char *str)
 {
 	if (!str)
 		return (0);
-	free(str);
+	allocator->destroy(allocator, str);
 	return (0);
 }

@@ -12,49 +12,38 @@
 
 #include "../plib.h"
 
-static unsigned int	split_find_size(char *string, int ch)
-{
-	unsigned int	size;
+int	split_count_until(char *string, int ch)
+{	
+	int	i;
 
-	if (!string)
-		return (0);
-	size = 0;
-	while (*string)
-	{
-		while (*string && *string == ch)
-			++string;
-		if (*string && *string != ch)
-			++size;
-		while (*string && *string != ch)
-			++string;
-	}
-	return (size);
+	i = 0;
+	while (string[i] and string[i] != ch)
+		++i;
+	return (i);
 }
 
-char	**split(char *string, int ch)
+char	**split(struct s_allocator *allocator, char *string, int ch)
 {
 	char			**result;
-	unsigned int	index;
-	unsigned int	start;
-	unsigned int	end;
+	unsigned int 		size;
+	unsigned int 		i;
 
 	if (!string)
 		return (0);
-	result = split_create(split_find_size(string, ch) + 1);
+	size = string_count(string, ch);
+	result = split_create(allocator, size + 1);
 	if (!result)
 		return (0);
-	index = 0;
-	start = 0;
-	while (string[start])
+	i = 0;
+	while (i < size)
 	{
-		while (string[start] && string[start] == ch)
-			++start;
-		end = start;
-		while (string[end] && string[end] != ch)
-			++end;
-		if (string[start] && string[start] != ch)
-			result[index++] = string_slice(string, start, end);
-		start = end;
+		while (*string and *string == ch)
+			++string;
+		result[i++] = string_slice(allocator, string, 0, split_count_until(string, ch));
+		if (!result[i - 1])
+			return (split_destroy(allocator, result));
+		while (*string and *string != ch)
+			++string;
 	}
 	return (result);
 }

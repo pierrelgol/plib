@@ -12,7 +12,7 @@
 
 #include "../plib.h"
 
-char	**split_destroy(char **split)
+char	**split_destroy(struct s_allocator *allocator, char **split)
 {
 	unsigned int	i;
 
@@ -20,7 +20,7 @@ char	**split_destroy(char **split)
 		return (0);
 	i = 0;
 	while (split[i])
-		free(split[i++]);
-	free(split[i]);
+		allocator->destroy(allocator, split[i++]);
+	allocator->destroy(allocator, split);
 	return (0);
 }

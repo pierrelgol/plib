@@ -14,11 +14,11 @@
 CC := cc
 RM := rm -f
 # CFLAGS := -Wall -Werror -Wextra -g
-CFLAGS := -Wall -Werror -Wextra -g3 -march=native -mcpu=native
-# CFLAGS := -Wall -Werror -Wextra -O3 -march=native -mcpu=native
+CFLAGS := -Wall -Werror -Wextra -g3 -march=native -mtune=native
+# CFLAGS := -Wall -Werror -Wextra -O3 -march=native -mtune=native
 
 NAME := libplib.a
-SRC_DIRS := string memory char split file bit list stack table buffer vector
+SRC_DIRS := string memory char split file print bit list stack table buffer allocator
 SRCS := $(foreach dir,$(SRC_DIRS),$(wildcard ./$(dir)/*.c))
 OBJS := $(SRCS:.c=.o)
 

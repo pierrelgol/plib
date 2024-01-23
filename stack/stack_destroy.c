@@ -14,11 +14,14 @@
 
 t_stack	*stack_destroy(t_stack *stack)
 {
+	struct s_allocator *allocator;
+
 	if (!stack)
 		return (0);
+	allocator = stack->allocator;
 	if (stack->top)
-		list_destroy(stack->top);
+		list_destroy(allocator, stack->top);
 	if (stack->free_node)
-		list_destroy(stack->free_node);
-	return (memory_destroy(stack));
+		list_destroy(allocator, stack->free_node);
+	return (allocator->destroy(allocator, stack));
 }

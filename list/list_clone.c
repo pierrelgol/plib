@@ -12,7 +12,7 @@
 
 #include "../plib.h"
 
-t_list	*list_clone(t_list **list)
+t_list	*list_clone(struct s_allocator *allocator, t_list **list)
 {
 	t_list	*clone;
 	t_list	*temp;
@@ -20,11 +20,11 @@ t_list	*list_clone(t_list **list)
 	if (!list || !*list)
 		return (0);
 	temp = (*list)->next;
-	clone = list_create();
+	clone = list_create(allocator);
 	clone->data = (*list)->data;
 	while (temp)
 	{
-		list_insert_at(&clone, temp->data, list_length(*list));
+		list_insert_at(allocator, &clone, temp->data, list_length(*list));
 		temp = temp->next;
 	}
 	return (clone);

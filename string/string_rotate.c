@@ -12,7 +12,7 @@
 
 #include "../plib.h"
 
-static char	*string_rotate_left(char *str, unsigned int n)
+static char	*string_rotate_left(struct s_allocator *allocator, char *str, unsigned int n)
 {
 	unsigned int	slen;
 	char			*temp;
@@ -23,16 +23,16 @@ static char	*string_rotate_left(char *str, unsigned int n)
 	n %= slen;
 	if (n == 0 || slen <= 1)
 		return (str);
-	temp = string_clone(str);
+	temp = string_clone(allocator, str);
 	temp[n] = '\0';
 	string_move(str, str + n, slen - n);
 	str[slen - n] = '\0';
 	string_concat(str, temp, n);
-	string_destroy(temp);
+	string_destroy(allocator, temp);
 	return (str);
 }
 
-static char	*string_rotate_right(char *str, unsigned int n)
+static char	*string_rotate_right(struct s_allocator *allocator, char *str, unsigned int n)
 {
 	unsigned int	slen;
 	char			*temp;
@@ -43,18 +43,18 @@ static char	*string_rotate_right(char *str, unsigned int n)
 	n %= slen;
 	if (n == 0 || slen <= 1)
 		return (str);
-	temp = string_clone(str);
+	temp = string_clone(allocator, str);
 	string_move(str + n, str, slen - n);
 	string_copy(str, temp + slen - n, n);
 	str[slen] = '\0';
-	string_destroy(temp);
+	allocator->destroy(allocator, temp);
 	return (str);
 }
 
-char	*string_rotate(char *str, int shift)
+char	*string_rotate(struct s_allocator *allocator, char *str, int shift)
 {
 	if (shift < 0)
-		return (string_rotate_left(str, shift));
+		return (string_rotate_left(allocator, str, shift));
 	else
-		return (string_rotate_right(str, shift));
+		return (string_rotate_right(allocator, str, shift));
 }

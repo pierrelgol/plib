@@ -25,7 +25,7 @@ t_stack	*stack_shrink(t_stack *stack)
 	{
 		while (current_size > target_size)
 		{
-			list_remove_at(&stack->free_node, 0);
+			list_remove_at(stack->allocator, &stack->free_node, 0);
 			--current_size;
 		}
 		stack->size = target_size;

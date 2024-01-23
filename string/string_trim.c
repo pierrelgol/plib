@@ -12,7 +12,7 @@
 
 #include "../plib.h"
 
-char	*string_trim(char *str, int ch)
+char	*string_trim(struct s_allocator *allocator, char *str, int ch)
 {
 	char			*result;
 	unsigned int	start;
@@ -22,7 +22,7 @@ char	*string_trim(char *str, int ch)
 		return (0);
 	start = string_count_leading(str, ch);
 	end = string_length(str) + string_count_trailing(str, ch);
-	result = string_create((end - start) + 1);
+	result = string_create(allocator, (end - start) + 1);
 	if (!result)
 		return (0);
 	string_copy(result, &str[start], (end - start));

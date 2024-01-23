@@ -14,17 +14,20 @@
 
 t_file	*file_destroy(t_file *file)
 {
+	struct s_allocator *allocator;
+
 	if (!file)
 		return (0);
+	allocator = file->allocator;
 	if (bit_is_set(file->flag, IS_OPEN))
 		file_close(file->in);
 	if (file->name)
-		string_destroy(file->name);
+		string_destroy(allocator ,file->name);
 	if (file->path)
-		string_destroy(file->path);
+		string_destroy(allocator ,file->path);
 	if (file->content)
-		string_destroy(file->content);
+		string_destroy(allocator ,file->content);
 	if (file->buffer)
 		buffer_destroy(file->buffer);
-	return (memory_destroy(file));
+	return (allocator->destroy(allocator, file));
 }

@@ -12,13 +12,14 @@
 
 #include "../plib.h"
 
-t_file	*file_create(void)
+t_file	*file_create(struct s_allocator *allocator)
 {
 	t_file	*file;
 
-	file = memory_create(1, sizeof(t_file));
+	file = allocator->create(allocator, sizeof(t_file));
 	if (!file)
 		return (0);
+	file->allocator = allocator;
 	file->flag = bit_set_bit(file->flag, IS_VALID);
 	return (file);
 }

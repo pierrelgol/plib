@@ -16,6 +16,6 @@ t_file	*file_clone_path(t_file *file, char *path)
 {
 	if (!file || !path)
 		return (0);
-	file->path = string_clone(path);
+	file->path = string_clone(file->allocator, path);
 	return (file);
 }

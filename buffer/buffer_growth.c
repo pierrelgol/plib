@@ -14,6 +14,12 @@
 
 void	buffer_growth(t_buffer *buffer)
 {
-	buffer->capacity = buffer->capacity * BUFFER_GROWTH_RATE;
-	buffer->data = memory_realloc(buffer->data, buffer->capacity + 1);
+	size_t prev;
+	size_t next;
+
+	prev = buffer->capacity;
+	next = prev * BUFFER_GROWTH_RATE;
+	struct s_allocator *allocator = buffer->allocator;
+	buffer->data = allocator->realloc(allocator, buffer->data,prev, next + 1);
+	buffer->capacity = next;
 }

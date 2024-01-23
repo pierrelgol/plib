@@ -12,7 +12,7 @@
 
 #include "../plib.h"
 
-static void	*list_remove_front(t_list **list)
+static void	*list_remove_front(struct s_allocator *allocator, t_list **list)
 {
 	t_list	*temp;
 	void	*data;
@@ -22,11 +22,11 @@ static void	*list_remove_front(t_list **list)
 	temp = (*list);
 	data = temp->data;
 	(*list) = (*list)->next;
-	memory_destroy(temp);
+	allocator->destroy(allocator,temp);
 	return (data);
 }
 
-static void	*list_remove_back(t_list **list)
+static void	*list_remove_back(struct s_allocator *allocator, t_list **list)
 {
 	t_list	*prev;
 	t_list	*curr;
@@ -43,11 +43,11 @@ static void	*list_remove_back(t_list **list)
 	}
 	data = curr->data;
 	prev->next = 0;
-	memory_destroy(curr);
+	allocator->destroy(allocator,curr);
 	return (data);
 }
 
-void	*list_remove_at(t_list **list, unsigned int index)
+void	*list_remove_at(struct s_allocator *allocator, t_list **list, unsigned int index)
 {
 	t_list	*prev;
 	t_list	*curr;
@@ -56,9 +56,9 @@ void	*list_remove_at(t_list **list, unsigned int index)
 	if (!list || !*list)
 		return (0);
 	if (index == 0)
-		return (list_remove_front(list));
+		return (list_remove_front(allocator, list));
 	else if (index >= list_length(*list))
-		return (list_remove_back(list));
+		return (list_remove_back(allocator, list));
 	else
 	{
 		curr = (*list);
@@ -70,7 +70,7 @@ void	*list_remove_at(t_list **list, unsigned int index)
 		}
 		data = curr->data;
 		prev->next = curr->next;
-		memory_destroy(curr);
+		allocator->destroy(allocator,curr);
 		return (data);
 	}
 }

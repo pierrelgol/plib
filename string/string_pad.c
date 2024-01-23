@@ -12,7 +12,7 @@
 
 #include "../plib.h"
 
-char	*string_pad(char *str, int ch, int left, int right)
+char	*string_pad(struct s_allocator *allocator, char *str, int ch, size_t n)
 {
 	char			*result;
 	unsigned int	rlen;
@@ -20,15 +20,15 @@ char	*string_pad(char *str, int ch, int left, int right)
 
 	if (!str)
 		return (0);
-	if (left == 0 && right == 0)
+	if (n == 0)
 		return (str);
 	slen = string_length(str);
-	rlen = slen + (left + right);
-	result = string_create(rlen + 1);
+	rlen = slen + (n * 2);
+	result = string_create(allocator, rlen + 1);
 	if (!result)
 		return (0);
-	string_set(result, ch, left);
-	string_copy(&result[left], str, slen);
-	string_set(&result[left + slen], ch, right);
+	string_set(result, ch, n);
+	string_copy(&result[n], str, slen);
+	string_set(&result[n + slen], ch, n);
 	return (result);
 }

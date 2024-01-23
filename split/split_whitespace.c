@@ -38,7 +38,7 @@ static unsigned int	split_find_size(char *string)
 	return (size);
 }
 
-char	**split_whitespace(char *string)
+char	**split_whitespace(struct s_allocator *allocator, char *string)
 {
 	char			**result;
 	unsigned int	index;
@@ -47,7 +47,7 @@ char	**split_whitespace(char *string)
 
 	if (!string)
 		return (0);
-	result = split_create(split_find_size(string) + 1);
+	result = split_create(allocator, split_find_size(string) + 1);
 	if (!result)
 		return (0);
 	index = 0;
@@ -60,7 +60,7 @@ char	**split_whitespace(char *string)
 		while (string[end] && !is_whitespace(string[end]))
 			++end;
 		if (string[start] && !is_whitespace(string[start]))
-			result[index++] = string_slice(string, start, end);
+			result[index++] = string_slice(allocator, string, start, end);
 		start = end;
 	}
 	return (result);

@@ -12,14 +12,14 @@
 
 #include "../plib.h"
 
-void	*memory_realloc(void *ptr, unsigned int size)
+void	*memory_realloc(void *ptr, size_t old_size, size_t size)
 {
 	void	*new_ptr;
 
 	new_ptr = memory_create(size, 1);
 	if (!new_ptr)
 		return (ptr);
-	memory_copy(new_ptr, ptr, size);
+	memory_copy(new_ptr, ptr, old_size);
 	memory_destroy(ptr);
 	return (new_ptr);
 }

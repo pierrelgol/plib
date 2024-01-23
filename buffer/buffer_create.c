@@ -12,16 +12,19 @@
 
 #include "../plib.h"
 
-t_buffer	*buffer_create(void)
+t_buffer	*buffer_create(struct s_allocator *allocator)
 {
 	t_buffer	*buffer;
+	size_t		default_size;
 
-	buffer = memory_create(1, sizeof(t_buffer));
+	buffer = allocator->create(allocator, sizeof(t_buffer));
 	if (!buffer)
 		return (0);
-	buffer->data = memory_create(BUFFER_DEFAULT_CAPACITY + 1, sizeof(char));
+	default_size = BUFFER_DEFAULT_CAPACITY;
+	buffer->data = allocator->create(allocator, default_size);
 	if (!buffer->data)
 		return (buffer_destroy(buffer));
+	buffer->allocator = allocator;
 	buffer->capacity = BUFFER_DEFAULT_CAPACITY;
 	buffer->count = 0;
 	buffer->rindex = 0;

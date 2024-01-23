@@ -12,14 +12,15 @@
 
 #include "../plib.h"
 
-t_stack	*stack_create(void)
+t_stack	*stack_create(struct s_allocator *allocator)
 {
 	t_stack	*stack;
 
-	stack = memory_create(1, sizeof(t_stack));
+	stack = allocator->create(allocator, sizeof(t_stack));
 	if (!stack)
 		return (0);
-	stack->top = list_create();
+	stack->allocator = allocator;
+	stack->top = list_create(allocator);
 	stack->top->data = 0;
 	stack->free_node = 0;
 	stack->size = 1;

@@ -12,20 +12,20 @@
 
 #include "../plib.h"
 
-char	**split_clone(char **split)
+char	**split_clone(struct s_allocator *allocator, char **split)
 {
 	char			**result;
 	unsigned int	i;
 
 	if (!split)
 		return (0);
-	result = split_create(split_size(split) + 1);
+	result = split_create(allocator, split_size(split) + 1);
 	if (!result)
 		return (0);
 	i = 0;
 	while (split[i])
 	{
-		result[i] = string_clone(split[i]);
+		result[i] = string_clone(allocator, split[i]);
 		++i;
 	}
 	return (split);

@@ -12,7 +12,7 @@
 
 #include "../plib.h"
 
-t_entry	*table_body_create(unsigned int capacity)
+t_entry	*table_body_create(struct s_allocator *allocator, unsigned int capacity)
 {
-	return ((t_entry *)memory_create(capacity, sizeof(t_entry)));
+	return ((t_entry *)allocator->create(allocator, capacity * sizeof(t_entry)));
 }

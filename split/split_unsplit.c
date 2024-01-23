@@ -12,7 +12,7 @@
 
 #include "../plib.h"
 
-char	*split_unsplit(char **split, int sep)
+char	*split_unsplit(struct s_allocator *allocator, char **split, int sep)
 {
 	char			*result;
 	unsigned int	rlen;
@@ -23,7 +23,7 @@ char	*split_unsplit(char **split, int sep)
 		return (0);
 	size = split_size(split);
 	rlen = split_length(split) + size;
-	result = string_create(rlen + 1);
+	result = string_create(allocator, rlen + 1);
 	if (!rlen)
 		return (0);
 	i = 0;

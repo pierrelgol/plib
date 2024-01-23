@@ -12,11 +12,11 @@
 
 #include "../plib.h"
 
-t_list	*list_create(void)
+t_list	*list_create(struct s_allocator *allocator)
 {
 	t_list	*list;
 
-	list = memory_create(1, sizeof(*list));
+	list = allocator->create(allocator, sizeof(*list));
 	if (!list)
 		return (0);
 	list->next = 0;

@@ -12,13 +12,13 @@
 
 #include "../plib.h"
 
-static t_list	*list_insert_front(t_list **list, void *data)
+static t_list	*list_insert_front(struct s_allocator *allocator,t_list **list, void *data)
 {
 	t_list	*new_head;
 
 	if (!list)
 		return (0);
-	new_head = list_create();
+	new_head = list_create(allocator);
 	if (!new_head)
 		return (0);
 	new_head->data = data;
@@ -32,14 +32,14 @@ static t_list	*list_insert_front(t_list **list, void *data)
 	return (new_head);
 }
 
-static t_list	*list_insert_back(t_list **list, void *data)
+static t_list	*list_insert_back(struct s_allocator *allocator, t_list **list, void *data)
 {
 	t_list	*new_tail;
 	t_list	*temp;
 
 	if (!list)
 		return (0);
-	new_tail = list_create();
+	new_tail = list_create(allocator);
 	if (!new_tail)
 		return (0);
 	new_tail->data = data;
@@ -55,7 +55,7 @@ static t_list	*list_insert_back(t_list **list, void *data)
 	return (new_tail);
 }
 
-t_list	*list_insert_at(t_list **list, void *data, unsigned int index)
+t_list	*list_insert_at(struct s_allocator *allocator, t_list **list, void *data, unsigned int index)
 {
 	t_list	*new_node;
 	t_list	*temp;
@@ -63,12 +63,12 @@ t_list	*list_insert_at(t_list **list, void *data, unsigned int index)
 	if (!list)
 		return (0);
 	if (index == 0)
-		return (list_insert_front(list, data));
+		return (list_insert_front(allocator, list, data));
 	else if (index >= list_length(*list))
-		return (list_insert_back(list, data));
+		return (list_insert_back(allocator, list, data));
 	else
 	{
-		new_node = list_create();
+		new_node = list_create(allocator);
 		if (!new_node)
 			return (0);
 		new_node->data = data;

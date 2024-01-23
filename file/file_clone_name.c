@@ -16,6 +16,6 @@ t_file	*file_clone_name(t_file *file, char *name)
 {
 	if (!file || !name)
 		return (0);
-	file->name = string_clone(name);
+	file->name = string_clone(file->allocator, name);
 	return (file);
 }

@@ -28,7 +28,7 @@ static unsigned int	split_find_count(char *str, unsigned int n)
 	return (count);
 }
 
-char	**split_nsplit(char *str, unsigned int n)
+char	**split_nsplit(struct s_allocator *allocator, char *str, unsigned int n)
 {
 	char			**result;
 	unsigned int	slen;
@@ -38,7 +38,7 @@ char	**split_nsplit(char *str, unsigned int n)
 	if (!str)
 		return (0);
 	slen = string_length(str);
-	result = split_create(split_find_count(str, n) + 1);
+	result = split_create(allocator, split_find_count(str, n) + 1);
 	if (!result)
 		return (0);
 	i = 0;
@@ -46,10 +46,10 @@ char	**split_nsplit(char *str, unsigned int n)
 	while (str[j])
 	{
 		if ((j + n) <= slen)
-			result[i++] = string_slice(&str[j], 0, n);
+			result[i++] = string_slice(allocator, &str[j], 0, n);
 		else
 		{
-			result[i++] = string_clone(&str[j]);
+			result[i++] = string_clone(allocator, &str[j]);
 			n = string_length(result[i - 1]);
 		}
 		j += n;

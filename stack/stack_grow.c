@@ -21,7 +21,7 @@ t_stack	*stack_grow(t_stack *stack)
 	i = 0;
 	while (i < (stack->size << 1))
 	{
-		list_insert_at(&stack->free_node, 0, 0);
+		list_insert_at(stack->allocator, &stack->free_node, 0, 0);
 		++i;
 	}
 	stack->size <<= 1;

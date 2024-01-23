@@ -12,16 +12,12 @@
 
 #include "../plib.h"
 
-char	**split_create(unsigned int size)
+char	**split_create(struct s_allocator *allocator, unsigned int size)
 {
-	unsigned int	i;
 	char			**split;
 
-	split = malloc(size * sizeof(char *));
+	split = allocator->create(allocator, size * sizeof(char *) + 1);
 	if (!split)
 		return (0);
-	i = 0;
-	while (i < size)
-		split[i++] = 0;
 	return (split);
 }
