@@ -4,14 +4,14 @@ pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
-    const zlib = b.addStaticLibrary(.{
-        .name = "zlib",
+    const plib = b.addStaticLibrary(.{
+        .name = "plib",
         .target = target,
         .optimize = optimize,
     });
-    zlib.linkLibC();
-    zlib.addIncludePath(.{ .path = "include/" });
-    zlib.addCSourceFiles(.{ .files = &.{
+    plib.linkLibC();
+    plib.addIncludePath(.{ .path = "include/" });
+    plib.addCSourceFiles(.{ .files = &.{
         "src/allocator/arena_create.c",
         "src/allocator/arena_deinit.c",
         "src/allocator/arena_destroy.c",
@@ -174,7 +174,7 @@ pub fn build(b: *std.Build) void {
         "-Werror",
         "-Wextra",
     } });
-    b.installArtifact(zlib);
+    b.installArtifact(plib);
 
     const main_tests = b.addTest(.{
         .root_source_file = .{ .path = "test/test.zig" },
@@ -182,7 +182,7 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
     main_tests.addIncludePath(.{ .path = "include/" });
-    main_tests.linkLibrary(zlib);
+    main_tests.linkLibrary(plib);
     main_tests.linkLibC();
 
     const run_main_tests = b.addRunArtifact(main_tests);
