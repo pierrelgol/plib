@@ -1,16 +1,46 @@
+name: Zig Workflow
+
+on: [push, pull_request]
+
 jobs:
+  setup-zig:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Zig
+        uses: goto-bus-stop/setup-zig@v2.2.0
+        with:
+          version: master
+          cache: true
+
   test:
+    needs: setup-zig
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
     runs-on: ${{matrix.os}}
     steps:
-      - uses: actions/checkout@v2
-      - uses: goto-bus-stop/setup-zig@v2
-      - run: zig build test
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Zig
+        uses: goto-bus-stop/setup-zig@v2
+
+      - name: Build and run tests
+        run: zig build test
+
   lint:
+    needs: setup-zig
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: goto-bus-stop/setup-zig@v2
-      - run: zig fmt --check .
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Zig
+        uses: goto-bus-stop/setup-zig@v2
+
+      - name: Run Zig formatter (lint)
+        run: zig fmt --check .
+
