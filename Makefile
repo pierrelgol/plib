@@ -13,12 +13,22 @@
 
 CC := cc
 RM := rm -f
-# CFLAGS := -Wall -Werror -Wextra -g
-CFLAGS := -Wall -Werror -Wextra -g3 -march=native -mtune=native
-# CFLAGS := -Wall -Werror -Wextra -O3 -march=native -mtune=native
+CFLAGS := -Wall -Werror -Wextra
 
 NAME := libplib.a
-SRC_DIRS := string memory char split file print bit list stack table buffer allocator
+SRC_DIRS := src/allocator	\
+			src/bit 		\
+			src/buffer 		\
+			src/char 		\
+			src/file 		\
+			src/list 		\
+			src/memory 		\
+			src/print 		\
+			src/split 		\
+			sc/stack 		\
+			src/string 		\
+			src/table 		\
+
 SRCS := $(foreach dir,$(SRC_DIRS),$(wildcard ./$(dir)/*.c))
 OBJS := $(SRCS:.c=.o)
 
