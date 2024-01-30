@@ -24,7 +24,7 @@ RM := rm -f
 
 CFLAGS =  -Wall 								\
 		  -Wextra 								\
-		  -glldb								\
+		  -Werror 								\
 
 NAME := libplib.a
 SRC_DIRS := src/allocator	\
