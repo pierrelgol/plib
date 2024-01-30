@@ -14,9 +14,7 @@
 
 static unsigned int	is_whitespace(int ch)
 {
-	if (ch == ' ' || ch == '\t' || ch == '\v' || ch == '\r')
-		return (1);
-	return (0);
+	return (ch == ' ' || ch == '\t' || ch == '\v' || ch == '\r');
 }
 
 static unsigned int	split_find_size(char *string)
@@ -30,8 +28,7 @@ static unsigned int	split_find_size(char *string)
 	{
 		while (*string && is_whitespace(*string))
 			++string;
-		if (*string && !is_whitespace(*string))
-			++size;
+		++size;
 		while (*string && !is_whitespace(*string))
 			++string;
 	}
@@ -60,7 +57,7 @@ char	**split_whitespace(struct s_allocator *allocator, char *string)
 		while (string[end] && !is_whitespace(string[end]))
 			++end;
 		if (string[start] && !is_whitespace(string[start]))
-			result[index++] = string_slice(allocator, string, start, end);
+			result[index++] = string_nclone(allocator, &string[start], end);
 		start = end;
 	}
 	return (result);

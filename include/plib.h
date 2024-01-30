@@ -36,7 +36,6 @@
 /******************************************************************************/
 
 #define LOG 0
-#define FBA_ENOMEM "fba limit reached %d bytes wanted only %d bytes left\n"
 struct s_allocator;
 typedef unsigned char t_ressource;
 
@@ -44,22 +43,43 @@ typedef void *(t_fn_create) (struct s_allocator *self, size_t size);
 typedef void *(t_fn_destroy) (struct s_allocator *self, void *ptr);
 typedef void *(t_fn_realloc) (struct s_allocator *self, void *ptr, size_t prev, size_t next);
 
+typedef struct s_log_entry
+{
+    intptr_t    ptr;
+    size_t      bytes;
+
+}                t_log_entry;
+
 typedef struct s_allocator
 {
     size_t              capacity;
     size_t              count;
+    size_t              bytes_alloced;
+    size_t              bytes_dealloced;
+    bool                is_logger;
     bool                is_arena;
     bool                is_heap;
-    t_ressource        *region;
     t_fn_create        *create;
     t_fn_destroy       *destroy;
     t_fn_realloc       *realloc;
+    t_ressource        *region;
+    struct s_file      *file;
     struct s_list      *next;
+    struct s_list      *history;
+    struct s_allocator *private_allocator;
     struct s_allocator *parent_allocator;
 
 } t_allocator;
 
-/* ********************************c_heapalloc******************************* */
+/* *****************************c_logging_allocator************************** */
+
+struct s_allocator *logging_allocator_init(struct s_allocator *parent_allocator);
+void *logging_allocator_deinit(struct s_allocator *self);
+void *logging_allocator_destroy(struct s_allocator *self, void *ptr);
+void *logging_allocator_create(struct s_allocator *self, size_t size);
+void *logging_allocator_realloc(struct s_allocator *self, void *ptr, size_t old_size, size_t size);
+
+/* ********************************c_heap************************************ */
 
 struct s_allocator *heap_init(void);
 void               *heap_deinit(struct s_allocator *self);

@@ -18,11 +18,14 @@ void	*memory_copy(void *dst, void *src, size_t n)
 	char	*pdst;
 	char	*psrc;
 
-	if (DBG)
-		print_fmt("[LOG]memory_copy(%p, %p, %d)\n",dst,src,n);
+	if (DBG == 2)
+		print_fmt("[LOG]memory_copy(%p, %p, %u)\n",dst,src,n);
 	pdst = dst;
 	psrc = src;
-	while (n--)
+	while (n > 0)
+	{
 		*pdst++ = *psrc++;
+		--n;
+	}
 	return (dst);
 }

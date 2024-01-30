@@ -19,21 +19,21 @@ void	*memory_move(void *dst, void *src, size_t n)
 	char		*ptr_dst;
 
 	if (DBG)
-		print_fmt("[LOG]memory_compare(%p, %p, %d)\n",dst,src,n);
+		print_fmt("[LOG]memory_compare(%p, %p, %u)\n",dst,src,n);
 	if (dst == src)
 		return (dst);
 	ptr_src = (char *)src;
 	ptr_dst = (char *)dst;
 	if (dst > src)
 	{
-		while (n)
+		while (n > 0)
 		{
 			*(ptr_dst + n - 1) = *(ptr_src + n - 1);
-			n--;
+			--n;
 		}
 		return (dst);
 	}
-	while (n--)
+	while (n-- > 0)
 		*ptr_dst++ = *ptr_src++;
 	return (dst);
 }

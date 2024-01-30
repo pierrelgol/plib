@@ -46,7 +46,7 @@ char	**split_nsplit(struct s_allocator *allocator, char *str, unsigned int n)
 	while (str[j])
 	{
 		if ((j + n) <= slen)
-			result[i++] = string_slice(allocator, &str[j], 0, n);
+			result[i++] = string_nclone(allocator, &str[j], n);
 		else
 		{
 			result[i++] = string_clone(allocator, &str[j]);

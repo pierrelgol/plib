@@ -17,16 +17,17 @@ int	memory_compare(const void *m1, const void *m2, size_t n)
 	const unsigned char	*p1;
 	const unsigned char	*p2;
 
-	if (DBG)
-		print_fmt("[LOG]memory_compare(%p, %p, %d)\n",m1,m2,n);
+	if (DBG == 2)
+		print_fmt("[LOG]memory_compare(%p , %p , %u)\n",m1,m2,n);
 	p1 = (unsigned char *)m1;
 	p2 = (unsigned char *)m2;
-	while (n--)
+	while (n > 0)
 	{
 		if (*p1 != *p2)
 			return (*p1 - *p2);
 		++p1;
 		++p2;
+		--n;
 	}
 	return (0);
 }

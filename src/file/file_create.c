@@ -19,7 +19,10 @@ t_file	*file_create(struct s_allocator *allocator)
 	file = allocator->create(allocator, sizeof(t_file));
 	if (!file)
 		return (0);
-	file->allocator = allocator;
+	if (allocator->is_logger)
+		file->allocator = allocator->parent_allocator;
+	else
+		file->allocator = allocator;
 	file->flag = bit_set_bit(file->flag, IS_VALID);
 	return (file);
 }

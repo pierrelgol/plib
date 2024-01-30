@@ -13,7 +13,18 @@
 
 CC := cc
 RM := rm -f
-CFLAGS := -Wall -Werror -Wextra
+# CFLAGS =  -Wall 								\
+# 		  -Wextra 								\
+# 		  -glldb								\
+# 		  -Weverything 							\
+# 		  -fsanitize=address 					\
+# 		  -fsanitize=undefined 					\
+# 		  -fsanitize=integer					\
+# 		  -fstrict-overflow						\
+
+CFLAGS =  -Wall 								\
+		  -Wextra 								\
+		  -glldb								\
 
 NAME := libplib.a
 SRC_DIRS := src/allocator	\

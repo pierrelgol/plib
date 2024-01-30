@@ -18,7 +18,7 @@ void	*memory_realloc(void *ptr, size_t prev, size_t next)
 	void	*new_ptr;
 
 	if (DBG)
-		print_fmt("[LOG]memory_compare(%p, %d, %d)\n",ptr,prev,next);
+		print_fmt("[LOG]memory_compare(%p, %u, %u)\n",ptr,prev,next);
 	if (prev == next)
 		return (ptr);
 	new_ptr = memory_create(next, 1);

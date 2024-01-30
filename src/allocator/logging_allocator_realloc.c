@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memory_set.c                                       :+:      :+:    :+:   */
+/*   logging_allocator_realloc.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plgol.perso <pollivie@student.42.fr>       +#+  +:+       +#+        */
+/*   By: pollivie <pollivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/01 12:09:50 by plgol.perso       #+#    #+#             */
-/*   Updated: 2023/12/01 12:09:51 by plgol.perso      ###   ########.fr       */
+/*   Created: 2024/01/30 13:15:18 by pollivie          #+#    #+#             */
+/*   Updated: 2024/01/30 13:15:18 by pollivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "../../include/plib.h"
+#include <stdint.h>
 
 
-void	*memory_set(void *m1, char ch, size_t n)
+void *logging_allocator_realloc(struct s_allocator *allocator, void *ptr, size_t old ,size_t size)
 {
-	unsigned char	*ptr_m1;
-
-	if (DBG)
-		print_fmt("[LOG]memory_set(%p, %d, %u)\n",m1,ch,n);
-	ptr_m1 = m1;
-	while (n > 0)
-	{
-		*ptr_m1++ = (unsigned char)ch;
-		--n;
-	}
-	return (m1);
+	return (allocator->parent_allocator->realloc(allocator->parent_allocator, ptr, old, size));
 }

@@ -17,8 +17,8 @@ void	*memory_search(void *m1, char ch, size_t n)
 {
 	unsigned char	*ptr_m1;
 
-	if (DBG)
-		print_fmt("[LOG]memory_compare(%p, %c, %d)\n",m1,ch,n);
+	if (DBG == 2)
+		print_fmt("[LOG]memory_compare(%p, %c, %u)\n",m1,ch,n);
 	ptr_m1 = m1;
 	while (n--)
 	{

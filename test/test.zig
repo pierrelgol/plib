@@ -6,6 +6,7 @@ const testing = std.testing;
 const process = std.process;
 const log = std.log;
 const c = std.c;
+const ascii = std.ascii;
 const zlib = @cImport({
     @cInclude("plib.h");
 });
@@ -300,4 +301,124 @@ test "string_clone : test2" {
     defer _ = zlib.heap_destroy(heap_alloc, result);
     const slice: []const u8 = std.mem.span(result);
     try expect_eql_str(expected, slice);
+}
+
+test "string_clone : test3" {
+    const expected = "";
+    const heap_alloc = zlib.heap_init();
+    defer _ = zlib.heap_deinit(heap_alloc);
+    const result = zlib.string_clone(heap_alloc, @ptrCast(expected));
+    defer _ = zlib.heap_destroy(heap_alloc, result);
+    const slice: []const u8 = std.mem.span(result);
+    try expect_eql_str(expected, slice);
+}
+
+// ************************************+************************************* //
+//                                    Char                                    //
+// ************************************************************************** //
+
+test "char_is_alnum : test1" {
+    for (0..255) |i| {
+        const ch: u8 = @truncate(i);
+        const res: bool = if (zlib.char_is_alnum(ch) >= 1) true else (false);
+        try expect(res == ascii.isAlphanumeric(ch));
+    }
+}
+
+test "char_is_alpha : test1" {
+    for (0..255) |i| {
+        const ch: u8 = @truncate(i);
+        const res: bool = if (zlib.char_is_alpha(ch) >= 1) true else (false);
+        try expect(res == ascii.isAlphabetic(ch));
+    }
+}
+
+test "char_is_digit: test1" {
+    for (0..255) |i| {
+        const ch: u8 = @truncate(i);
+        const res: bool = if (zlib.char_is_digit(ch) >= 1) true else (false);
+        try expect(res == ascii.isDigit(ch));
+    }
+}
+
+test "char_is_space: test1" {
+    for (0..255) |i| {
+        const ch: u8 = @truncate(i);
+        const res: bool = if (zlib.char_is_spaces(ch) >= 1) true else (false);
+        try expect(res == ascii.isWhitespace(ch));
+    }
+}
+
+test "char_is_lowercase: test1" {
+    for (0..255) |i| {
+        const ch: u8 = @truncate(i);
+        const res: bool = if (zlib.char_is_lowercase(ch) >= 1) true else (false);
+        try expect(res == ascii.isLower(ch));
+    }
+}
+
+test "char_is_uppercase: test1" {
+    for (0..255) |i| {
+        const ch: u8 = @truncate(i);
+        const res: bool = if (zlib.char_is_uppercase(ch) >= 1) true else (false);
+        try expect(res == ascii.isUpper(ch));
+    }
+}
+
+test "char_is_even: test1" {
+    for (0..255) |i| {
+        const ch: u8 = @truncate(i);
+        const res: bool = if (zlib.char_is_even(ch) >= 1) true else (false);
+        try expect(res == if (i % 2 == 0) true else false);
+    }
+}
+
+test "char_is_odd: test1" {
+    for (0..255) |i| {
+        const ch: u8 = @truncate(i);
+        const res: bool = if (zlib.char_is_odd(ch) >= 1) true else (false);
+        try expect(res == if (i % 2 != 0) true else false);
+    }
+}
+
+test "char_is_printable: test1" {
+    for (0..255) |i| {
+        const ch: u8 = @truncate(i);
+        const res: bool = if (zlib.char_is_printable(ch) >= 1) true else (false);
+        try expect(res == ascii.isPrint(ch));
+    }
+}
+
+test "char_is_ascii: test1" {
+    for (0..255) |i| {
+        const ch: u8 = @truncate(i);
+        const res: bool = if (zlib.char_is_ascii(ch) >= 1) true else (false);
+        try expect(res == ascii.isASCII(ch));
+    }
+}
+
+test "char_is_binary: test1" {
+    for (0..255) |i| {
+        switch (i) {
+            '0', '1' => try expect((if (zlib.char_is_binary(@intCast(i)) == 1) true else false) == true),
+            else => try expect((if (zlib.char_is_binary(@intCast(i)) == 1) true else false) == false),
+        }
+    }
+}
+
+test "char_is_hex: test1" {
+    for (0..255) |i| {
+        switch (i) {
+            '0'...'9' => try expect((if (zlib.char_is_hex(@intCast(i)) == 1) true else false) == true),
+            'A'...'F' => try expect((if (zlib.char_is_hex(@intCast(i)) == 1) true else false) == true),
+            'a'...'f' => try expect((if (zlib.char_is_hex(@intCast(i)) == 1) true else false) == true),
+            else => try expect((if (zlib.char_is_hex(@intCast(i)) == 1) true else false) == false),
+        }
+    }
+}
+
+test "char_is_newline: test1" {
+    const new_line: u8 = '\n';
+    const result: bool = if (zlib.char_is_newline(new_line) >= 1) true else false;
+    try expect(result == true);
 }

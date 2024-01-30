@@ -18,7 +18,7 @@ void	*memory_create(size_t count, size_t size)
 	void			*memory;
 
 	if (DBG)
-		print_fmt("[LOG]memory_create(%d, %d)\n",count,size);
+		print_fmt("[LOG]memory_create(%u, %u)\n",count,size);
 	if (count * size == 0)
 		return (0);
 	memory = malloc(count * size);
