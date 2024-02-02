@@ -12,25 +12,26 @@
 
 #include "../../include/plib.h"
 
-char	*string_move(char *dst, char *src, unsigned int n)
+char *string_move(char *dst, char *src, unsigned int n)
 {
-	char	*psrc;
-	char	*pdst;
+    char *psrc;
+    char *pdst;
 
-	if (!dst || !src)
-		return (0);
-	psrc = src;
-	pdst = dst;
-	if (dst > src)
+    psrc = src;
+    pdst = dst;
+    if (dst > src)
+    {
+	while (n > 0)
 	{
-		while (n)
-		{
-			*(pdst + n - 1) = *(psrc + n - 1);
-			n--;
-		}
-		return (dst);
+	    *(pdst + n - 1) = *(psrc + n - 1);
+	    n--;
 	}
-	while (n--)
-		*pdst++ = *psrc++;
 	return (dst);
+    }
+    while (n > 0)
+    {
+	*pdst++ = *psrc++;
+	n--;
+    }
+    return (dst);
 }

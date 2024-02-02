@@ -14,8 +14,6 @@
 
 char	*string_concat(char *dst, char *src, unsigned int n)
 {
-	if (!dst || !src)
-		return (0);
 	string_copy(dst + string_length(dst), src, n);
 	return (dst);
 }

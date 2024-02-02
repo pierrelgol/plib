@@ -280,40 +280,6 @@ test "memory_set : test3" {
 }
 
 // ************************************+************************************* //
-//                                   String                                   //
-// ************************************************************************** //
-
-test "string_clone : test1" {
-    const expected = "Hello, World";
-    const heap_alloc = zlib.heap_init();
-    defer _ = zlib.heap_deinit(heap_alloc);
-    const result = zlib.string_clone(heap_alloc, @ptrCast(expected));
-    defer _ = zlib.heap_destroy(heap_alloc, result);
-    const slice: []const u8 = std.mem.span(result);
-    try expect_eql_str(expected, slice);
-}
-
-test "string_clone : test2" {
-    const expected = "";
-    const heap_alloc = zlib.heap_init();
-    defer _ = zlib.heap_deinit(heap_alloc);
-    const result = zlib.string_clone(heap_alloc, @ptrCast(expected));
-    defer _ = zlib.heap_destroy(heap_alloc, result);
-    const slice: []const u8 = std.mem.span(result);
-    try expect_eql_str(expected, slice);
-}
-
-test "string_clone : test3" {
-    const expected = "";
-    const heap_alloc = zlib.heap_init();
-    defer _ = zlib.heap_deinit(heap_alloc);
-    const result = zlib.string_clone(heap_alloc, @ptrCast(expected));
-    defer _ = zlib.heap_destroy(heap_alloc, result);
-    const slice: []const u8 = std.mem.span(result);
-    try expect_eql_str(expected, slice);
-}
-
-// ************************************+************************************* //
 //                                    Char                                    //
 // ************************************************************************** //
 
@@ -421,4 +387,481 @@ test "char_is_newline: test1" {
     const new_line: u8 = '\n';
     const result: bool = if (zlib.char_is_newline(new_line) >= 1) true else false;
     try expect(result == true);
+}
+
+// ************************************+************************************* //
+//                                   String                                   //
+// ************************************************************************** //
+
+test "string_clone : test1" {
+    const heapalloc = zlib.heap_init();
+    defer _ = zlib.heap_deinit(heapalloc);
+
+    const expected = "This is a string";
+    const ptr = zlib.string_clone(heapalloc, @constCast(@ptrCast(expected)));
+    defer _ = zlib.heap_destroy(heapalloc, ptr);
+    try expect_eql_str(expected, mem.span(ptr));
+}
+
+test "string_clone : test2" {
+    const heapalloc = zlib.heap_init();
+    defer _ = zlib.heap_deinit(heapalloc);
+
+    const expected = "";
+    const ptr = zlib.string_clone(heapalloc, @constCast(@ptrCast(expected)));
+    defer _ = zlib.heap_destroy(heapalloc, ptr);
+    try expect_eql_str(expected, mem.span(ptr));
+}
+
+test "string_clone : test3" {
+    const heapalloc = zlib.heap_init();
+    defer _ = zlib.heap_deinit(heapalloc);
+
+    const expected = "0";
+    const ptr = zlib.string_clone(heapalloc, @constCast(@ptrCast(expected)));
+    defer _ = zlib.heap_destroy(heapalloc, ptr);
+    try expect_eql_str(expected, mem.span(ptr));
+}
+
+test "string_compare : test1" {
+    const str1: [*c]u8 = @constCast(@ptrCast("This is a test"));
+    const str2: [*c]u8 = @constCast(@ptrCast("This is a test"));
+    const result = zlib.string_compare(str1, str2);
+    try expect(result == 0);
+}
+
+test "string_compare : test2" {
+    const str1: [*c]u8 = @constCast(@ptrCast("This is a testa"));
+    const str2: [*c]u8 = @constCast(@ptrCast("This is a testb"));
+    const result = zlib.string_compare(str1, str2);
+    try expect(result == -1);
+}
+
+test "string_compare : test3" {
+    const str1: [*c]u8 = @constCast(@ptrCast("This is a testb"));
+    const str2: [*c]u8 = @constCast(@ptrCast("This is a testa"));
+    const result = zlib.string_compare(str1, str2);
+    try expect(result == 1);
+}
+
+test "string_compare : test4" {
+    const str1: [*c]u8 = @constCast(@ptrCast("This is b"));
+    const str2: [*c]u8 = @constCast(@ptrCast("This is a test"));
+    const result = zlib.string_compare(str1, str2);
+    try expect(result == 1);
+}
+
+test "string_compare : test5" {
+    const str1: [*c]u8 = @constCast(@ptrCast("This is a test"));
+    const str2: [*c]u8 = @constCast(@ptrCast("This is b"));
+    const result = zlib.string_compare(str1, str2);
+    try expect(result == -1);
+}
+
+test "string_concat : test1" {
+    const str1 = "Hello, ";
+    const str2 = "World!";
+    var buffer: [16]u8 = undefined;
+    @memset(buffer[0..], 0x00);
+    var ptr = zlib.string_concat(@ptrCast(buffer[0..]), @constCast(@ptrCast(str1[0..])), str1.len);
+    ptr = zlib.string_concat(@ptrCast(buffer[0..]), @constCast(@ptrCast(str2[0..])), str2.len);
+    try expect_eql_str("Hello, World!", mem.span(ptr));
+}
+
+test "string_concat : test2" {
+    const str1 = "";
+    const str2 = "";
+    var buffer: [16]u8 = undefined;
+    @memset(buffer[0..], 0x00);
+    var ptr = zlib.string_concat(@ptrCast(buffer[0..]), @constCast(@ptrCast(str1[0..])), str1.len);
+    ptr = zlib.string_concat(@ptrCast(buffer[0..]), @constCast(@ptrCast(str2[0..])), str2.len);
+    try expect_eql_str("", mem.span(ptr));
+}
+
+test "string_concat : test3" {
+    const str1 = "a";
+    const str2 = "";
+    var buffer: [16]u8 = undefined;
+    @memset(buffer[0..], 0x00);
+    var ptr = zlib.string_concat(@ptrCast(buffer[0..]), @constCast(@ptrCast(str1[0..])), str1.len);
+    ptr = zlib.string_concat(@ptrCast(buffer[0..]), @constCast(@ptrCast(str2[0..])), str2.len);
+    try expect_eql_str("a", mem.span(ptr));
+}
+
+test "string_concat : test4" {
+    const str1 = "";
+    const str2 = "a";
+    var buffer: [16]u8 = undefined;
+    @memset(buffer[0..], 0x00);
+    var ptr = zlib.string_concat(@ptrCast(buffer[0..]), @constCast(@ptrCast(str1[0..])), str1.len);
+    ptr = zlib.string_concat(@ptrCast(buffer[0..]), @constCast(@ptrCast(str2[0..])), str2.len);
+    try expect_eql_str("a", mem.span(ptr));
+}
+
+test "string_copy : test1" {
+    const str1 = "Hello, World!";
+    var buffer: [16]u8 = undefined;
+    @memset(buffer[0..], 0x00);
+    const ptr = zlib.string_copy(@ptrCast(buffer[0..]), @constCast(@ptrCast(str1[0..])), str1.len);
+    try expect_eql_str("Hello, World!", mem.span(ptr));
+}
+
+test "string_copy : test2" {
+    const str1 = "";
+    var buffer: [16]u8 = undefined;
+    @memset(buffer[0..], 0x00);
+    const ptr = zlib.string_copy(@ptrCast(buffer[0..]), @constCast(@ptrCast(str1[0..])), str1.len);
+    try expect_eql_str("", mem.span(ptr));
+}
+
+test "string_copy : test3" {
+    const str1 = "a";
+    var buffer: [16]u8 = undefined;
+    @memset(buffer[0..], 0x00);
+    const ptr = zlib.string_copy(@ptrCast(buffer[0..]), @constCast(@ptrCast(str1[0..])), str1.len);
+    try expect_eql_str("a", mem.span(ptr));
+}
+
+test "string_count : test1" {
+    const str1 = "aaa_bbb_ccc";
+    const result = zlib.string_count(@constCast(@ptrCast(str1)), 'a');
+    try expect(result == 3);
+}
+
+test "string_count : test2" {
+    const str1 = "aaa_bbb_ccc";
+    const result = zlib.string_count(@constCast(@ptrCast(str1)), 'b');
+    try expect(result == 3);
+}
+
+test "string_count : test3" {
+    const str1 = "aaa_bbb_ccc";
+    const result = zlib.string_count(@constCast(@ptrCast(str1)), 'c');
+    try expect(result == 3);
+}
+
+test "string_count : test4" {
+    const str1 = "aaa_bbb_ccc";
+    const result = zlib.string_count(@constCast(@ptrCast(str1)), 'z');
+    try expect(result == 0);
+}
+
+test "string_count : test5" {
+    const str1 = "aaa" ** 10;
+    const result = zlib.string_count(@constCast(@ptrCast(str1)), 'a');
+    try expect(result == 30);
+}
+
+test "string_count_leading : test1" {
+    const str1 = "aaa_bbb_ccc";
+    const result = zlib.string_count_leading(@constCast(@ptrCast(str1)), 'a');
+    try expect(result == 3);
+}
+
+test "string_count_leading : test2" {
+    const str1 = "aaa_bbb_ccc";
+    const result = zlib.string_count_leading(@constCast(@ptrCast(str1)), 'b');
+    try expect(result == 0);
+}
+
+test "string_count_leading : test3" {
+    const str1 = "aaa_bbb_ccc";
+    const result = zlib.string_count_leading(@constCast(@ptrCast(str1)), 'c');
+    try expect(result == 0);
+}
+
+test "string_count_leading : test4" {
+    const str1 = "aaa_bbb_ccc";
+    const result = zlib.string_count_leading(@constCast(@ptrCast(str1)), 'z');
+    try expect(result == 0);
+}
+
+test "string_count_leading : test5" {
+    const str1 = "aaa" ** 10;
+    const result = zlib.string_count_leading(@constCast(@ptrCast(str1)), 'a');
+    try expect(result == 30);
+}
+
+test "string_count_trailing : test1" {
+    const str1 = "aaa_bbb_ccc";
+    const result = zlib.string_count_trailing(@constCast(@ptrCast(str1)), 'a');
+    try expect(result == 0);
+}
+
+test "string_count_trailing : test2" {
+    const str1 = "aaa_bbb_ccc";
+    const result = zlib.string_count_trailing(@constCast(@ptrCast(str1)), 'b');
+    try expect(result == 0);
+}
+
+test "string_count_trailing : test3" {
+    const str1 = "aaa_bbb_ccc";
+    const result = zlib.string_count_trailing(@constCast(@ptrCast(str1)), 'c');
+    try expect(result == 3);
+}
+
+test "string_count_trailing : test4" {
+    const str1 = "aaa_bbb_ccc";
+    const result = zlib.string_count_trailing(@constCast(@ptrCast(str1)), 'z');
+    try expect(result == 0);
+}
+
+test "string_count_trailing : test5" {
+    const str1 = "aaa" ** 10;
+    const result = zlib.string_count_trailing(@constCast(@ptrCast(str1)), 'a');
+    try expect(result == 30);
+}
+
+test "string_count_until : test1" {
+    const str1 = "aaa_bbb_ccc";
+    const result = zlib.string_count_until(@constCast(@ptrCast(str1)), 'a');
+    try expect(result == 0);
+}
+
+test "string_count_until : test2" {
+    const str1 = "aaa_bbb_ccc";
+    const result = zlib.string_count_until(@constCast(@ptrCast(str1)), 'b');
+    try expect(result == 4);
+}
+
+test "string_count_until : test3" {
+    const str1 = "aaa_bbb_ccc";
+    const result = zlib.string_count_until(@constCast(@ptrCast(str1)), 'c');
+    try expect(result == 8);
+}
+
+test "string_count_until : test4" {
+    const str1 = "aaa_bbb_ccc";
+    const result = zlib.string_count_until(@constCast(@ptrCast(str1)), 'z');
+    try expect(result == str1.len);
+}
+
+test "string_count_until : test5" {
+    const str1 = "aaa" ** 10;
+    const result = zlib.string_count_until(@constCast(@ptrCast(str1)), 'a');
+    try expect(result == 0);
+}
+
+test "string_create : test1" {
+    const heapalloc = zlib.heap_init();
+    defer _ = zlib.heap_deinit(heapalloc);
+
+    const expected = "This is a string";
+    var ptr = zlib.string_create(heapalloc, expected.len + 1);
+    defer _ = zlib.heap_destroy(heapalloc, ptr);
+    ptr = zlib.string_copy(ptr, @ptrCast(expected), expected.len);
+    try expect_eql_str(expected, mem.span(ptr));
+}
+
+test "string_create : test2" {
+    const heapalloc = zlib.heap_init();
+    defer _ = zlib.heap_deinit(heapalloc);
+
+    const expected = "";
+    var ptr = zlib.string_create(heapalloc, expected.len + 1);
+    defer _ = zlib.heap_destroy(heapalloc, ptr);
+    ptr = zlib.string_copy(ptr, @ptrCast(expected), expected.len);
+    try expect_eql_str(expected, mem.span(ptr));
+}
+
+test "string_destroy : test1" {
+    const heapalloc = zlib.heap_init();
+    defer _ = zlib.heap_deinit(heapalloc);
+
+    const expected = "This is a string";
+    var ptr = zlib.string_create(heapalloc, expected.len + 1);
+    defer _ = zlib.heap_destroy(heapalloc, ptr);
+    ptr = zlib.string_copy(ptr, @ptrCast(expected), expected.len);
+    try expect_eql_str(expected, mem.span(ptr));
+}
+
+test "string_destroy : test2" {
+    const heapalloc = zlib.heap_init();
+    defer _ = zlib.heap_deinit(heapalloc);
+    const expected = "";
+    var ptr = zlib.string_create(heapalloc, expected.len + 1);
+    defer _ = zlib.heap_destroy(heapalloc, ptr);
+    ptr = zlib.string_copy(ptr, @ptrCast(expected), expected.len);
+    try expect_eql_str(expected, mem.span(ptr));
+}
+
+test "string_join : test1" {
+    const heapalloc = zlib.heap_init();
+    defer _ = zlib.heap_deinit(heapalloc);
+    const str1: [*c]u8 = @constCast(@ptrCast("Hello, "));
+    const str2: [*c]u8 = @constCast(@ptrCast("World!"));
+    const result = zlib.string_join(heapalloc, str1, str2);
+    defer _ = zlib.heap_destroy(heapalloc, result);
+    try expect_eql_str("Hello, World!", mem.span(result));
+}
+
+test "string_join : test2" {
+    const heapalloc = zlib.heap_init();
+    defer _ = zlib.heap_deinit(heapalloc);
+    const str1: [*c]u8 = @constCast(@ptrCast(""));
+    const str2: [*c]u8 = @constCast(@ptrCast(""));
+    const result = zlib.string_join(heapalloc, str1, str2);
+    defer _ = zlib.heap_destroy(heapalloc, result);
+    try expect_eql_str("", mem.span(result));
+}
+
+test "string_join : test3" {
+    const heapalloc = zlib.heap_init();
+    defer _ = zlib.heap_deinit(heapalloc);
+    const str1: [*c]u8 = @constCast(@ptrCast("a"));
+    const str2: [*c]u8 = @constCast(@ptrCast("b"));
+    const result = zlib.string_join(heapalloc, str1, str2);
+    defer _ = zlib.heap_destroy(heapalloc, result);
+    try expect_eql_str("ab", mem.span(result));
+}
+
+test "string_join : test4" {
+    const heapalloc = zlib.heap_init();
+    defer _ = zlib.heap_deinit(heapalloc);
+    const str1: [*c]u8 = @constCast(@ptrCast(""));
+    const str2: [*c]u8 = @constCast(@ptrCast("b"));
+    const result = zlib.string_join(heapalloc, str1, str2);
+    defer _ = zlib.heap_destroy(heapalloc, result);
+    try expect_eql_str("b", mem.span(result));
+}
+
+test "string_join : test5" {
+    const heapalloc = zlib.heap_init();
+    defer _ = zlib.heap_deinit(heapalloc);
+    const str1: [*c]u8 = @constCast(@ptrCast("a"));
+    const str2: [*c]u8 = @constCast(@ptrCast(""));
+    const result = zlib.string_join(heapalloc, str1, str2);
+    defer _ = zlib.heap_destroy(heapalloc, result);
+    try expect_eql_str("a", mem.span(result));
+}
+
+test "string_length : test1" {
+    const str = "This is a test";
+    const result = zlib.string_length(@constCast(@ptrCast(str)));
+    try expect(result == str.len);
+}
+
+test "string_length : test2" {
+    const str = "This is a test" ** 100;
+    const result = zlib.string_length(@constCast(@ptrCast(str)));
+    try expect(result == str.len);
+}
+
+test "string_length : test3" {
+    const str = "";
+    const result = zlib.string_length(@constCast(@ptrCast(str)));
+    try expect(result == str.len);
+}
+
+test "string_move : test1" {
+    const buff1 = "abcdefghijklmnopqrstuvwxyz";
+    const buff2: [26]u8 = undefined;
+
+    const ptr1: [*c]u8 = @constCast(@ptrCast(buff1[0..]));
+    const ptr2: [*c]u8 = @constCast(@ptrCast(buff1[0..]));
+    const ptr3: [*c]u8 = @constCast(@ptrCast(buff2[1..]));
+    _ = zlib.memory_copy(ptr2, ptr1, 0);
+    const result = zlib.string_move(ptr2, ptr3, buff2.len - 1);
+    const slice1: []const u8 = @as([*]u8, @ptrCast(result))[0 .. buff2.len - 1];
+    try expect_eql_slc(u8, slice1, "bcdefghijklmnopqrstuvwxyz"[0 .. buff2.len - 1]);
+}
+
+test "string_move : test2" {
+    const buff1 = "abcdefghijklmnopqrstuvwxyz";
+    const buff2: [26]u8 = undefined;
+
+    const ptr1: [*c]u8 = @constCast(@ptrCast(buff1[0..]));
+    const ptr2: [*c]u8 = @constCast(@ptrCast(buff1[1..]));
+    const ptr3: [*c]u8 = @constCast(@ptrCast(buff2[0..]));
+    _ = zlib.string_copy(ptr2, ptr1, 0);
+    const result = zlib.string_move(ptr2, ptr3, buff2.len - 1);
+    const slice1: []const u8 = @as([*]u8, @ptrCast(result))[0 .. buff2.len - 1];
+    try expect_eql_slc(u8, slice1, "abcdefghijklmnopqrstuvwxy"[0 .. buff2.len - 1]);
+}
+
+test "string_move : test3" {
+    const buff1 = "abcdefghijklmnopqrstuvwxyz";
+    const buff2 = "abcdefghijklmnopqrstuvwxyz";
+
+    const ptr1: [*c]u8 = @constCast(@ptrCast(buff1[0..]));
+    const ptr2: [*c]u8 = @constCast(@ptrCast(buff1[1..]));
+    const result = zlib.string_move(ptr1, ptr2, buff2.len);
+    const slice1: []const u8 = @as([*]u8, @ptrCast(result))[0..buff2.len];
+    try expect_eql_slc(u8, slice1, "abcdefghijklmnopqrstuvwxyz"[0..buff2.len]);
+}
+
+test "string_move : test4" {
+    const buff1 = "abcdefghijklmnopqrstuvwxyz";
+    const buff2 = "abcdefghijklmnopqrstuvwxyz";
+
+    const ptr1: [*c]u8 = @constCast(@ptrCast(buff1[0..]));
+    const ptr2: [*c]u8 = @constCast(@ptrCast(buff1[1..]));
+    const result = zlib.string_move(ptr1, ptr2, @intCast(0));
+    const slice1: []const u8 = @as([*]u8, @ptrCast(result))[0..buff2.len];
+    try expect_eql_slc(u8, slice1, "abcdefghijklmnopqrstuvwxyz"[0..buff2.len]);
+}
+
+test "string_nclone : test1" {
+    const heapalloc = zlib.heap_init();
+    defer _ = zlib.heap_deinit(heapalloc);
+
+    const expected = "This is a string";
+    const ptr = zlib.string_nclone(heapalloc, @constCast(@ptrCast(expected)), expected.len);
+    defer _ = zlib.heap_destroy(heapalloc, ptr);
+    try expect_eql_str(expected, mem.span(ptr));
+}
+
+test "string_nclone : test2" {
+    const heapalloc = zlib.heap_init();
+    defer _ = zlib.heap_deinit(heapalloc);
+
+    const expected = "";
+    const ptr = zlib.string_nclone(heapalloc, @constCast(@ptrCast(expected)), expected.len);
+    defer _ = zlib.heap_destroy(heapalloc, ptr);
+    try expect_eql_str(expected, mem.span(ptr));
+}
+
+test "string_nclone : test3" {
+    const heapalloc = zlib.heap_init();
+    defer _ = zlib.heap_deinit(heapalloc);
+
+    const expected = "0";
+    const ptr = zlib.string_nclone(heapalloc, @constCast(@ptrCast(expected)), expected.len);
+    defer _ = zlib.heap_destroy(heapalloc, ptr);
+    try expect_eql_str(expected, mem.span(ptr));
+}
+
+test "string_ncompare : test1" {
+    const str1: [*c]u8 = @constCast(@ptrCast("This is a test"));
+    const str2: [*c]u8 = @constCast(@ptrCast("This is a test"));
+    const result = zlib.string_ncompare(str1, str2, 14);
+    try expect(result == 0);
+}
+
+test "string_ncompare : test2" {
+    const str1: [*c]u8 = @constCast(@ptrCast("This is a testa"));
+    const str2: [*c]u8 = @constCast(@ptrCast("This is a testb"));
+    const result = zlib.string_ncompare(str1, str2, 14);
+    try expect(result == -1);
+}
+
+test "string_ncompare : test3" {
+    const str1: [*c]u8 = @constCast(@ptrCast("This is a testb"));
+    const str2: [*c]u8 = @constCast(@ptrCast("This is a testa"));
+    const result = zlib.string_ncompare(str1, str2, 14);
+    try expect(result == 1);
+}
+
+test "string_ncompare : test4" {
+    const str1: [*c]u8 = @constCast(@ptrCast("This is b"));
+    const str2: [*c]u8 = @constCast(@ptrCast("This is a test"));
+    const result = zlib.string_ncompare(str1, str2, 14);
+    try expect(result == 1);
+}
+
+test "string_ncompare : test5" {
+    const str1: [*c]u8 = @constCast(@ptrCast("This is a test"));
+    const str2: [*c]u8 = @constCast(@ptrCast("This is b"));
+    const result = zlib.string_ncompare(str1, str2, 14);
+    try expect(result == -1);
 }

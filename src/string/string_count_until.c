@@ -14,16 +14,14 @@
 
 unsigned int string_count_until(char *str, int ch)
 {
-	unsigned int count;
+    unsigned int count;
 
-	if (!str)
-		return (0);
-	count = 0;
-	while (str[count]){
-		if (str[count] == ch)
-			return (count);
-		++count;
-	}
-	return (count);
+    count = 0;
+    while (str[count])
+    {
+	if (str[count] == ch)
+	    return (count);
+	++count;
+    }
+    return (count);
 }
-

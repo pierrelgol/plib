@@ -16,8 +16,6 @@ unsigned int	string_count(char *str, int ch)
 {
 	unsigned int	count;
 
-	if (!str)
-		return (0);
 	count = 0;
 	while (*str)
 	{

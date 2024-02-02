@@ -17,8 +17,6 @@ unsigned int	string_count_trailing(char *str, int ch)
 	unsigned int	count;
 	unsigned int	slen;
 
-	if (!str)
-		return (0);
 	count = 0;
 	slen = string_length(str);
 	if (slen == 0)

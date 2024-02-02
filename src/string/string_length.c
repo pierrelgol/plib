@@ -16,8 +16,6 @@ unsigned int	string_length(const char *src)
 {
 	unsigned int	length;
 
-	if (!src)
-		return (0);
 	length = 0;
 	while (src[length])
 		++length;

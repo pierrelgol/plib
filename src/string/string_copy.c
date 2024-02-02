@@ -16,8 +16,6 @@ char	*string_copy(char *dst, const char *src, unsigned int n)
 {
 	unsigned int	index;
 
-	if (!dst || !src)
-		return (0);
 	index = 0;
 	while (*src && index < n)
 		dst[index++] = *src++;
