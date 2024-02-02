@@ -15,12 +15,12 @@
 char	*string_reverse(char *str)
 {
 	unsigned int	slen;
-	unsigned int	i;
 	unsigned int	temp;
+	unsigned int	i;
 
-	if (!str)
-		return (0);
 	slen = string_length(str);
+	if (!slen)
+		return (str);
 	i = 0;
 	while (i < (slen - i - 1))
 	{

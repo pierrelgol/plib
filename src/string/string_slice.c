@@ -23,10 +23,9 @@ char *string_slice(struct s_allocator *allocator, char *str, size_t start, size_
 	if (slen < end || slen < start)
 		return (0);
 	result = string_create(allocator, ((slen - start) + (slen - end)) + 1);
-	if (start <= end)
+	if (start < end)
 		memory_copy(result, str + start, end - start);
-	else
+	else if (start > end)
 		memory_copy(result, str + end, start - end);
-
 	return result;
 }

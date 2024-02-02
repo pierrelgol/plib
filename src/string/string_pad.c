@@ -18,10 +18,8 @@ char	*string_pad(struct s_allocator *allocator, char *str, int ch, size_t n)
 	unsigned int	rlen;
 	unsigned int	slen;
 
-	if (!str)
-		return (0);
 	if (n == 0)
-		return (str);
+		return (string_clone(allocator, str));
 	slen = string_length(str);
 	rlen = slen + (n * 2);
 	result = string_create(allocator, rlen + 1);

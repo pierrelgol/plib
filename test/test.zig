@@ -28,6 +28,10 @@ const expect_str_ends_with = testing.expectStringEndsWith;
 //                                   Memory                                   //
 // ************************************************************************** //
 
+// ************************************+************************************* //
+//                                   Memory                                   //
+// ************************************************************************** //
+
 test "memory_create : test1" {
     const ptr = zlib.memory_create(1, 8) orelse null;
     defer _ = zlib.memory_destroy(ptr);
@@ -864,4 +868,133 @@ test "string_ncompare : test5" {
     const str2: [*c]u8 = @constCast(@ptrCast("This is b"));
     const result = zlib.string_ncompare(str1, str2, 14);
     try expect(result == -1);
+}
+
+test "string_pad : test1" {
+    const heapalloc = zlib.heap_init();
+    defer _ = zlib.heap_deinit(heapalloc);
+
+    const str1 = "a" ** 5;
+    const ptr = zlib.string_pad(heapalloc, @constCast(@ptrCast(str1)), 'b', 5);
+    defer _ = zlib.heap_destroy(heapalloc, ptr);
+    try expect_eql_str("bbbbbaaaaabbbbb", mem.span(ptr));
+}
+
+test "string_pad : test2" {
+    const heapalloc = zlib.heap_init();
+    defer _ = zlib.heap_deinit(heapalloc);
+
+    const str1 = "a" ** 5;
+    const ptr = zlib.string_pad(heapalloc, @constCast(@ptrCast(str1)), 'b', 0);
+    defer _ = zlib.heap_destroy(heapalloc, ptr);
+    try expect_eql_str(str1, mem.span(ptr));
+}
+
+test "string_pad : test3" {
+    const heapalloc = zlib.heap_init();
+    defer _ = zlib.heap_deinit(heapalloc);
+
+    const str1 = "a" ** 5;
+    const ptr = zlib.string_pad(heapalloc, @constCast(@ptrCast(str1)), 'b', 1);
+    defer _ = zlib.heap_destroy(heapalloc, ptr);
+    try expect_eql_str("b" ++ "a" ** 5 ++ "b", mem.span(ptr));
+}
+
+test "string_reverse : test1" {
+    const heapalloc = zlib.heap_init();
+    defer _ = zlib.heap_deinit(heapalloc);
+
+    var ptr = zlib.string_clone(heapalloc, "abcdefhijklmnopqrstuvwxyz");
+    ptr = zlib.string_reverse(@constCast(@ptrCast(ptr)));
+    defer _ = zlib.heap_destroy(heapalloc, ptr);
+
+    try expect_eql_str("zyxwvutsrqponmlkjihfedcba", mem.span(ptr));
+}
+
+test "string_reverse : test2" {
+    const heapalloc = zlib.heap_init();
+    defer _ = zlib.heap_deinit(heapalloc);
+
+    var ptr = zlib.string_clone(heapalloc, "ab");
+    ptr = zlib.string_reverse(@constCast(@ptrCast(ptr)));
+    defer _ = zlib.heap_destroy(heapalloc, ptr);
+
+    try expect_eql_str("ba", mem.span(ptr));
+}
+
+test "string_reverse : test3" {
+    const heapalloc = zlib.heap_init();
+    defer _ = zlib.heap_deinit(heapalloc);
+
+    var ptr = zlib.string_clone(heapalloc, "");
+    ptr = zlib.string_reverse(@constCast(@ptrCast(ptr)));
+    defer _ = zlib.heap_destroy(heapalloc, ptr);
+
+    try expect_eql_str("", mem.span(ptr));
+}
+
+test "string_rotate : test1" {
+    const heapalloc = zlib.heap_init();
+    defer _ = zlib.heap_deinit(heapalloc);
+
+    var ptr = zlib.string_clone(heapalloc, @constCast(@ptrCast("abc")));
+    ptr = zlib.string_rotate(heapalloc, ptr, 1);
+    defer _ = zlib.heap_destroy(heapalloc, ptr);
+    try expect_eql_str("cab", mem.span(ptr));
+}
+
+test "string_rotate : test2" {
+    const heapalloc = zlib.heap_init();
+    defer _ = zlib.heap_deinit(heapalloc);
+
+    var ptr = zlib.string_clone(heapalloc, "abc");
+    ptr = zlib.string_rotate(heapalloc, ptr, -1);
+    defer _ = zlib.heap_destroy(heapalloc, ptr);
+    try expect_eql_str("bca", mem.span(ptr));
+}
+
+test "string_rotate : test3" {
+    const heapalloc = zlib.heap_init();
+    defer _ = zlib.heap_deinit(heapalloc);
+
+    var ptr = zlib.string_clone(heapalloc, "abc");
+    ptr = zlib.string_rotate(heapalloc, ptr, 0);
+    defer _ = zlib.heap_destroy(heapalloc, ptr);
+    try expect_eql_str("abc", mem.span(ptr));
+}
+
+test "string_search : test1" {
+    const haystack = "This is a very long string who's purpose is to see if we can find a needle";
+    const needle = "needle";
+
+    const ptr1 = zlib.string_search(@constCast(@ptrCast(haystack)), @constCast(@ptrCast(needle)), haystack.len, needle.len);
+
+    try expect_eql_str(mem.span(ptr1), "needle");
+}
+
+test "string_search : test2" {
+    const haystack = "This is a very long string who's purpose is to see if we can find a needle";
+    const needle = "This";
+
+    const ptr1 = zlib.string_search(@constCast(@ptrCast(haystack)), @constCast(@ptrCast(needle)), haystack.len, needle.len);
+
+    try expect_eql_str(mem.span(ptr1), haystack);
+}
+
+test "string_search : test3" {
+    const haystack = "";
+    const needle = "";
+
+    const ptr1 = zlib.string_search(@constCast(@ptrCast(haystack)), @constCast(@ptrCast(needle)), haystack.len, needle.len);
+
+    try expect_eql_str(mem.span(ptr1), haystack);
+}
+
+test "string_set : test1" {
+    var buffer1: [32]u8 = undefined;
+    var buffer2: [32]u8 = undefined;
+
+    @memset(buffer1[0..], 0x00);
+    _ = zlib.string_set(@ptrCast(buffer2[0..]), 0x00, 32);
+    try expect_eql_slc(u8, buffer1[0..], buffer2[0..]);
 }

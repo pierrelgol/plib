@@ -17,8 +17,6 @@ static char	*string_rotate_left(struct s_allocator *allocator, char *str, unsign
 	unsigned int	slen;
 	char			*temp;
 
-	if (!str)
-		return (0);
 	slen = string_length(str);
 	n %= slen;
 	if (n == 0 || slen <= 1)
@@ -37,8 +35,6 @@ static char	*string_rotate_right(struct s_allocator *allocator, char *str, unsig
 	unsigned int	slen;
 	char			*temp;
 
-	if (!str)
-		return (0);
 	slen = string_length(str);
 	n %= slen;
 	if (n == 0 || slen <= 1)
@@ -54,7 +50,7 @@ static char	*string_rotate_right(struct s_allocator *allocator, char *str, unsig
 char	*string_rotate(struct s_allocator *allocator, char *str, int shift)
 {
 	if (shift < 0)
-		return (string_rotate_left(allocator, str, shift));
+		return (string_rotate_left(allocator, str, -shift));
 	else
 		return (string_rotate_right(allocator, str, shift));
 }
